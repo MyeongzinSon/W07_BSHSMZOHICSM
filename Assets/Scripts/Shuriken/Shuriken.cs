@@ -6,6 +6,14 @@ using UnityEngine.Serialization;
 
 public class Shuriken : MonoBehaviour
 {
+    public enum ShurikenState
+    {
+        ATTACK, PICKUP,
+    }
+
+    public ShurikenState state;
+    public GameObject owner;
+    
     [Header("수리검의 데미지")]
     public float damage = 3f;
     public bool canDamage = true;
@@ -33,6 +41,9 @@ public class Shuriken : MonoBehaviour
     public float explosionScale;
     public float explosionTime = 1f;
 
+    [Header("자동 수거")]
+    public bool useBoomerang;
+
     #region privateValues
 
     private Mover mover;
@@ -47,17 +58,18 @@ public class Shuriken : MonoBehaviour
         collider = GetComponent<BoxCollider2D>();
     }
 
+    public void Start()
+    {
+        state = ShurikenState.ATTACK;
+    }
+
     private void Update()
     {
         //이동한 거리 계산
         movedDistance += mover.speed*Time.deltaTime;
         if (movedDistance >= moveDistance)
         {
-            if (useExplosion)
-            {
-                Explosion();
-            }
-            Destroy(gameObject);
+            SetStatePickUp();
         }
     }
 
@@ -87,10 +99,7 @@ public class Shuriken : MonoBehaviour
                 {
                     mover.direction = GetReflectVector(mover.direction, hit.normal);
                     target.Hit(damage);
-                    if (useExplosion)
-                    {
-                        Explosion();
-                    }
+                    SetStatePickUp();
                     StartCoroutine(BounceCoroutine(enemyBounceTime));
                 }
             }
@@ -101,10 +110,7 @@ public class Shuriken : MonoBehaviour
                 //리플렉트가 불가능하다면, 벽 반사 움직임 코루틴 시작, 가능하다면 그냥 방향만 바뀌고 쭊 날아감
                 if (!canReflect)
                 {
-                    if (useExplosion)
-                    {
-                        Explosion();
-                    }
+                    SetStatePickUp();
                     StartCoroutine(BounceCoroutine(wallBounceTime));
                 }
             }
@@ -134,6 +140,7 @@ public class Shuriken : MonoBehaviour
             mover.direction = Vector3.Slerp(mover.direction, target,Time.fixedDeltaTime*maxGuidedAngularSpeed);
         }
     }
+
 
     void Explosion()
     {
@@ -168,7 +175,35 @@ public class Shuriken : MonoBehaviour
             mover.speed = orgSpeed*timer/_moveTime;
             yield return null;
         }
-        //Debug.Log("벽에 부딪히고 dur초 경과!");
+        mover.CanMove = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        //PICKUP모드일 때 소환자와 만나면 사라짐
+        if (state == ShurikenState.PICKUP)
+        {
+            if (owner == other.gameObject)
+            {
+                //탄창 +1
+                OnPickUp();
+            }
+        }
+    }
+    
+    
+    void SetStatePickUp()
+    {
+        if (useExplosion)
+        {
+            Explosion();
+        }
+        state = ShurikenState.PICKUP;
+    }
+
+    void OnPickUp()
+    {
+        Debug.Log("회수 완료.");
         Destroy(gameObject);
     }
 }
