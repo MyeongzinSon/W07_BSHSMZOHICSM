@@ -7,6 +7,7 @@ using CoroutineRunner = Unity.VisualScripting.CoroutineRunner;
 public class ShurikenShooter : MonoBehaviour
 {
 	const float MaxCharge = 1;
+	const float chargeDelay = 0.5f;
 
 	public Mover shurikenPrefab;
 	public LayerMask damageLayer;
@@ -45,6 +46,8 @@ public class ShurikenShooter : MonoBehaviour
 		{
 			currentCharge += Time.deltaTime * stats.chargeSpeed;
 			currentCharge = Mathf.Min(currentCharge, MaxCharge);
+			if (currentCharge >= chargeDelay)
+				VCamManager.Instance.Expand();
 		}
 	}
 	public bool StartCharge()
@@ -52,7 +55,6 @@ public class ShurikenShooter : MonoBehaviour
 		if (CanShoot && !IsCharging)
         {
 			currentCharge += Time.deltaTime;
-			VCamManager.Instance.Expand();
 			return true;
         }
 		return false;
