@@ -18,8 +18,8 @@ public class UpgradeManager : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             UpgradeIconContainers[i] = transform.GetChild(i + 2).transform;
-            //스프라이트는 나중에 하고
-            //UpgradeIconContainers[i].GetChild(3).GetComponent<Image>().sprite = shurikenDB.Shurikens[selectedIdxes[i]].sprite;
+            
+            UpgradeIconContainers[i].GetChild(3).GetComponent<Image>().sprite = Resources.Load<Sprite>("Prefabs/Sprites/Icons/Icon" + selectedIdxes[i]);
             
             UpgradeIconContainers[i].GetChild(4).GetComponent<TextMeshProUGUI>().text = shurikenDB.Shurikens[selectedIdxes[i]].name;
             UpgradeIconContainers[i].GetChild(5).GetComponent<TextMeshProUGUI>().text = shurikenDB.Shurikens[selectedIdxes[i]].description;
@@ -42,11 +42,11 @@ public class UpgradeManager : MonoBehaviour
                         meritText = "공격속도";
                         meritAmount += "%";
                         break;
-                    case "cartridge":
+                    case "Cartridge":
                         meritText = "총 수리검";
                         meritAmount = shurikenDB.Shurikens[selectedIdxes[i]].meritAmount.ToString() + " (고정)";
                         break;
-                    case "moveSpeed":
+                    case "MoveSpeed":
                         meritText = "이동속도";
                         break;
                     case "Hp":
