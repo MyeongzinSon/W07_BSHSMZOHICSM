@@ -14,6 +14,9 @@ public class Shuriken : MonoBehaviour
 
     public ShurikenState state;
     public GameObject owner;
+
+    [Header("수리검 회수 가능 여부")]
+    public bool isShadow = false;
     
     [Header("수리검의 데미지")]
     public float damage = 3f;
@@ -248,11 +251,20 @@ public class Shuriken : MonoBehaviour
         {
             StartCoroutine(BoomerangCoroutine());
         }
+        
+        
         attributes.ForEach(a => {
             Debug.Log($"Attribute : {a}");
         });
         state = ShurikenState.PICKUP;
         mover.CanMove = false;
+        
+        
+        //쉐도우라면, PICKUP으로 들어가면서 사라진다.
+        if (isShadow)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnPickUp()

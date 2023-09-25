@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CoroutineRunner = Unity.VisualScripting.CoroutineRunner;
 
 public class ShurikenShooter : MonoBehaviour
 {
@@ -13,6 +12,8 @@ public class ShurikenShooter : MonoBehaviour
 
 	[Header("플레이어에게서 약간 떨어진 거리에서 발사됩니다.")]
 	public float shootRadius = 0.5f;
+	[Header("여러발 발사할 때의 최대 발사각")]
+	public float launchAngle = 45f;
 
 	#region privateArea
 
@@ -74,17 +75,33 @@ public class ShurikenShooter : MonoBehaviour
     {
 		if (currentCartridge > 0)
 		{
-			Shoot(mainCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position);
+			Vector2 dir = (mainCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+			float angle = -launchAngle;
+			if(stats.shurikenNum==1)
+				Shoot(dir, false);
+			else
+			{
+				for (int i = 0; i < stats.shurikenNum; i++)
+				{
+					Vector3 td = Quaternion.AngleAxis(angle, Vector3.forward) * dir;
+					if((int)stats.shurikenNum/2==i)
+						Shoot(td,false);
+					else
+						Shoot(td,true);
+					angle += launchAngle/(stats.shurikenNum/2);
+				}
+			}
 			return true;
 		}
 		return false;
 	}
-	void Shoot(Vector2 _dir)
+	void Shoot(Vector2 _dir, bool isShadow)
 	{
 		//정규화
 		_dir = _dir.normalized;
 
-		currentCartridge--;
+		if(!isShadow)
+			currentCartridge--;
 		shurikenCount++;
 		//총알 실제 생성, 초기화
 		Mover inst = Instantiate(shurikenPrefab, (Vector2)transform.position + _dir*shootRadius, Quaternion.identity);
@@ -98,10 +115,10 @@ public class ShurikenShooter : MonoBehaviour
 		instSrk.owner = gameObject;
 		instSrk.damage = stats.attackPower;
 		instSrk.moveDistance = stats.maxDistance * chargeAmount;
+		instSrk.isShadow = isShadow;
 		
 		//특대형 수리검
 		instSrk.transform.localScale *= 1f + stats.shurikenScale;
-		Debug.Log("크기: "+stats.shurikenScale);
 
 		inst.speed = stats.shurikenSpeed;
 		foreach (var a in stats.shurikenAttributes)
