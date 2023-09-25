@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class HealPack : Pickable
 {
-    public override void Pick()
+    [SerializeField] private float healAmount = 10f;
+
+    public override void Pick(Collider2D _collision)
     {
-        base.Pick();
-        Debug.Log("Pick");
+        base.Pick(_collision);
+        if (_collision.TryGetComponent<Damageable>(out Damageable damageable))
+        {
+            damageable.Heal(healAmount);
+            Debug.Log("Heal");
+        }
     }
 }
