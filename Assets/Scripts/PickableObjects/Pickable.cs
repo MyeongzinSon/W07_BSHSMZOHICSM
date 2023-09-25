@@ -12,7 +12,6 @@ public class Pickable : MonoBehaviour
     public virtual void Pick(Collider2D _collision)
     {
         //풀피일때 삭제가 되어야 하는가?
-        gameObject.SetActive(false);
         //ADD Pick Effect or Sound
     }
 }

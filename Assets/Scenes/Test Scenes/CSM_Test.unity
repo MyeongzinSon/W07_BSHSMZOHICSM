@@ -308,10 +308,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1061904426}
   - component: {fileID: 1061904427}
+  - component: {fileID: 1061904431}
   - component: {fileID: 1061904428}
   - component: {fileID: 1061904429}
   - component: {fileID: 1061904430}
-  - component: {fileID: 1061904431}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: 1200443926}
   - component: {fileID: 1200443929}
   m_Layer: 0
-  m_Name: Heal
+  m_Name: HealPack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
