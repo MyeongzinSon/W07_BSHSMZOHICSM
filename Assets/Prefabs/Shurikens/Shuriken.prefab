@@ -100,6 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efdee91aeefabed4fb9d99a794ed857c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
+  owner: {fileID: 0}
   damage: 3
   canDamage: 1
   damageLayer:
@@ -116,9 +118,11 @@ MonoBehaviour:
   maxGuidedAngularSpeed: 1
   guidedTarget: {fileID: 0}
   explosionPrefab: {fileID: 4663520320846168782, guid: aad20f4c5a862eb48a5656860ce05e42, type: 3}
-  useExplosion: 1
+  useExplosion: 0
   explosionScale: 3
   explosionTime: 1
+  useBoomerang: 0
+  boomerangDelay: 5
 --- !u!114 &3743431136012034996
 MonoBehaviour:
   m_ObjectHideFlags: 0

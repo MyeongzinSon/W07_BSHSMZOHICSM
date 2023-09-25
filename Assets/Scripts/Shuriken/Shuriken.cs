@@ -43,6 +43,8 @@ public class Shuriken : MonoBehaviour
 
     [Header("자동 수거")]
     public bool useBoomerang;
+    public float boomerangDelay = 5f;
+    private bool isBoomerangMoving = false;
 
     #region privateValues
 
@@ -66,15 +68,24 @@ public class Shuriken : MonoBehaviour
     private void Update()
     {
         //이동한 거리 계산
-        movedDistance += mover.speed*Time.deltaTime;
-        if (movedDistance >= moveDistance)
+        if (state == ShurikenState.ATTACK)
         {
-            SetStatePickUp();
+            movedDistance += mover.speed*Time.deltaTime;
+            if (movedDistance >= moveDistance)
+            {
+                SetPickUpState();
+            }
         }
     }
 
     private void FixedUpdate()
     {
+        if (isBoomerangMoving)
+        {
+            //부메랑 이동 중일 경우, 충돌 및 유도탄 모두 무시
+            return;
+        }
+        
         //충돌 처리
         float angle = mover.SetRotationByDirection();
         RaycastHit2D hit 
@@ -99,7 +110,7 @@ public class Shuriken : MonoBehaviour
                 {
                     mover.direction = GetReflectVector(mover.direction, hit.normal);
                     target.Hit(damage);
-                    SetStatePickUp();
+                    SetPickUpState();
                     StartCoroutine(BounceCoroutine(enemyBounceTime));
                 }
             }
@@ -110,7 +121,7 @@ public class Shuriken : MonoBehaviour
                 //리플렉트가 불가능하다면, 벽 반사 움직임 코루틴 시작, 가능하다면 그냥 방향만 바뀌고 쭊 날아감
                 if (!canReflect)
                 {
-                    SetStatePickUp();
+                    SetPickUpState();
                     StartCoroutine(BounceCoroutine(wallBounceTime));
                 }
             }
@@ -165,12 +176,16 @@ public class Shuriken : MonoBehaviour
     IEnumerator BounceCoroutine(float _moveTime)
     {
         //벽에 충돌 후 더이상 데미지를 주지 않는다.
-        
+        mover.CanMove = true;
         canDamage = false;
         float orgSpeed = mover.speed*0.5f;
         float timer = _moveTime;
         while (timer > 0f)
         {
+            //부메랑 이동이 발견되면, BounceCoroutine을 끊는다. 정말 먼 나중에 착오가 생길 수 있는 하드코딩이므로 시간이 난다면 수정 필요.
+            if(isBoomerangMoving)       
+                yield break;
+            
             timer -= Time.deltaTime;
             mover.speed = orgSpeed*timer/_moveTime;
             yield return null;
@@ -190,15 +205,35 @@ public class Shuriken : MonoBehaviour
             }
         }
     }
+
+    IEnumerator BoomerangCoroutine()
+    {
+        yield return new WaitForSeconds(boomerangDelay);
+        float boomerangAccel = 5f;
+        mover.CanMove = true;
+        isBoomerangMoving = true;
+        mover.speed = 0f;
+        while (true)
+        {
+            mover.direction = owner.transform.position - transform.position;
+            mover.speed += boomerangAccel*Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+    }
     
     
-    void SetStatePickUp()
+    void SetPickUpState()
     {
         if (useExplosion)
         {
             Explosion();
         }
+        if (useBoomerang)
+        {
+            StartCoroutine(BoomerangCoroutine());
+        }
         state = ShurikenState.PICKUP;
+        mover.CanMove = false;
     }
 
     void OnPickUp()
