@@ -14,9 +14,13 @@ public class Shuriken : MonoBehaviour
     [Header("충돌 시 튕길 레이어")]
     public LayerMask bounceLayer;
 
+    [Header("움직일 거리")]
+    public float moveDistance = 3f;
+
     #region privateValues
 
     private TestMover mover;
+    private float movedDistance = 0f;
 
     #endregion
 
@@ -24,6 +28,19 @@ public class Shuriken : MonoBehaviour
     {
         mover = GetComponent<TestMover>();
     }
+
+    private void Update()
+    {
+        //이동한 거리 계산
+        movedDistance += mover.moveSpeed*Time.deltaTime;
+        if (movedDistance >= moveDistance)
+        {
+            Debug.Log("이동 가능 거리 달성");
+            Destroy(gameObject);
+        }
+    }
+    
+    
 
     private void OnTriggerEnter2D(Collider2D other)
     {
