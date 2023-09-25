@@ -6,6 +6,8 @@ using CoroutineRunner = Unity.VisualScripting.CoroutineRunner;
 
 public class ShurikenShooter : MonoBehaviour
 {
+	const float MaxCharge = 1;
+
 	public Mover shurikenPrefab;
 	public LayerMask damageLayer;
 
@@ -19,7 +21,9 @@ public class ShurikenShooter : MonoBehaviour
 	private int maxCartridge;
 	private int currnetCartridge;
 	private int shurikenCount;
+	private float currentCharge = 0;
 
+	bool IsCharging => currentCharge > 0;
 	#endregion
 	
 	private void Start()
@@ -39,9 +43,39 @@ public class ShurikenShooter : MonoBehaviour
 		//테스트용, 나중에 Input System으로 변경 필요
 		if (Input.GetMouseButtonDown(0))
 		{
-			TryShoot();
+			StartCharge();
 		}
+		if (IsCharging)
+		{
+			currentCharge += Time.deltaTime * stats.chargeSpeed;
+			currentCharge = Mathf.Min(currentCharge, MaxCharge);
+		}
+		if (Input.GetMouseButtonUp(0))
+        {
+			EndCharge();
+        }
 	}
+	public bool StartCharge()
+    {
+		if (!IsCharging)
+        {
+			currentCharge += Time.deltaTime;
+			return true;
+        }
+		return false;
+    }
+	public bool EndCharge()
+    {
+		if (IsCharging)
+		{
+			if (TryShoot())
+            {
+				currentCharge = 0;
+				return true;
+            }
+		}
+		return false;
+    }
 	bool TryShoot()
     {
 		if (currnetCartridge > 0)
@@ -62,12 +96,14 @@ public class ShurikenShooter : MonoBehaviour
 		Mover inst = Instantiate(shurikenPrefab, (Vector2)transform.position + _dir*shootRadius, Quaternion.identity);
 		inst.direction = _dir;
 		inst.SetRotationByDirection();
-		
+
+		float chargeAmount = currentCharge / MaxCharge;
 		//슈리켄 값 받아와서 해당 값에 대한 설정
 		Shuriken instSrk = inst.GetComponent<Shuriken>();
 		instSrk.damageLayer = damageLayer;
 		instSrk.damage = stats.attackPower;
-		instSrk.moveDistance = stats.maxDistance;
+		instSrk.moveDistance = stats.maxDistance * chargeAmount;
+
 		inst.speed = stats.shurikenSpeed;
 		foreach (var a in stats.shurikenAttributes)
         {
