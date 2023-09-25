@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -51,6 +52,8 @@ public class GameManager : MonoBehaviour
         UpgradeIdx.FIRE
     };
     public int upgradeIdxCount = System.Enum.GetValues(typeof(UpgradeIdx)).Length;
+    public bool isBattleStart = false;
+    public float magneticFieldAppearCount = 30f;
     private static GameManager _instance;
     public static GameManager Instance
     {
@@ -83,7 +86,19 @@ public class GameManager : MonoBehaviour
     
     private void Start()
     {
-        //EnterState(GameState.Tournament);
+        EnterState(GameState.Tournament);
+    }
+
+    private void Update()
+    {
+        if (gameState == GameState.Battle && magneticFieldAppearCount > 0f)
+        {
+            magneticFieldAppearCount -= Time.deltaTime;
+            if (magneticFieldAppearCount <= 0f)
+            {
+                //자기장 생성
+            }
+        }
     }
     
     public void EnterState(GameState state)
@@ -92,12 +107,13 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.Tournament:
-                UIManager.Instance.UIObjects["TournamentCanvas"].SetActive(true);
                 break;
             case GameState.Battle:
+                isBattleStart = true;
+                magneticFieldAppearCount = 30f;
                 break;
             case GameState.Upgrade:
-                UIManager.Instance.UIObjects["UpgradeCanvas"].SetActive(true);
+                UIManager.Instance.UpgradeCanvas.SetActive(true);
                 break;
             case GameState.GameClear:
                 break;
@@ -111,17 +127,24 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.Tournament:
-                UIManager.Instance.UIObjects["TournamentCanvas"].SetActive(false);
                 break;
             case GameState.Battle:
+                isBattleStart = false;
                 break;
             case GameState.Upgrade:
-                UIManager.Instance.UIObjects["UpgradeCanvas"].SetActive(false);
+                UIManager.Instance.UpgradeCanvas.SetActive(false);
                 break;
             case GameState.GameClear:
                 break;
             case GameState.GameOver:
                 break;
         }
+    }
+
+    public void GoToBattle()
+    {
+        ExitState(GameState.Tournament);
+        EnterState(GameState.Battle);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
