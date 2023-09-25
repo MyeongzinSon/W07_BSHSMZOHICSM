@@ -29,12 +29,9 @@ public class Mover : MonoBehaviour
 
     private void Start()
     {
-        void Start()
+        if (TryGetComponent<CharacterStats>(out var stats))
         {
-            if (TryGetComponent<CharacterStats>(out var stats))
-            {
-                speed = stats.moveSpeed;
-            }
+            speed = stats.moveSpeed;
         }
     }
     private void FixedUpdate()
