@@ -27,7 +27,8 @@ public class TestMover : MonoBehaviour
 		}
 		if (isRotate)
 		{
-			transform.rotation = Quaternion.Euler(0f,0f,GetAngle());
+			//Direction방향으로 Rotation값 수정
+			SetRotationByDirection();
 		}
 		if (direction != Vector2.zero)
 		{
@@ -36,12 +37,13 @@ public class TestMover : MonoBehaviour
 		}
 	}
 
-	float GetAngle()
+	public float SetRotationByDirection()
 	{
 		Vector2 a = Vector2.right;
 		Vector2 b = direction.normalized;
 		float angle = Vector2.Angle(a,b);
 		float t = ((a.x*b.y - b.x*a.y)>=0)?1f:-1f;
+		transform.rotation = Quaternion.Euler(0f,0f,angle*t);
 		return angle*t;
 	}
 }
