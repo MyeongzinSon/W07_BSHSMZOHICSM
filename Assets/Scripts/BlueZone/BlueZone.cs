@@ -6,21 +6,20 @@ public class BlueZone : MonoBehaviour
 {
     private List<Damageable> objectOut = new List<Damageable>();
 
-    private CircleCollider2D circleCollider;
-
     [Header("Damage")]
     [SerializeField] private float damage;
     [SerializeField] private float damageElapsedTime;
     [SerializeField] private float damageMaxTime;
 
     [Header("Shrink")]
-    [SerializeField] private float shrinkSizePerSecond;
+    [SerializeField] private float shrinkTime;
     [SerializeField] private float shrinkElapsedTime;
+    private Vector3 initialScale;
     public float shrinkDelay;
 
     private void Awake()
     {
-        TryGetComponent(out circleCollider);
+        initialScale = transform.localScale;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -59,13 +58,10 @@ public class BlueZone : MonoBehaviour
 
     private void Shrink()
     {
-        if (shrinkElapsedTime < shrinkDelay)
+        shrinkElapsedTime += Time.deltaTime;
+        if (shrinkElapsedTime >= shrinkDelay)
         {
-            shrinkElapsedTime += Time.deltaTime;
-        }
-        else
-        {
-            circleCollider.radius -= shrinkSizePerSecond * Time.deltaTime;
+            transform.localScale = Vector3.Lerp(initialScale, Vector3.zero, Mathf.Clamp01((shrinkElapsedTime - shrinkDelay) / shrinkTime));
         }
     }
 }
