@@ -27,6 +27,12 @@ public class Shuriken : MonoBehaviour
     public float maxGuidedAngularSpeed = 1f;
     public Transform guidedTarget;
 
+    [Header("폭발 수리검")]
+    public ExplosionDamager explosionPrefab;
+    public bool useExplosion = false;
+    public float explosionScale;
+    public float explosionTime = 1f;
+
     #region privateValues
 
     private Mover mover;
@@ -47,6 +53,10 @@ public class Shuriken : MonoBehaviour
         movedDistance += mover.speed*Time.deltaTime;
         if (movedDistance >= moveDistance)
         {
+            if (useExplosion)
+            {
+                Explosion();
+            }
             Destroy(gameObject);
         }
     }
@@ -77,6 +87,10 @@ public class Shuriken : MonoBehaviour
                 {
                     mover.direction = GetReflectVector(mover.direction, hit.normal);
                     target.Hit(damage);
+                    if (useExplosion)
+                    {
+                        Explosion();
+                    }
                     StartCoroutine(BounceCoroutine(enemyBounceTime));
                 }
             }
@@ -87,6 +101,10 @@ public class Shuriken : MonoBehaviour
                 //리플렉트가 불가능하다면, 벽 반사 움직임 코루틴 시작, 가능하다면 그냥 방향만 바뀌고 쭊 날아감
                 if (!canReflect)
                 {
+                    if (useExplosion)
+                    {
+                        Explosion();
+                    }
                     StartCoroutine(BounceCoroutine(wallBounceTime));
                 }
             }
@@ -102,7 +120,6 @@ public class Shuriken : MonoBehaviour
 
     void AdaptGuidedMove()
     {
-        
         if (guidedTarget==null)
         {
             GameObject g = GameObject.FindWithTag("Enemy");
@@ -116,6 +133,13 @@ public class Shuriken : MonoBehaviour
             Vector3 target = (guidedTarget.position - transform.position).normalized;
             mover.direction = Vector3.Slerp(mover.direction, target,Time.fixedDeltaTime*maxGuidedAngularSpeed);
         }
+    }
+
+    void Explosion()
+    {
+        ExplosionDamager ex = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        ex.transform.localScale = new Vector3(explosionScale, explosionScale, 1f);
+        ex.destroyTimer = explosionTime;
     }
     
     

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5659675096001688344}
   - component: {fileID: 5659675096001688345}
   - component: {fileID: 5659675096001688347}
+  - component: {fileID: 3743431136012034996}
   - component: {fileID: 5659675096001688349}
   - component: {fileID: 5659675096001688348}
-  - component: {fileID: 3743431136012034996}
   m_Layer: 0
   m_Name: Shuriken
   m_TagString: Untagged
@@ -108,13 +108,36 @@ MonoBehaviour:
   bounceLayer:
     serializedVersion: 2
     m_Bits: 512
-  canReflect: 1
+  canReflect: 0
   wallBounceTime: 0.15
-  enemyBounceTime: 0.7
+  enemyBounceTime: 1
   moveDistance: 10
   useGuidedMove: 0
   maxGuidedAngularSpeed: 1
   guidedTarget: {fileID: 0}
+  explosionPrefab: {fileID: 4663520320846168782, guid: aad20f4c5a862eb48a5656860ce05e42, type: 3}
+  useExplosion: 1
+  explosionScale: 3
+  explosionTime: 1
+--- !u!114 &3743431136012034996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5659675096001688358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f30bfff8ed007424b8c5ef1d17ac42a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canMove: 1
+  speed: 10
+  accel: 0
+  direction: {x: 0, y: 0}
+  angularAccel: {x: 0, y: 0}
+  lastInput: {x: 0, y: -1}
+  isRotate: 1
 --- !u!50 &5659675096001688349
 Rigidbody2D:
   serializedVersion: 4
@@ -162,22 +185,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &3743431136012034996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5659675096001688358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f30bfff8ed007424b8c5ef1d17ac42a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canMove: 1
-  speed: 3
-  accel: 0
-  direction: {x: 0, y: 0}
-  angularAccel: {x: 0, y: 0}
-  lastInput: {x: 0, y: -1}
-  isRotate: 1
