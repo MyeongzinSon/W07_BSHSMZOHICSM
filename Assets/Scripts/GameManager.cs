@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameState gameState;
+    public enum GameState
+    {
+        Tournament = 100,
+        Battle,
+        Upgrade,
+        GameClear,
+        GameOver
+    }
     public enum UpgradeIdx
     {
         LARGE = 0,
@@ -58,8 +67,6 @@ public class GameManager : MonoBehaviour
             return _instance;
         }
     }
-    
-    
     private void Awake()
     {
         if (_instance == null)
@@ -72,5 +79,49 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+    }
+    
+    private void Start()
+    {
+        EnterState(GameState.Tournament);
+    }
+    
+    public void EnterState(GameState state)
+    {
+        gameState = state;
+        switch (gameState)
+        {
+            case GameState.Tournament:
+                UIManager.Instance.UIObjects["TournamentCanvas"].SetActive(true);
+                break;
+            case GameState.Battle:
+                break;
+            case GameState.Upgrade:
+                UIManager.Instance.UIObjects["UpgradeCanvas"].SetActive(true);
+                break;
+            case GameState.GameClear:
+                break;
+            case GameState.GameOver:
+                break;
+        }
+    }
+    
+    public void ExitState(GameState state)
+    {
+        switch (gameState)
+        {
+            case GameState.Tournament:
+                UIManager.Instance.UIObjects["TournamentCanvas"].SetActive(false);
+                break;
+            case GameState.Battle:
+                break;
+            case GameState.Upgrade:
+                UIManager.Instance.UIObjects["UpgradeCanvas"].SetActive(false);
+                break;
+            case GameState.GameClear:
+                break;
+            case GameState.GameOver:
+                break;
+        }
     }
 }
