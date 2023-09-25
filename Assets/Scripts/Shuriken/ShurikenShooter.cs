@@ -98,6 +98,10 @@ public class ShurikenShooter : MonoBehaviour
 		instSrk.owner = gameObject;
 		instSrk.damage = stats.attackPower;
 		instSrk.moveDistance = stats.maxDistance * chargeAmount;
+		
+		//특대형 수리검
+		instSrk.transform.localScale *= 1f + stats.shurikenScale;
+		Debug.Log("크기: "+stats.shurikenScale);
 
 		inst.speed = stats.shurikenSpeed;
 		foreach (var a in stats.shurikenAttributes)

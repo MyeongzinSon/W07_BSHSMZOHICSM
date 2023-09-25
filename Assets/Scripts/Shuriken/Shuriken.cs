@@ -85,6 +85,7 @@ public class Shuriken : MonoBehaviour
     {
         if (state == ShurikenState.PICKUP)
             return;
+        CalculateMoveDistance();
         //충돌 처리
         float angle = mover.SetRotationByDirection();
         RaycastHit2D hit 
