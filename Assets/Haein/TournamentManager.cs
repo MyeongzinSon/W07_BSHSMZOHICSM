@@ -12,13 +12,13 @@ public class TournamentManager : MonoBehaviour
     public float movementSpeed = 2f; 
     private float waitTime = 0.3f;
     private int currentRound = 0;
-    private List<Transform> objectsToRemove = new List<Transform>(); // 삭제할 오브젝트를 저장하는 리스트
+    private List<Transform> objectsToRemove = new List<Transform>(); // 삭제할 오브젝트 저장
     private List<Transform> remainingTourmantObjects = new List<Transform>();
     GameObject PortraitIconContainerPrefab;
     
     private List<string> NinjaSpecies = new List<string>
     {
-        "",
+        "주인공",
         "공격적",
         "수비적",
         "공격적",
@@ -92,24 +92,22 @@ public class TournamentManager : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
             winner.GetChild(0).GetComponent<Image>().color = Color.green;
             loser.GetChild(0).GetComponent<Image>().color = Color.red;
-            objectsToRemove.Add(loser); // 삭제할 오브젝트를 리스트에 추가
+            objectsToRemove.Add(loser);
             yield return new WaitForSeconds(waitTime);
         }
-
-        // 모든 매치가 끝나면 한 번에 삭제
+        
         foreach (Transform objToRemove in objectsToRemove)
         {
             remainingTourmantObjects.Remove(objToRemove);
             Destroy(objToRemove.gameObject);
         }
-        objectsToRemove.Clear(); // 리스트 비우기
+        objectsToRemove.Clear();
 
         GoToNextRound();
     }
 
     private Transform SimulateMatch(Transform obj1, Transform obj2)
     {
-        // 이긴 오브젝트를 무작위로 선택
         return Random.Range(0, 2) == 0 ? obj1 : obj2;
     }
     
@@ -122,9 +120,8 @@ public class TournamentManager : MonoBehaviour
             Color lightGray = new Color(0.75f, 0.75f, 0.75f, 1.0f);
             image.color = lightGray;
         }
-
-        // 화면 왼쪽에 있는 오브젝트들을 오른쪽으로, 그렇지 않은 오브젝트들은 왼쪽으로 이동
-        float moveDistance = 200f; // 이동 거리 조절
+        
+        float moveDistance = 200f;
         float screenWidth = Screen.width;
         foreach (Transform obj in remainingTourmantObjects)
         {
@@ -132,12 +129,10 @@ public class TournamentManager : MonoBehaviour
 
             if (obj.position.x < screenWidth / 2)
             {
-                // 화면 왼쪽에 있는 오브젝트를 오른쪽으로 이동
                 targetPosition.x += moveDistance;
             }
             else
             {
-                // 화면 오른쪽에 있는 오브젝트를 왼쪽으로 이동
                 targetPosition.x -= moveDistance;
             }
 
@@ -165,16 +160,14 @@ public class TournamentManager : MonoBehaviour
     
     private void CreateIconContainers()
     {
-        // 첫 번째 8개의 아이콘 컨테이너 생성
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < objectCount / 2; i++)
         {
             CreateIconContainer(new Vector3(105f, 990f - i * 130f, 0f), i);
         }
-
-        // 나머지 8개의 아이콘 컨테이너 생성
-        for (int i = 0; i < 8; i++)
+        
+        for (int i = 0; i < objectCount / 2; i++)
         {
-            CreateIconContainer(new Vector3(1635f, 990f - i * 130f, 0f), i + 8);
+            CreateIconContainer(new Vector3(1635f, 990f - i * 130f, 0f), i + objectCount / 2);
         }
     }
     
