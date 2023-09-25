@@ -101,6 +101,7 @@ public class ShurikenShooter : MonoBehaviour
 		//슈리켄 값 받아와서 해당 값에 대한 설정
 		Shuriken instSrk = inst.GetComponent<Shuriken>();
 		instSrk.damageLayer = damageLayer;
+		instSrk.owner = gameObject;
 		instSrk.damage = stats.attackPower;
 		instSrk.moveDistance = stats.maxDistance * chargeAmount;
 
