@@ -9,7 +9,8 @@ public class Shuriken : MonoBehaviour
 {
     public enum ShurikenState
     {
-        ATTACK, PICKUP,
+        ATTACK,
+        PICKUP,
     }
 
     public ShurikenState state;
@@ -17,7 +18,7 @@ public class Shuriken : MonoBehaviour
 
     [Header("수리검 회수 가능 여부")]
     public bool isShadow = false;
-    
+
     [Header("수리검의 데미지")]
     public float damage = 3f;
     public bool canDamage = true;
@@ -27,9 +28,11 @@ public class Shuriken : MonoBehaviour
     public LayerMask damageLayer;
     [Header("충돌 시 튕길 레이어")]
     public LayerMask bounceLayer;
-    public bool canReflect = false;
-    [FormerlySerializedAs("bounceWallTime")] public float wallBounceTime = 0.3f;     //벽 충돌 시 튕겨나갈 시간
-    [FormerlySerializedAs("bounceDamageTime")] public float enemyBounceTime = 1.0f;   // 적 충돌 시 튕겨나갈 시간
+    [FormerlySerializedAs("canReflect")] public bool useBounce = false;
+    [FormerlySerializedAs("bounceWallTime")]
+    public float wallBounceTime = 0.3f; //벽 충돌 시 튕겨나갈 시간
+    [FormerlySerializedAs("bounceDamageTime")]
+    public float enemyBounceTime = 1.0f; // 적 충돌 시 튕겨나갈 시간
 
     [Header("움직일 거리")]
     public float moveDistance = 3f;
@@ -45,10 +48,11 @@ public class Shuriken : MonoBehaviour
     public float explosionScale;
     public float explosionTime = 1f;
 
-    [Header("자동 수거")]
+    [Header("부메랑")]
     public bool useBoomerang;
     public float boomerangDelay = 5f;
-    private bool isBoomerangMoving = false;
+    public float boomerangAccel = 3f;
+    private bool isBoomerangReturning = false;
     [Header("수리검 속성")]
     public List<ShurikenAttribute> attributes = new();
 
@@ -71,62 +75,115 @@ public class Shuriken : MonoBehaviour
         state = ShurikenState.ATTACK;
     }
 
+    public void AddAttribute(ShurikenAttribute attr)
+    {
+        attributes.Add(attr);
+
+        //bool 변수로 컨트롤 되는 경우 수정
+        switch (attr)
+        {
+            case ShurikenAttribute.Boomerang:
+                useBoomerang = true;
+                break;
+            case ShurikenAttribute.Guidance:
+                useGuidedMove = true;
+                break;
+            case ShurikenAttribute.BounceOnWall:
+                useBounce = true;
+                break;
+            case ShurikenAttribute.ExplodeOnHit:
+                useExplosion = true;
+                break;
+        }
+    }
+
     void CalculateMoveDistance()
     {
         //이동한 거리 계산
         if (state == ShurikenState.ATTACK)
         {
             movedDistance += mover.speed*Time.deltaTime;
+
             if (movedDistance >= moveDistance)
             {
-                SetPickUpState();
+                if (useBoomerang)
+                {
+                    if (!isBoomerangReturning)
+                    {
+                        //부메랑 모드일 경우, 공격을 유지하고 돌아오는 중으로 체크
+                        mover.speed = 0f;
+                        isBoomerangReturning = true;
+                    }
+                }
+                else
+                {
+                    SetPickUpState();
+                }
+
+
             }
         }
     }
 
     private void FixedUpdate()
     {
+        if (isBoomerangReturning)
+        {
+            //부메랑 리턴은 PICKUP이어도 작동한다.
+            AdaptBoomerangReturnMove();
+        }
         if (state == ShurikenState.PICKUP)
             return;
         CalculateMoveDistance();
+
+        //유도 처리
+        if (useGuidedMove && canDamage)
+        {
+            AdaptGuidedMove();
+        }
         //충돌 처리
         float angle = mover.SetRotationByDirection();
-        RaycastHit2D hit 
+        RaycastHit2D hit
             = Physics2D.BoxCast(
-                (Vector2)transform.position + collider.offset, 
-                collider.size, 
-                angle, 
-                mover.direction, 
+                (Vector2) transform.position + collider.offset,
+                collider.size,
+                angle,
+                mover.direction,
                 Time.fixedDeltaTime*mover.speed*3,
-                bounceLayer|damageLayer);
+                bounceLayer | damageLayer);
         //충돌 체크
         if (hit.collider != null)
         {
             int targetLayer = (1 << hit.collider.gameObject.layer);
-            
+
             //적과 충돌하였는가?
-            if (canDamage&&(targetLayer & damageLayer) > 0)
+            if (canDamage && (targetLayer & damageLayer) > 0)
             {
                 //적 
                 if (hit.collider.gameObject.TryGetComponent<Damageable>(out var target))
                 {
+                    if (isBoomerangReturning)
+                    {
+                        isBoomerangReturning = false;
+                    }
                     //대상에게 공격 판정
                     target.Hit(damage);
-                    
+
+
                     //PickUp으로 변경 및 Drop
                     float dropDistance = 5f;
-                    Vector3 dropPos = transform.position + (Vector3)mover.direction*dropDistance;
-        
+                    Vector3 dropPos = transform.position + (Vector3) mover.direction*dropDistance;
+
                     //레이캐스트를 쏴서, 벽이 없는지 확인한다.
                     RaycastHit2D hitToDrop = Physics2D.Raycast(transform.position, dropPos - transform.position, dropDistance, bounceLayer);
                     if (hitToDrop.collider != null)
                     {
                         //벽이 있다면, 가장 가까운 거리에 Drop한다.
-                        dropPos = transform.position + (Vector3)mover.direction *(hitToDrop.distance - collider.size.y*0.5f);
+                        dropPos = transform.position + (Vector3) mover.direction*(hitToDrop.distance - collider.size.y*0.5f);
                     }
                     transform.position = dropPos;
                     canDamage = false;
-                    
+
                     SetPickUpState();
                     //SetPickUpState();
                     //StartCoroutine(BounceCoroutine(enemyBounceTime));
@@ -135,39 +192,59 @@ public class Shuriken : MonoBehaviour
             //벽에 부딪힘
             if ((targetLayer & bounceLayer) > 0)
             {
-                mover.direction = GetReflectVector(mover.direction, hit.normal);
+                if(!isBoomerangReturning)
+                    mover.direction = GetReflectVector(mover.direction, hit.normal);
                 //리플렉트가 불가능하다면, 벽 반사 움직임 코루틴 시작, 가능하다면 그냥 방향만 바뀌고 쭊 날아감
-                if (!canReflect)
+                if (!useBounce)
                 {
                     canDamage = false;
-                    SetPickUpState();
                     StartCoroutine(BounceCoroutine(wallBounceTime));
                 }
+                //부메랑 모드
+                //벽과 충돌 시, 공격은 유지하면서, 방향만 플레이어쪽으로 향한다.
+                if (useBoomerang)
+                {
+                    mover.speed = 0f;
+                    isBoomerangReturning = true;
+                }
             }
-            
+
         }
-        
-        //유도 처리
-        if (useGuidedMove&&canDamage)
-        {
-            AdaptGuidedMove();
-        }
+
+
     }
-    
+
     void AdaptGuidedMove()
     {
-        if (guidedTarget==null)
+        if (guidedTarget == null)
         {
             GameObject g = GameObject.FindWithTag("Enemy");
-            if (g!=null)
+            if (g != null)
             {
                 guidedTarget = g.transform;
             }
         }
-        if (guidedTarget!=null)
+        if (guidedTarget != null)
         {
             Vector3 target = (guidedTarget.position - transform.position).normalized;
-            mover.direction = Vector3.Slerp(mover.direction, target,Time.fixedDeltaTime*maxGuidedAngularSpeed);
+            mover.direction = Vector3.Slerp(mover.direction, target, Time.fixedDeltaTime*maxGuidedAngularSpeed);
+        }
+    }
+
+
+    void AdaptBoomerangReturnMove()
+    {
+        Vector2 dist = owner.transform.position - transform.position;
+        mover.CanMove = true;
+        mover.direction = dist.normalized;
+        mover.accel = boomerangAccel;
+        if (dist.magnitude < 0.5f)
+        {
+            SetPickUpState();
+        }
+        else
+        {
+            canDamage = true;
         }
     }
 
@@ -178,13 +255,13 @@ public class Shuriken : MonoBehaviour
         ex.transform.localScale = new Vector3(explosionScale, explosionScale, 1f);
         ex.destroyTimer = explosionTime;
     }
-    
-    
+
+
     Vector2 GetReflectVector(Vector2 _dir, Vector2 _normal)
     {
         // 충돌한 객체의 법선 벡터를 가져옴
-        Vector2 n = _normal;         //법선벡터
-        Vector2 p = _dir;    //입사벡터
+        Vector2 n = _normal; //법선벡터
+        Vector2 p = _dir; //입사벡터
         //P + 2n(-P dot N)
         Vector2 reflect = p + 2*(-p.x*n.x - p.y*n.y)*n;
 
@@ -202,17 +279,18 @@ public class Shuriken : MonoBehaviour
         while (timer > 0f)
         {
             //부메랑 이동이 발견되면, BounceCoroutine을 끊는다. 정말 먼 나중에 착오가 생길 수 있는 하드코딩이므로 시간이 난다면 수정 필요.
-            if(isBoomerangMoving)       
+            if (isBoomerangReturning)
                 yield break;
-            
+
             timer -= Time.deltaTime;
             mover.speed = orgSpeed*timer/_moveTime;
             yield return null;
         }
+        SetPickUpState();
         mover.CanMove = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         //PICKUP모드일 때 소환자와 만나면 사라짐
         if (state == ShurikenState.PICKUP)
@@ -225,41 +303,24 @@ public class Shuriken : MonoBehaviour
         }
     }
 
-    IEnumerator BoomerangCoroutine()
-    {
-        yield return new WaitForSeconds(boomerangDelay);
-        float boomerangAccel = 5f;
-        mover.CanMove = true;
-        isBoomerangMoving = true;
-        mover.speed = 0f;
-        while (true)
-        {
-            mover.direction = owner.transform.position - transform.position;
-            mover.speed += boomerangAccel*Time.fixedDeltaTime;
-            yield return new WaitForFixedUpdate();
-        }
-    }
-    
-    
+
     void SetPickUpState()
     {
         if (useExplosion)
         {
             Explosion();
         }
-        if (useBoomerang)
-        {
-            StartCoroutine(BoomerangCoroutine());
-        }
-        
-        
-        attributes.ForEach(a => {
-            Debug.Log($"Attribute : {a}");
-        });
+        // if (useBoomerang)
+        // {
+        //     StartCoroutine(BoomerangCoroutine());
+        // }
+
+
+        attributes.ForEach(a => { Debug.Log($"Attribute : {a}"); });
         state = ShurikenState.PICKUP;
         mover.CanMove = false;
-        
-        
+
+
         //쉐도우라면, PICKUP으로 들어가면서 사라진다.
         if (isShadow)
         {

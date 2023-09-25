@@ -606,7 +606,7 @@ MonoBehaviour:
         m_MethodName: AddCharacterStats
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 6f0dbf2bb4f478846b802dde52d02c8a, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: a6afba2c1f5a88940b3235adc1ce50b7, type: 2}
           m_ObjectArgumentAssemblyTypeName: CharacterStatsData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -731,7 +731,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 585245844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.45, y: -0.97, z: 0}
+  m_LocalPosition: {x: -2.25, y: -0.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

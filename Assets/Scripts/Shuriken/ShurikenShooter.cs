@@ -125,7 +125,7 @@ public class ShurikenShooter : MonoBehaviour
         {
 			if (shurikenCount % a.GetActivateNumber() == 0)
             {
-				instSrk.attributes.Add(a);
+				instSrk.AddAttribute(a);
             }
         }
 	}

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9be4da6ba60ca3646b8bb410bc4c5bf1, type: 3}
+  m_Name: "\uC720\uB3C4\uC218\uB9AC\uAC80"
+  m_EditorClassIdentifier: 
+  forDefaultState: 0
+  maxHp: 0
+  moveSpeed: 0
+  attackPower: 0
+  chargeSpeed: 0
+  maxCartridgeNum: 0
+  maxDistance: 0
+  shurikenSpeed: 0
+  shurikenNum: 0
+  shurikenScale: 0
+  shurikenAttributes: 04000000
