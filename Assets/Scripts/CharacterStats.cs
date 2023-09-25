@@ -20,6 +20,7 @@ public class CharacterStats : MonoBehaviour
     public float shurikenNum { get; private set; }
     public float shurikenScale { get; private set; }
     public List<ShurikenAttribute> shurikenAttributes { get; private set; }
+    
 
     private void Awake()
     {

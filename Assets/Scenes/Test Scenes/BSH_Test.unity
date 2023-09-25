@@ -606,7 +606,7 @@ MonoBehaviour:
         m_MethodName: AddCharacterStats
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: a6afba2c1f5a88940b3235adc1ce50b7, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: 96bed05f408782740884121dc7fff7fa, type: 2}
           m_ObjectArgumentAssemblyTypeName: CharacterStatsData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -661,9 +661,11 @@ GameObject:
   m_Component:
   - component: {fileID: 585245846}
   - component: {fileID: 585245845}
-  - component: {fileID: 585245847}
   - component: {fileID: 585245849}
   - component: {fileID: 585245848}
+  - component: {fileID: 585245850}
+  - component: {fileID: 585245847}
+  - component: {fileID: 585245851}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -750,8 +752,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fdde0f704bdda4448c280dff1e1bc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 32
-  hp: 32
+  maxHp: 100
+  hp: 50
+  damageCoef: 1
+  canHeal: 1
 --- !u!50 &585245848
 Rigidbody2D:
   serializedVersion: 4
@@ -801,6 +805,37 @@ PolygonCollider2D:
     - - {x: 0, y: 0.5773587}
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
+--- !u!114 &585245850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585245844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f30bfff8ed007424b8c5ef1d17ac42a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canMove: 1
+  speed: 1
+  accel: 0
+  direction: {x: 0, y: -1}
+  angularAccel: {x: 0, y: 0}
+  lastInput: {x: 0, y: -1}
+  isRotate: 0
+--- !u!114 &585245851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585245844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57668efbccdfadd43b984d83b4967cbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &693373705
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1379,10 +1414,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 268700112459832159, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
-      propertyPath: launchAngle
-      value: 45
-      objectReference: {fileID: 0}
     - target: {fileID: 2161613080536109213, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1446,11 +1477,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2611023797887767892, guid: c541d32eabf026044bf236a07a72ad68, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.29
+      value: -2.22
       objectReference: {fileID: 0}
     - target: {fileID: 2611023797887767892, guid: c541d32eabf026044bf236a07a72ad68, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.91
+      value: -33.59
       objectReference: {fileID: 0}
     - target: {fileID: 2611023797887767892, guid: c541d32eabf026044bf236a07a72ad68, type: 3}
       propertyPath: m_LocalPosition.z

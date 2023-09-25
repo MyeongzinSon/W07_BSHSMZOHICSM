@@ -49,7 +49,7 @@ public class ShurikenShooter : MonoBehaviour
 		}
 	}
 	public bool StartCharge()
-    {
+	{
 		if (CanShoot && !IsCharging)
         {
 			currentCharge += Time.deltaTime;

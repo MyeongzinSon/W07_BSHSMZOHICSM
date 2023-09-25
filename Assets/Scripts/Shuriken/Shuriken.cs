@@ -56,6 +56,15 @@ public class Shuriken : MonoBehaviour
     [Header("수리검 속성")]
     public List<ShurikenAttribute> attributes = new();
 
+    [Header("데미지 줄 때 값 처리")]
+    public bool useLifeSteal = false;
+    [FormerlySerializedAs("healAmount")] public float lifeStealAmount = 2f;
+    public bool useKnockBack = false;
+    public float knockbackPower = 5f;
+    public bool useSlow = false;
+    public bool useDamageBuff = false;
+    public bool useInhibitHeal = false;
+
     #region privateValues
 
     private Mover mover;
@@ -93,6 +102,21 @@ public class Shuriken : MonoBehaviour
                 break;
             case ShurikenAttribute.ExplodeOnHit:
                 useExplosion = true;
+                break;
+            case ShurikenAttribute.Vampire:
+                useLifeSteal = true;
+                break;
+            case ShurikenAttribute.KnockbackToWall:
+                useKnockBack = true;
+                break;
+            case ShurikenAttribute.Slow:
+                useSlow = true;
+                break;
+            case ShurikenAttribute.Vulnerable:
+                useDamageBuff = true;
+                break;
+            case ShurikenAttribute.HealReduction:
+                useInhibitHeal = true;
                 break;
         }
     }
@@ -168,7 +192,7 @@ public class Shuriken : MonoBehaviour
                     }
                     //대상에게 공격 판정
                     target.Hit(damage);
-
+                    OnHitEnemy(target);
 
                     //PickUp으로 변경 및 Drop
                     float dropDistance = 5f;
@@ -330,9 +354,59 @@ public class Shuriken : MonoBehaviour
 
     void OnPickUp()
     {
-        Debug.Log("회수 완료.");
+        //Debug.Log("회수 완료.");
         owner.GetComponent<ShurikenShooter>().AddCurrentCartridge(1);
         Destroy(gameObject);
+    }
+
+    void OnHitEnemy(Damageable _target)
+    {
+        if (useLifeSteal)
+        {
+            if (owner.TryGetComponent<Damageable>(out var ownerHp))
+            {
+                ownerHp.Heal(lifeStealAmount);
+            }
+            
+        }
+        
+        //맞았을때 적에게 디버프 효과
+        if (_target.TryGetComponent<StatusEffectController>(out var sec))
+        {
+            if (useKnockBack)
+            {
+                StatusEffectParameter sep = new StatusEffectParameter(StatusEffectController.StatusEffect.KNOCKBACK);
+                sep.dir = mover.direction;
+                sep.duration = 1.0f;
+                sep.value = 5f;
+                sec.AddStatusEffect(sep);
+            }
+            if (useSlow)
+            {
+                StatusEffectParameter sep = new StatusEffectParameter(StatusEffectController.StatusEffect.SLOW);
+                
+                sep.duration = 3.0f;
+                sep.value = 0.3f;
+                sec.AddStatusEffect(sep);
+            }
+            if (useDamageBuff)
+            {
+                StatusEffectParameter sep = new StatusEffectParameter(StatusEffectController.StatusEffect.MORE_DAMAGE_TAKEN);
+                
+                sep.duration = 5.0f;
+                sep.value = 0.5f;
+                sec.AddStatusEffect(sep);
+                
+            }
+            if (useInhibitHeal)
+            {
+                StatusEffectParameter sep = new StatusEffectParameter(StatusEffectController.StatusEffect.INHIBIT_HEAL);
+                
+                sep.duration = 5.0f;
+                sec.AddStatusEffect(sep);
+                
+            }
+        }
     }
 
 }
