@@ -111,7 +111,10 @@ MonoBehaviour:
   canReflect: 1
   wallBounceTime: 0.15
   enemyBounceTime: 0.7
-  moveDistance: 20
+  moveDistance: 10
+  useGuidedMove: 0
+  maxGuidedAngularSpeed: 1
+  guidedTarget: {fileID: 0}
 --- !u!50 &5659675096001688349
 Rigidbody2D:
   serializedVersion: 4
@@ -172,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canMove: 1
-  speed: 15
+  speed: 3
   accel: 0
   direction: {x: 0, y: 0}
   angularAccel: {x: 0, y: 0}

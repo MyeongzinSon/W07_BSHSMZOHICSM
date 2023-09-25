@@ -22,6 +22,11 @@ public class Shuriken : MonoBehaviour
     [Header("움직일 거리")]
     public float moveDistance = 3f;
 
+    [Header("유도탄 움직임 관련")]
+    public bool useGuidedMove = false;
+    public float maxGuidedAngularSpeed = 1f;
+    public Transform guidedTarget;
+
     #region privateValues
 
     private Mover mover;
@@ -42,13 +47,13 @@ public class Shuriken : MonoBehaviour
         movedDistance += mover.speed*Time.deltaTime;
         if (movedDistance >= moveDistance)
         {
-            Debug.Log("이동 가능 거리 달성");
             Destroy(gameObject);
         }
     }
 
     private void FixedUpdate()
     {
+        //충돌 처리
         float angle = mover.SetRotationByDirection();
         RaycastHit2D hit 
             = Physics2D.BoxCast(
@@ -87,7 +92,33 @@ public class Shuriken : MonoBehaviour
             }
             
         }
+        
+        //유도 처리
+        if (useGuidedMove&&canDamage)
+        {
+            AdaptGuidedMove();
+        }
     }
+
+    void AdaptGuidedMove()
+    {
+        
+        if (guidedTarget==null)
+        {
+            GameObject g = GameObject.FindWithTag("Enemy");
+            if (g!=null)
+            {
+                guidedTarget = g.transform;
+            }
+        }
+        if (guidedTarget!=null)
+        {
+            Vector3 target = (guidedTarget.position - transform.position).normalized;
+            mover.direction = Vector3.Slerp(mover.direction, target,Time.fixedDeltaTime*maxGuidedAngularSpeed);
+        }
+    }
+    
+    
     Vector2 GetReflectVector(Vector2 _dir, Vector2 _normal)
     {
         // 충돌한 객체의 법선 벡터를 가져옴
@@ -113,7 +144,7 @@ public class Shuriken : MonoBehaviour
             mover.speed = orgSpeed*timer/_moveTime;
             yield return null;
         }
-        Debug.Log("벽에 부딪히고 dur초 경과!");
+        //Debug.Log("벽에 부딪히고 dur초 경과!");
         Destroy(gameObject);
     }
 }
