@@ -5,19 +5,25 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    [Header("Character")]
-    public float maxHp;
-    public float currentHp;
-    public float moveSpeed;
-    [Header("Shuriken")]
-    public float attackPower;
-    public float chargeSpeed;
-    public int maxCatridgeNum;
-    public int currentCatridgeNum;
-    public float maxDistance;
-    public float shurikenSpeed;
-    public float shurikenNum;
-    public List<ShurikenAttribute> shurikenAttributes;
+    [SerializeField] CharacterStatsData initialStats;
+
+    //hp
+    public float maxHp { get; private set; }
+    //move
+    public float moveSpeed { get; private set; }
+    //shuriken
+    public float attackPower { get; private set; }
+    public float chargeSpeed { get; private set; }
+    public int maxCartridgeNum { get; private set; }
+    public float maxDistance { get; private set; }
+    public float shurikenSpeed { get; private set; }
+    public float shurikenNum { get; private set; }
+    public List<ShurikenAttribute> shurikenAttributes { get; private set; }
+
+    private void Awake()
+    {
+        SetCharacterStats(initialStats);
+    }
 
     public void SetCharacterStats(CharacterStatsData info)
     { 
@@ -31,7 +37,7 @@ public class CharacterStats : MonoBehaviour
         moveSpeed = info.moveSpeed;
         attackPower = info.attackPower;
         chargeSpeed = info.chargeSpeed;
-        maxCatridgeNum = info.maxCatridgeNum;
+        maxCartridgeNum = info.maxCartridgeNum;
         maxDistance = info.maxDistance;
         shurikenSpeed = info.shurikenSpeed;
         shurikenNum = info.shurikenNum;
@@ -52,7 +58,7 @@ public class CharacterStats : MonoBehaviour
         moveSpeed += info.moveSpeed;
         attackPower += info.attackPower;
         chargeSpeed += info.chargeSpeed;
-        maxCatridgeNum += info.maxCatridgeNum;
+        maxCartridgeNum += info.maxCartridgeNum;
         maxDistance += info.maxDistance;
         shurikenSpeed += info.shurikenSpeed;
         shurikenNum += info.shurikenNum;

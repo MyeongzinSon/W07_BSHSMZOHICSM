@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -21,6 +22,9 @@ public class Shuriken : MonoBehaviour
 
     [Header("움직일 거리")]
     public float moveDistance = 3f;
+
+    [Header("수리검 속성")]
+    public List<ShurikenAttribute> attributes = new();
 
     #region privateValues
 
@@ -43,7 +47,7 @@ public class Shuriken : MonoBehaviour
         if (movedDistance >= moveDistance)
         {
             Debug.Log("이동 가능 거리 달성");
-            Destroy(gameObject);
+            DestroySelf();
         }
     }
 
@@ -114,6 +118,15 @@ public class Shuriken : MonoBehaviour
             yield return null;
         }
         Debug.Log("벽에 부딪히고 dur초 경과!");
+        DestroySelf();
+    }
+
+    void DestroySelf()
+    {
+        attributes.ForEach(a => {
+            Debug.Log($"Attribute : {a}");
+        });
         Destroy(gameObject);
     }
+
 }

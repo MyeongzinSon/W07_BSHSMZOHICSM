@@ -8,8 +8,12 @@ public class Damageable : MonoBehaviour
 	public float maxHp = 32;
 	public float hp = 32;
 
-	private void Awake()
-	{
+	private void Start()
+	{ 
+		if (TryGetComponent<CharacterStats>(out var stats))
+        {
+			maxHp = stats.maxHp;
+        }
 		hp = maxHp;
 	}
 

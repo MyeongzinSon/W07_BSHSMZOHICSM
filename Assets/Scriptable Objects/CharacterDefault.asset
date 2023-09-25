@@ -17,7 +17,7 @@ MonoBehaviour:
   moveSpeed: 5
   attackPower: 10
   chargeSpeed: 1
-  maxCatridgeNum: 3
+  maxCartridgeNum: 3
   maxDistance: 20
   shurikenSpeed: 10
   shurikenNum: 1
