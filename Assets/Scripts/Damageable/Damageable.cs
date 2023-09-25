@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestDamageable : MonoBehaviour
+public class Damageable : MonoBehaviour
 {
 	public float maxHp = 32;
 	public float hp = 32;

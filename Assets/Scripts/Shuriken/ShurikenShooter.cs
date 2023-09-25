@@ -6,7 +6,7 @@ using CoroutineRunner = Unity.VisualScripting.CoroutineRunner;
 
 public class ShurikenShooter : MonoBehaviour
 {
-	public TestMover shurikenPrefab;
+	public Mover shurikenPrefab;
 	public LayerMask damageLayer;
 
 	[Header("플레이어에게서 약간 떨어진 거리에서 발사됩니다.")]
@@ -39,7 +39,7 @@ public class ShurikenShooter : MonoBehaviour
 		_dir = _dir.normalized;
 		
 		//총알 실제 생성, 초기화
-		TestMover inst = Instantiate(shurikenPrefab, (Vector2)transform.position + _dir*shootRadius, Quaternion.identity);
+		Mover inst = Instantiate(shurikenPrefab, (Vector2)transform.position + _dir*shootRadius, Quaternion.identity);
 		inst.direction = _dir;
 		inst.SetRotationByDirection();
 		
