@@ -28,6 +28,16 @@ public class Damageable : MonoBehaviour
 		}
 	}
 
+	public void Heal(float amout)
+	{
+		Debug.Log("Healed: " + name);
+		hp += amout;
+		if (hp >= maxHp)
+		{
+			hp = maxHp;
+		}
+	}
+
 	public void Kill()
 	{
 		Debug.Log("Killed: "+name);
