@@ -14,7 +14,7 @@ public class Mover : MonoBehaviour
     }
 
 
-    [Header("�ӵ� ����")]
+    [Header("속도 관련")]
     public float speed;
     public float accel;
     public Vector2 direction;
@@ -23,6 +23,9 @@ public class Mover : MonoBehaviour
     protected Rigidbody2D body;
 
     public Vector2 lastInput = new Vector2(0,-1);
+
+    [Header("이동 방향을 바라볼지 결정합니다.")]
+    public bool isRotate = false;
 
 
     private void FixedUpdate()
@@ -48,14 +51,30 @@ public class Mover : MonoBehaviour
             body = GetComponent<Rigidbody2D>();
         }
         body.MovePosition(body.position + speed * Time.fixedDeltaTime * direction.normalized);
+        
+        if (isRotate)
+        {
+            //Direction방향으로 Rotation값 수정
+            SetRotationByDirection();
+        }
         //body.velocity = direction.normalized * speed;
     }
 
     public void CalculateDelta()
     {
-        //�ӵ�, ���ӵ�, ���ӵ� ���
+        //속도, 가속도, 각속도 계산
         speed += accel * Time.fixedDeltaTime;
         direction += angularAccel * Time.fixedDeltaTime;
+    }
+
+    public float SetRotationByDirection()
+    {
+        Vector2 a = Vector2.right;
+        Vector2 b = direction.normalized;
+        float angle = Vector2.Angle(a,b);
+        float t = ((a.x*b.y - b.x*a.y)>=0)?1f:-1f;
+        transform.rotation = Quaternion.Euler(0f,0f,angle*t);
+        return angle*t;
     }
 
     public virtual void BeforeMove() { }

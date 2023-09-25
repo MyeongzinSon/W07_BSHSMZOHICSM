@@ -19,20 +19,20 @@ public class Shuriken : MonoBehaviour
 
     #region privateValues
 
-    private TestMover mover;
+    private Mover mover;
     private float movedDistance = 0f;
 
     #endregion
 
     private void Awake()
     {
-        mover = GetComponent<TestMover>();
+        mover = GetComponent<Mover>();
     }
 
     private void Update()
     {
         //이동한 거리 계산
-        movedDistance += mover.moveSpeed*Time.deltaTime;
+        movedDistance += mover.speed*Time.deltaTime;
         if (movedDistance >= moveDistance)
         {
             Debug.Log("이동 가능 거리 달성");
@@ -48,7 +48,7 @@ public class Shuriken : MonoBehaviour
         //데미지 대상과 충돌 시
         if ((targetLayer & damageLayer) > 0)
         {
-            if (other.TryGetComponent<TestDamageable>(out var target))
+            if (other.TryGetComponent<Damageable>(out var target))
             {
                 target.Hit(damage);
             }

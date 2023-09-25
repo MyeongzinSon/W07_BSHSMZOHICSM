@@ -123,6 +123,69 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &106139432
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5659675096001688344, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659675096001688344, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659675096001688344, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659675096001688344, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659675096001688344, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659675096001688344, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659675096001688344, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659675096001688344, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659675096001688344, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659675096001688344, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659675096001688344, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659675096001688358, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+      propertyPath: m_Name
+      value: ShurikenDrop
+      objectReference: {fileID: 0}
+    - target: {fileID: 5659675096001688358, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5659675096001688346, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+    - {fileID: 5659675096001688347, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
 --- !u!1 &585245844
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,11 +551,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48674c3545863f4a94a1ddba566ea30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shurikenPrefab: {fileID: 5659675096001688346, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+  shurikenPrefab: {fileID: 3743431136012034996, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
   damageLayer:
     serializedVersion: 2
     m_Bits: 1024
-  shootRadius: 0.5
+  shootRadius: 1
 --- !u!1001 &5659675094689177337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -500,6 +563,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3743431136012034996, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+      propertyPath: speed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3743431136012034996, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+      propertyPath: isRotate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5659675096001688344, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
       propertyPath: m_RootOrder
       value: 1
