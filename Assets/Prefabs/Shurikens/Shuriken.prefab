@@ -101,12 +101,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
+  canDamage: 1
   damageLayer:
     serializedVersion: 2
     m_Bits: 1024
   bounceLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
+  canReflect: 1
+  wallBounceTime: 0.15
+  enemyBounceTime: 0.7
   moveDistance: 20
 --- !u!50 &5659675096001688349
 Rigidbody2D:
@@ -116,7 +120,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5659675096001688358}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
