@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerRoll : MonoBehaviour, NewInputActions.IPlayerActions
+public class PlayerRoll : MonoBehaviour
 {
-    private NewInputActions inputs;
     private PlayerMove playerMove;
     private Rigidbody2D playerRigidbody;
 
-    [Header("±¸¸£±â ½ºÆå")]
+    [Header("êµ¬ë¥´ê¸° ìŠ¤í™")]
     [SerializeField] private float rollDistance;
     [SerializeField] private float rollCoolTime;
     [SerializeField] private float rollingTime;
@@ -20,33 +19,8 @@ public class PlayerRoll : MonoBehaviour, NewInputActions.IPlayerActions
 
     private void Awake()
     {
-        inputs = new();
-        inputs.Player.SetCallbacks(this);
-        inputs.Enable();
-
         TryGetComponent(out playerMove);
         TryGetComponent(out playerRigidbody);
-    }
-
-    private void OnDisable()
-    {
-        inputs.Disable();
-    }
-    public void OnFire(InputAction.CallbackContext _context)
-    {
-    }
-
-    public void OnLook(InputAction.CallbackContext _context)
-    {
-    }
-
-    public void OnLookOnMouse(InputAction.CallbackContext _context)
-    {
-        
-    }
-
-    public void OnMove(InputAction.CallbackContext _context)
-    {
     }
 
     public void OnRoll(InputAction.CallbackContext _context)
@@ -63,17 +37,17 @@ public class PlayerRoll : MonoBehaviour, NewInputActions.IPlayerActions
                     }
                     else
                     {
-                        Debug.Log("ÄğÅ¸ÀÓ ±â´Ù¸®´Â Áß");
+                        Debug.Log("ì¿¨íƒ€ì„ ê¸°ë‹¤ë¦¬ëŠ” ì¤‘");
                     }
                 }
                 else
                 {
-                    Debug.Log("±¸¸£´Â Áß");
+                    Debug.Log("êµ¬ë¥´ëŠ” ì¤‘");
                 }
             }
             else
             {
-                Debug.Log("¹æÇâ ÀÔ·Â ¾øÀ½");
+                Debug.Log("ë°©í–¥ ì…ë ¥ ì—†ìŒ");
             }
         }
     }
