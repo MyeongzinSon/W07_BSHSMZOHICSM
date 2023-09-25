@@ -124,13 +124,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2161613080536109214}
-  - component: {fileID: 2161613080536109215}
   - component: {fileID: 2161613080536109211}
   - component: {fileID: 2161613080536109208}
+  - component: {fileID: 226309023}
+  - component: {fileID: 151654153272765878}
+  - component: {fileID: 2161613080536109215}
   - component: {fileID: 2161613080536109209}
   - component: {fileID: 2161613080536109210}
-  - component: {fileID: 2161613080536109188}
-  - component: {fileID: 151654153272765878}
   - component: {fileID: 268700112459832159}
   m_Layer: 0
   m_Name: Player
@@ -156,26 +156,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2161613080536109215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2161613080536109213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb9a5e67d57baa848badc62dbbf7e8cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canMove: 1
-  speed: 5
-  accel: 0
-  direction: {x: 0, y: 0}
-  angularAccel: {x: 0, y: 0}
-  lastInput: {x: 0, y: -1}
-  isRotate: 0
-  knockbackTime: 0.25
 --- !u!58 &2161613080536109211
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -213,6 +193,51 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &226309023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2161613080536109213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bf267b97ca4b46479547f907cb85c8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &151654153272765878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2161613080536109213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9486882b2c15c2b44bfaf2cc91ea3921, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialStats: {fileID: 11400000, guid: ef51ae7319ff6264e9e6d556d20371d4, type: 2}
+--- !u!114 &2161613080536109215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2161613080536109213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb9a5e67d57baa848badc62dbbf7e8cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canMove: 1
+  speed: 5
+  accel: 0
+  direction: {x: 0, y: 0}
+  angularAccel: {x: 0, y: 0}
+  lastInput: {x: 0, y: -1}
+  isRotate: 0
+  knockbackTime: 0.25
 --- !u!114 &2161613080536109209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,31 +271,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 32
   hp: 32
---- !u!114 &2161613080536109188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2161613080536109213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e868d70ef1345fb4390820939bedca29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &151654153272765878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2161613080536109213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9486882b2c15c2b44bfaf2cc91ea3921, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialStats: {fileID: 11400000, guid: ef51ae7319ff6264e9e6d556d20371d4, type: 2}
 --- !u!114 &268700112459832159
 MonoBehaviour:
   m_ObjectHideFlags: 0

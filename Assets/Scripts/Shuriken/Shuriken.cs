@@ -245,6 +245,7 @@ public class Shuriken : MonoBehaviour
     void OnPickUp()
     {
         Debug.Log("회수 완료.");
+        owner.GetComponent<ShurikenShooter>().AddCurrentCartridge(1);
         Destroy(gameObject);
     }
 

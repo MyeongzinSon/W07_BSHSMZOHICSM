@@ -3,24 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMove : Mover, NewInputActions.IPlayerActions
+public class PlayerMove : Mover
 {
-    [Header("³Ë¹é °ü·Ã")]
+    [Header("ë„‰ë°± ê´€ë ¨")]
     public float knockbackTime = 0.25f;
     //public Vector2 lastInput;
-    private NewInputActions inputs;
-
-    private void Awake()
-    {
-        inputs = new();
-        inputs.Player.SetCallbacks(this);
-        inputs.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputs.Disable();
-    }
 
     public void OnMove(InputAction.CallbackContext _callback)
     {
@@ -49,21 +36,5 @@ public class PlayerMove : Mover, NewInputActions.IPlayerActions
         CanMove = false;
         yield return new WaitForSeconds(knockbackTime);
         CanMove = true;
-    }
-
-    public void OnLook(InputAction.CallbackContext context)
-    {
-    }
-
-    public void OnLookOnMouse(InputAction.CallbackContext context)
-    {
-    }
-
-    public void OnFire(InputAction.CallbackContext context)
-    {
-    }
-
-    public void OnRoll(InputAction.CallbackContext context)
-    {
     }
 }

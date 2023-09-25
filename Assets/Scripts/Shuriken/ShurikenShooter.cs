@@ -19,10 +19,11 @@ public class ShurikenShooter : MonoBehaviour
 	private Camera mainCamera;
 	private CharacterStats stats;
 	private int maxCartridge;
-	private int currnetCartridge;
+	private int currentCartridge;
 	private int shurikenCount;
 	private float currentCharge = 0;
 
+	private bool CanShoot => currentCartridge > 0;
 	bool IsCharging => currentCharge > 0;
 	#endregion
 	
@@ -34,32 +35,24 @@ public class ShurikenShooter : MonoBehaviour
 			Debug.LogError($"ShurikenShooter : 해당 캐릭터에서 CharacterStats 컴포넌트를 찾을 수 없음! (Instance ID : {this.GetInstanceID()})");
         }
 		maxCartridge = stats.maxCartridgeNum;
-		currnetCartridge = maxCartridge;
+		currentCartridge = maxCartridge;
 		shurikenCount = 0;
 	}
 
 	private void Update()
 	{
-		//테스트용, 나중에 Input System으로 변경 필요
-		if (Input.GetMouseButtonDown(0))
-		{
-			StartCharge();
-		}
 		if (IsCharging)
 		{
 			currentCharge += Time.deltaTime * stats.chargeSpeed;
 			currentCharge = Mathf.Min(currentCharge, MaxCharge);
 		}
-		if (Input.GetMouseButtonUp(0))
-        {
-			EndCharge();
-        }
 	}
 	public bool StartCharge()
     {
-		if (!IsCharging)
+		if (CanShoot && !IsCharging)
         {
 			currentCharge += Time.deltaTime;
+			VCamManager.Instance.Expand();
 			return true;
         }
 		return false;
@@ -71,6 +64,7 @@ public class ShurikenShooter : MonoBehaviour
 			if (TryShoot())
             {
 				currentCharge = 0;
+				VCamManager.Instance.Reduce();
 				return true;
             }
 		}
@@ -78,7 +72,7 @@ public class ShurikenShooter : MonoBehaviour
     }
 	bool TryShoot()
     {
-		if (currnetCartridge > 0)
+		if (currentCartridge > 0)
 		{
 			Shoot(mainCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position);
 			return true;
@@ -90,7 +84,7 @@ public class ShurikenShooter : MonoBehaviour
 		//정규화
 		_dir = _dir.normalized;
 
-		currnetCartridge--;
+		currentCartridge--;
 		shurikenCount++;
 		//총알 실제 생성, 초기화
 		Mover inst = Instantiate(shurikenPrefab, (Vector2)transform.position + _dir*shootRadius, Quaternion.identity);
@@ -113,5 +107,10 @@ public class ShurikenShooter : MonoBehaviour
 				instSrk.attributes.Add(a);
             }
         }
+	}
+
+	public void AddCurrentCartridge(int _amount)
+	{
+		currentCartridge += _amount;
 	}
 }

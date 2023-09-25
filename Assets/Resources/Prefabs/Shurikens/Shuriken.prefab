@@ -121,7 +121,7 @@ MonoBehaviour:
   useExplosion: 0
   explosionScale: 3
   explosionTime: 1
-  useBoomerang: 1
+  useBoomerang: 0
   boomerangDelay: 5
   attributes: 
 --- !u!114 &3743431136012034996
