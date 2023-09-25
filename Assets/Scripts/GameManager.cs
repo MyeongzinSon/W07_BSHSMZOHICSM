@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
     
     private void Start()
     {
-        EnterState(GameState.Tournament);
+        //EnterState(GameState.Tournament);
     }
     
     public void EnterState(GameState state)
