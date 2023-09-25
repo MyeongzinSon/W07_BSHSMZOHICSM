@@ -1,24 +1,64 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.UI;
 
 public class TournamentManager : MonoBehaviour
 {
     public int playerIdx = 0;
-    public Transform[] tournamentObjects; // 16개의 오브젝트 배열
-    public List<Transform> remainingTourmantObjects; // 남아있는 오브젝트 배열
-    public float movementSpeed = 2f; // 오브젝트 이동 속도
-    private float waitTime = 0.3f; // 이긴 후 대기 시간
-    public int objectCount;
+    private int objectCount = 16;
+    public float movementSpeed = 2f; 
+    private float waitTime = 0.3f;
     private int currentRound = 0;
     private List<Transform> objectsToRemove = new List<Transform>(); // 삭제할 오브젝트를 저장하는 리스트
-
+    private List<Transform> remainingTourmantObjects = new List<Transform>();
+    GameObject PortraitIconContainerPrefab;
+    
+    private List<string> NinjaSpecies = new List<string>
+    {
+        "",
+        "공격적",
+        "수비적",
+        "공격적",
+        "수비적",
+        "공격적",
+        "수비적",
+        "공격적",
+        "수비적",
+        "공격적",
+        "수비적",
+        "수비적",
+        "공격적",
+        "수비적",
+        "공격적",
+        "공격적"
+    };
+    
+    private List<string> NinjaNames = new List<string>
+    {
+        "Player",
+        "Shadow",
+        "Strike",
+        "Blade",
+        "Storm",
+        "Raven",
+        "Fox",
+        "Zen",
+        "Ash",
+        "Echo",
+        "Fury",
+        "Phoenix",
+        "Thorn",
+        "Swift",
+        "Slate",
+        "Onyx"
+    };
     private void Start()
     {
-        objectCount = tournamentObjects.Length;
-        remainingTourmantObjects = new List<Transform>(tournamentObjects);
+        PortraitIconContainerPrefab = Resources.Load<GameObject>("Prefabs/Tournaments/PortraitIconContainer");
+        CreateIconContainers();
         StartTournament();
     }
 
@@ -42,6 +82,13 @@ public class TournamentManager : MonoBehaviour
             Transform winner = SimulateMatch(remainingTourmantObjects[i], remainingTourmantObjects[i + 1]);
             Transform loser = remainingTourmantObjects[i + 1];
             if (winner == remainingTourmantObjects[i + 1]) loser = remainingTourmantObjects[i];
+            
+            if (i == 0) //항상 플레이어가 이기게 함 (플레이어 idx = 0)
+            {
+                winner = remainingTourmantObjects[i];
+                loser = remainingTourmantObjects[i + 1];
+            }
+            
             yield return new WaitForSeconds(waitTime);
             winner.GetChild(0).GetComponent<Image>().color = Color.green;
             loser.GetChild(0).GetComponent<Image>().color = Color.red;
@@ -114,5 +161,29 @@ public class TournamentManager : MonoBehaviour
         }
 
         targetTransform.position = targetPosition;
+    }
+    
+    private void CreateIconContainers()
+    {
+        // 첫 번째 8개의 아이콘 컨테이너 생성
+        for (int i = 0; i < 8; i++)
+        {
+            CreateIconContainer(new Vector3(105f, 990f - i * 130f, 0f), i);
+        }
+
+        // 나머지 8개의 아이콘 컨테이너 생성
+        for (int i = 0; i < 8; i++)
+        {
+            CreateIconContainer(new Vector3(1635f, 990f - i * 130f, 0f), i + 8);
+        }
+    }
+    
+    private void CreateIconContainer(Vector3 position, int idx)
+    {
+        GameObject iconContainer = Instantiate(PortraitIconContainerPrefab, position, Quaternion.identity);
+        iconContainer.transform.SetParent(transform);
+        remainingTourmantObjects.Add(iconContainer.transform); 
+        iconContainer.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = NinjaSpecies[idx];
+        iconContainer.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = NinjaNames[idx];
     }
 }

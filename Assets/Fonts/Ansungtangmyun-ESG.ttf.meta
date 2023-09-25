@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 8d88fda80c4b3a84b9ef9d956606ddfd
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Ansungtangmyun
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: f65642a83177e944791535b358335fb4, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
