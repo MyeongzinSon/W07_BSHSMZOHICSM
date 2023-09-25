@@ -62,4 +62,8 @@ public class PlayerMove : Mover, NewInputActions.IPlayerActions
     public void OnFire(InputAction.CallbackContext context)
     {
     }
+
+    public void OnRoll(InputAction.CallbackContext context)
+    {
+    }
 }
