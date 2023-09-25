@@ -3,46 +3,25 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public Dictionary<string, GameObject> UIObjects = new Dictionary<string, GameObject>();
-    private static UIManager _instance;
+    public GameObject TournamentCanvas;
+    public GameObject UpgradeCanvas;
+    private static UIManager instance;
     public static UIManager Instance
     {
         get
         {
-            if (!_instance)
+            if(instance == null)
             {
-                _instance = FindObjectOfType(typeof(UIManager)) as UIManager;
-
-                if (_instance == null)
-                    Debug.Log("no Singleton obj");
+                instance = FindObjectOfType<UIManager>();
             }
 
-            return _instance;
+            return instance;
         }
     }
-    
-    private void Awake()
-    {
-        if (_instance == null)
-        {
-            _instance = this;
-        }
-        else if (_instance != this)
-        {
-            Destroy(gameObject);
-        }
 
-        DontDestroyOnLoad(gameObject);
+    private void Start()
+    {
         
-        GameObject[] allObjects = FindObjectsOfType<GameObject>();
-        foreach (GameObject obj in allObjects)
-        {
-            if (obj.layer == LayerMask.NameToLayer("UI"))
-            {
-                UIObjects.Add(obj.name, obj);
-                Debug.Log(obj.name);
-                obj.SetActive(false);
-            }
-        }
+        
     }
 }
