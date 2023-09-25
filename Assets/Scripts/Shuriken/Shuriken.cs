@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -45,6 +46,8 @@ public class Shuriken : MonoBehaviour
     public bool useBoomerang;
     public float boomerangDelay = 5f;
     private bool isBoomerangMoving = false;
+    [Header("수리검 속성")]
+    public List<ShurikenAttribute> attributes = new();
 
     #region privateValues
 
@@ -232,6 +235,9 @@ public class Shuriken : MonoBehaviour
         {
             StartCoroutine(BoomerangCoroutine());
         }
+        attributes.ForEach(a => {
+            Debug.Log($"Attribute : {a}");
+        });
         state = ShurikenState.PICKUP;
         mover.CanMove = false;
     }
@@ -241,4 +247,5 @@ public class Shuriken : MonoBehaviour
         Debug.Log("회수 완료.");
         Destroy(gameObject);
     }
+
 }

@@ -27,7 +27,13 @@ public class Mover : MonoBehaviour
     [Header("이동 방향을 바라볼지 결정합니다.")]
     public bool isRotate = false;
 
-
+    private void Start()
+    {
+        if (TryGetComponent<CharacterStats>(out var stats))
+        {
+            speed = stats.moveSpeed;
+        }
+    }
     private void FixedUpdate()
     {
         if (direction != Vector2.zero)
