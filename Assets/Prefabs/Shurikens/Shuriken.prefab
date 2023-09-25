@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canMove: 1
   isRotate: 1
-  moveSpeed: 10
+  moveSpeed: 15
   direction: {x: 1, y: 0}
   lastDireciton: {x: 0, y: -1}
 --- !u!114 &5659675096001688347
@@ -124,7 +124,7 @@ MonoBehaviour:
   bounceLayer:
     serializedVersion: 2
     m_Bits: 0
-  moveDistance: 10
+  moveDistance: 20
 --- !u!50 &5659675096001688349
 Rigidbody2D:
   serializedVersion: 4

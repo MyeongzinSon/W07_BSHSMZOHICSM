@@ -489,6 +489,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shurikenPrefab: {fileID: 5659675096001688346, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   shootRadius: 0.5
 --- !u!1001 &5659675094689177337
 PrefabInstance:
