@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
-public enum ShurikenAttribute { ExplodeOnHit, Boomerang, BounceOnWall, SizeUp, Guidance, KnockbackToWall, DoT, Slow, Vulnerable, Vampire, }
+public enum ShurikenAttribute { ExplodeOnHit, Boomerang, BounceOnWall, SizeUp, Guidance, KnockbackToWall, DoT, Slow, Vulnerable, Vampire, HealReduction }
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/CharacterStatsData", order = 1)]
 public class CharacterStatsData : ScriptableObject
