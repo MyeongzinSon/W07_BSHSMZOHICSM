@@ -15,12 +15,13 @@ public class CharacterStatsData : ScriptableObject
     public float maxHp;
     public float moveSpeed;
     [Header("Shuriken")]
-    public float attackPower;
-    public float chargeSpeed;
-    public int maxCartridgeNum;
-    public float maxDistance;
-    public float shurikenSpeed;
-    public int shurikenNum;
+    public float attackPower;   //데미지
+    public float chargeSpeed;   //충전 속도
+    public int maxCartridgeNum; //탄창 수
+    public float maxDistance;   //최대 사거리
+    public float shurikenSpeed; //수리검이 날아가는 속도
+    public int shurikenNum;     //한번에 던지는 수리검의 수
+    public float shurikenScale; //수리검의 크기
     public List<ShurikenAttribute> shurikenAttributes;
 }
 
@@ -44,7 +45,7 @@ public static class ShurikenAttributeExtensions
             case ShurikenAttribute.HealReduction:
                 return 3;
             default:
-                Debug.LogError($"�־��� ShurikenAttribute�� ������ ���� �ƴ�! : {attribute}");
+                Debug.LogError($"주어진 ShurikenAttribute가 가능한 값이 아님! : {attribute}");
                 return -1;
         }
 

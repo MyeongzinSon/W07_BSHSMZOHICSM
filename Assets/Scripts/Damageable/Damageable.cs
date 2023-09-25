@@ -8,6 +8,9 @@ public class Damageable : MonoBehaviour
 	public float maxHp = 32;
 	public float hp = 32;
 
+	public float damageCoef = 1f;
+	public bool canHeal = true;
+
 	private void Start()
 	{ 
 		if (TryGetComponent<CharacterStats>(out var stats))
@@ -20,7 +23,7 @@ public class Damageable : MonoBehaviour
 	public void Hit(float damage)
 	{
 		Debug.Log("Damaged: "+name);
-		hp -= damage;
+		hp -= damage * damageCoef;
 		if (hp <= 0)
 		{
 			hp = 0f;
@@ -30,6 +33,8 @@ public class Damageable : MonoBehaviour
 
 	public void Heal(float amout)
 	{
+		if (!canHeal)
+			return;
 		Debug.Log("Healed: " + name);
 		hp += amout;
 		if (hp >= maxHp)
