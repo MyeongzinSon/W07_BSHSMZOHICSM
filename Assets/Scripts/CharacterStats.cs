@@ -18,6 +18,7 @@ public class CharacterStats : MonoBehaviour
     public float maxDistance { get; private set; }
     public float shurikenSpeed { get; private set; }
     public float shurikenNum { get; private set; }
+    public float shurikenScale { get; private set; }
     public List<ShurikenAttribute> shurikenAttributes { get; private set; }
 
     private void Awake()
@@ -29,7 +30,7 @@ public class CharacterStats : MonoBehaviour
     { 
         if (!info.forDefaultState)
         {
-            Debug.LogError($"CharacterStats : ¼³Á¤ÇÏ·Á´Â Data ÆÄÀÏÀÌ ±âº»¿ë ½ºÅÈÀÌ ¾Æ´Ô! ({info.GetInstanceID()})");
+            Debug.LogError($"CharacterStats : ì„¤ì •í•˜ë ¤ëŠ” Data íŒŒì¼ì´ ê¸°ë³¸ìš© ìŠ¤íƒ¯ì´ ì•„ë‹˜! ({info.GetInstanceID()})");
             return;
         }
 
@@ -50,7 +51,7 @@ public class CharacterStats : MonoBehaviour
     {
         if (info.forDefaultState)
         {
-            Debug.LogError($"CharacterStats : ¼³Á¤ÇÏ·Á´Â Data ÆÄÀÏÀÌ Ãß°¡¿ë ½ºÅÈÀÌ ¾Æ´Ô! ({info.GetInstanceID()})");
+            Debug.LogError($"CharacterStats : ì„¤ì •í•˜ë ¤ëŠ” Data íŒŒì¼ì´ ì¶”ê°€ìš© ìŠ¤íƒ¯ì´ ì•„ë‹˜! ({info.GetInstanceID()})");
             return;
         }
 
@@ -62,6 +63,7 @@ public class CharacterStats : MonoBehaviour
         maxDistance += info.maxDistance;
         shurikenSpeed += info.shurikenSpeed;
         shurikenNum += info.shurikenNum;
+        shurikenScale += info.shurikenScale;
 
         shurikenAttributes.AddRange(info.shurikenAttributes);
     }

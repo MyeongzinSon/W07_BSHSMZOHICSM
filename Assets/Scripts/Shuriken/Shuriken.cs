@@ -68,7 +68,7 @@ public class Shuriken : MonoBehaviour
         state = ShurikenState.ATTACK;
     }
 
-    private void Update()
+    void CalculateMoveDistance()
     {
         //이동한 거리 계산
         if (state == ShurikenState.ATTACK)
@@ -83,12 +83,8 @@ public class Shuriken : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isBoomerangMoving)
-        {
-            //부메랑 이동 중일 경우, 충돌 및 유도탄 모두 무시
+        if (state == ShurikenState.PICKUP)
             return;
-        }
-        
         //충돌 처리
         float angle = mover.SetRotationByDirection();
         RaycastHit2D hit 
@@ -99,22 +95,37 @@ public class Shuriken : MonoBehaviour
                 mover.direction, 
                 Time.fixedDeltaTime*mover.speed*3,
                 bounceLayer|damageLayer);
-        //벽 등 Bounce 대상과 충돌 시
+        //충돌 체크
         if (hit.collider != null)
         {
-            
             int targetLayer = (1 << hit.collider.gameObject.layer);
             
-            //적 타격 시
+            //적과 충돌하였는가?
             if (canDamage&&(targetLayer & damageLayer) > 0)
             {
-                    
+                //적 
                 if (hit.collider.gameObject.TryGetComponent<Damageable>(out var target))
                 {
-                    mover.direction = GetReflectVector(mover.direction, hit.normal);
+                    //대상에게 공격 판정
                     target.Hit(damage);
+                    
+                    //PickUp으로 변경 및 Drop
+                    float dropDistance = 5f;
+                    Vector3 dropPos = transform.position + (Vector3)mover.direction*dropDistance;
+        
+                    //레이캐스트를 쏴서, 벽이 없는지 확인한다.
+                    RaycastHit2D hitToDrop = Physics2D.Raycast(transform.position, dropPos - transform.position, dropDistance, bounceLayer);
+                    if (hitToDrop.collider != null)
+                    {
+                        //벽이 있다면, 가장 가까운 거리에 Drop한다.
+                        dropPos = transform.position + (Vector3)mover.direction *(hitToDrop.distance - collider.size.y*0.5f);
+                    }
+                    transform.position = dropPos;
+                    canDamage = false;
+                    
                     SetPickUpState();
-                    StartCoroutine(BounceCoroutine(enemyBounceTime));
+                    //SetPickUpState();
+                    //StartCoroutine(BounceCoroutine(enemyBounceTime));
                 }
             }
             //벽에 부딪힘
@@ -124,6 +135,7 @@ public class Shuriken : MonoBehaviour
                 //리플렉트가 불가능하다면, 벽 반사 움직임 코루틴 시작, 가능하다면 그냥 방향만 바뀌고 쭊 날아감
                 if (!canReflect)
                 {
+                    canDamage = false;
                     SetPickUpState();
                     StartCoroutine(BounceCoroutine(wallBounceTime));
                 }
@@ -137,7 +149,7 @@ public class Shuriken : MonoBehaviour
             AdaptGuidedMove();
         }
     }
-
+    
     void AdaptGuidedMove()
     {
         if (guidedTarget==null)
