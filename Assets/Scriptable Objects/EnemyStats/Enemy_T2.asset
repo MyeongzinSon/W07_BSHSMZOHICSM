@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9be4da6ba60ca3646b8bb410bc4c5bf1, type: 3}
-  m_Name: CharacterDefault
+  m_Name: Enemy_T2
   m_EditorClassIdentifier: 
   forDefaultState: 1
   maxHp: 100

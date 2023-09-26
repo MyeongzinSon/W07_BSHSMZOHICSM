@@ -13,6 +13,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Transform currentTarget;
     [Header("AI Data")]
     [SerializeField] EnemyAIData aiData;
+    private CharacterStats stats;
+    public List<CharacterStatsData> itemToAdd = new();
     [Header("Pickable Target")]
     [SerializeField] float targetPositionOffset;
     [Header("Shuriken")]
@@ -44,7 +46,15 @@ public class EnemyController : MonoBehaviour
 
         ai = new EnemyAIStandard();
         ai.Initialize(this);
+        //적 기본 스탯 추가
         ai.SetPersonalVariables(aiData);
+        
+        //적 아이템 추가
+        stats = GetComponent<CharacterStats>();
+        foreach (var VARIABLE in itemToAdd)
+        {
+            stats.AddCharacterStats(VARIABLE);
+        }
     }
 
     private void Update()

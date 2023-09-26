@@ -23,11 +23,13 @@ public class CharacterStats : MonoBehaviour
 
     private Mover mover;
     private Damageable damageable;
+    private ShurikenShooter shooter;
 
     private void Awake()
     {
         mover = GetComponent<Mover>();
         damageable = GetComponent<Damageable>();
+        shooter = GetComponent<ShurikenShooter>();
         SetCharacterStats(initialStats);
     }
 
@@ -76,6 +78,7 @@ public class CharacterStats : MonoBehaviour
         
         CheckMinValues();
         
+        shooter.AddCurrentCartridge(info.maxCartridgeNum);
         shurikenAttributes.AddRange(info.shurikenAttributes);
     }
 

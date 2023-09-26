@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0310fb754aa04a94a912ff96b96aa47f, type: 3}
-  m_Name: DefaultAIData
+  m_Name: T4Ex_AIData 1
   m_EditorClassIdentifier: 
   useRoll: 1
   rollSpeed: 15
   rollCooldown: 2
   minProperDistance: 10
-  maxProperDistance: 15
+  maxProperDistance: 18
   attackDistanceOffset: 10
