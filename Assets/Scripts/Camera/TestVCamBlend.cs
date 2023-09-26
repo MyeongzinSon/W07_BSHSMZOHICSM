@@ -13,7 +13,7 @@ public class TestVCamBlend : MonoBehaviour
     #endregion
 
     #region PublicMethod
-    public void SetActive(bool isActive)
+    public void SetActiveCam(bool isActive)
     {
         activeVirtualCamera.Priority = isActive ? 10 : 0;
     }

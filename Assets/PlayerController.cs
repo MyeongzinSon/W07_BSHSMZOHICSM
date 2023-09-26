@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 	private PlayerRoll roll;
 	private ShurikenShooter attack;
 
-	float cameraExpandTimer;
+	float cameraExpandTimer = -1f;
 
 	void Awake()
 	{
