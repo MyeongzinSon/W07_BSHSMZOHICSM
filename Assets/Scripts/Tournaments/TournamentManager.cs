@@ -21,7 +21,7 @@ public class TournamentManager : MonoBehaviour
         }
     }
     public int playerIdx = 0;
-    private int objectCount = 64;
+    [SerializeField] private int objectCount = 64;
     public float movementSpeed = 2f; 
     private float waitTime = 0.5f;
     private int currentRound = 0;
@@ -120,16 +120,18 @@ public class TournamentManager : MonoBehaviour
         else if (instance != this)
         {
             Destroy(gameObject);
+            return;
         }
 
         DontDestroyOnLoad(gameObject);
         GenerateNinjaSpecies();
-    }
-    
-    private void Start()
-    {
         PortraitIconContainerPrefab = Resources.Load<GameObject>("Prefabs/Tournaments/PortraitIconContainer");
         CreateIconContainers();
+        Init();
+    }
+    
+    public void Init()
+    {
         StartTournament();
     }
 
@@ -149,6 +151,7 @@ public class TournamentManager : MonoBehaviour
 
     private IEnumerator SimulateTournament()
     {
+        yield return new WaitForSeconds(1.0f);
         int matchesPerRound = objectCount;
         int repeatNum = (int)objectCount / 8;
         repeatNum = Mathf.Max(repeatNum, 2);
@@ -294,6 +297,7 @@ public class TournamentManager : MonoBehaviour
     
     private void CreateIconContainers()
     {
+        Debug.Log($"CreateIconContainers");
         int columns = 8; // 열의 수
         int totalContainers = columns * 8; // 총 컨테이너 수
         float xOffset = -840f;
@@ -320,6 +324,8 @@ public class TournamentManager : MonoBehaviour
     {
         GameObject parent = GameObject.Find("TournamentCanvas");
         GameObject iconContainer = Instantiate(PortraitIconContainerPrefab, position, Quaternion.identity);
+        Debug.Log(parent.name);
+        Debug.Log(iconContainer.name);
         iconContainer.transform.SetParent(parent.transform, false);
         remainingTourmantObjects.Add(iconContainer.transform);
         int rndIdx = UnityEngine.Random.Range(1, 7);

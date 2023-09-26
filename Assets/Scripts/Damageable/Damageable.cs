@@ -20,6 +20,16 @@ public class Damageable : MonoBehaviour
 		hp = maxHp;
 	}
 
+	private void Update()
+	{
+		#if UNITY_EDITOR
+		if (Input.GetKeyDown(KeyCode.Alpha0))
+		{
+			TestEnemyDamage();
+		}
+		#endif
+	}
+
 	public void Hit(float damage)
 	{
 		Debug.Log("Damaged: "+name);
@@ -49,5 +59,24 @@ public class Damageable : MonoBehaviour
 	{
 		Debug.Log("Killed: "+name);
 		gameObject.SetActive(false);
+        
+        //플레이어가 죽었으면 게임오버
+        if (gameObject.tag == "Player")
+        {
+	        Debug.Log("Game Over");
+        }
+        else //적이 죽었으면 스테이지 클리어
+        {
+	        GameManager.Instance.StageClear();
+        }
+       
+	}
+	
+	public void TestEnemyDamage()
+	{
+		if (gameObject.tag == "Enemy")
+		{
+			Hit(50f);
+		}
 	}
 }

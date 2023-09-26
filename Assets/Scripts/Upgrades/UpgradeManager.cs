@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Build.Content;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 public class UpgradeManager : MonoBehaviour
@@ -146,6 +148,12 @@ public class UpgradeManager : MonoBehaviour
         //여기에 실제 업글 함수 넣기
         //GameManager.Instance.UpgradeShuriken(selectedIdxes);
         
+        GameManager.Instance.ExitState(GameManager.GameState.Upgrade);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        GameManager.Instance.EnterState(GameManager.GameState.Tournament);
+        TournamentManager.Instance.gameObject.SetActive(true);
+        TournamentManager.Instance.Init();
         gameObject.SetActive(false);
+        
     }
 }

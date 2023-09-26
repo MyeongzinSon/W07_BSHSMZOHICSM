@@ -127,6 +127,7 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.Tournament:
+                TournamentManager.Instance.gameObject.SetActive(false);
                 break;
             case GameState.Battle:
                 isBattleStart = false;
@@ -146,4 +147,19 @@ public class GameManager : MonoBehaviour
         ExitState(GameState.Tournament);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    public void GoToUpgrade()
+    {
+        ExitState(GameState.Battle);
+        EnterState(GameState.Upgrade);
+    }
+    
+    public void StageClear()
+    {
+        GameObject gameClearText = GameObject.Find("IngameCanvas").transform.Find("ClearText").gameObject;
+        gameClearText.SetActive(true);
+        Invoke("GoToUpgrade", 3.5f);
+    }
+    
+    
 }
