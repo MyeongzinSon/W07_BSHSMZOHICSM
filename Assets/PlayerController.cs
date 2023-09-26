@@ -65,8 +65,8 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 	{
 		if (context.started)
 		{
-			attack.StartCharge();
-			cameraExpandTimer = 0;
+			if(attack.StartCharge())
+				cameraExpandTimer = 0;
 		}
 		if (context.canceled)
 		{
