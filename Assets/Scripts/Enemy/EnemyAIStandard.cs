@@ -11,6 +11,7 @@ public class EnemyAIStandard : EnemyAI
 
     Vector2 attackDiff;
     Transform escapeTarget;
+    Vector2 dodgeDirection;
     bool isReloading = false;
 
     public override void OnUpdate()
@@ -20,6 +21,15 @@ public class EnemyAIStandard : EnemyAI
         if (EvaluateTarget()) { }
         CheckReloading();
         CheckEscape();
+
+        if (UpdateOnDodge())
+        {
+            return;
+        }
+        else
+        {
+            dodgeDirection = Vector2.zero;
+        }
 
         // follow current Target
         if (UpdateOnFollowTarget()) return;
@@ -185,9 +195,59 @@ public class EnemyAIStandard : EnemyAI
             }
         }
     }
-    bool TryRoll()
+    bool UpdateOnDodge()
     {
-        if (useRoll && roll.CanRoll)
+        if (!canDodgeRoll) return false;
+
+        var shurikens = GameObject.FindObjectsOfType<Shuriken>()
+                .Where(s => s.owner.Equals(main.AttackTarget.gameObject)
+                    && s.state == Shuriken.ShurikenState.ATTACK
+                    ).ToList();
+
+        if (shurikens.Count == 0) return false;
+
+        var dangerShurikens = shurikens.
+            Where(s =>
+            {
+                var shuriken = s.GetComponent<Shuriken>();
+                var direction = shuriken.direction;
+                var distance = shuriken.moveDistance;
+                var hit = Physics2D.Raycast(s.transform.position, direction, distance, 1 << LayerMask.NameToLayer("Enemy"));
+                return hit;
+            }).OrderBy(s => Vector3.Distance(s.transform.position, main.transform.position))
+            .ToList();
+
+        if (dangerShurikens.Count == 0) { return false; }
+
+        var targetShuriken = dangerShurikens.First();
+        var front = targetShuriken.direction;
+        var right = new Vector2(front.y, -front.x);
+        var left = -right;
+
+        if (IsCharging)
+        {
+            attack.SetDirection(attackDiff.normalized);
+            if (attack.EndCharge()) { }
+            else
+            {
+                Debug.LogWarning($"AI에서 attack.EndCharge를 성공하지 못함!");
+            }
+        }
+
+        if (dodgeDirection.Equals(Vector2.zero))
+        {
+            dodgeDirection = Random.value > 0.5 ? right : left;
+        }
+        
+        move.SetDirection(dodgeDirection);
+        TryRoll(true);
+
+        return true;
+    }
+    bool TryRoll(bool forDodge = false)
+    {
+        var condition = forDodge ? true : useRoll;
+        if (condition && roll.CanRoll)
         {
             roll.TryRoll();
             return true;
