@@ -113,6 +113,16 @@ public class EnemyAIStandard : EnemyAI
 
     public override bool EvaluateTarget()
     {
+        var needHeal = true;
+        if (needHeal)
+        {
+            var healpacks = GameObject.FindObjectsOfType<HealPack>().ToList();
+            if (TrySetNearestTarget(healpacks))
+            {
+                return true;
+            }
+        }
+
         if (isReloading)
         {
             var shurikens = GameObject.FindObjectsOfType<Shuriken>()
@@ -126,15 +136,6 @@ public class EnemyAIStandard : EnemyAI
             }
         }
 
-        var needHeal = true;
-        if (needHeal)
-        {
-            var healpacks = GameObject.FindObjectsOfType<HealPack>().ToList();
-            if (TrySetNearestTarget(healpacks))
-            {
-                return true;
-            }
-        }
         return false;
     }
 
