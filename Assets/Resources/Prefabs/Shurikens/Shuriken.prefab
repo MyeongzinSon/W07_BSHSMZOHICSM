@@ -121,8 +121,9 @@ MonoBehaviour:
   guidedTarget: {fileID: 0}
   explosionPrefab: {fileID: 4663520320846168782, guid: aad20f4c5a862eb48a5656860ce05e42, type: 3}
   useExplosion: 0
-  explosionScale: 3
+  explosionScale: 15
   explosionTime: 1
+  explosionDamageRatio: 0.3
   useBoomerang: 0
   boomerangDelay: 5
   boomerangAccel: 3
