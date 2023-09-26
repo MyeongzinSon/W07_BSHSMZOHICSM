@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forDefaultState: 0
   maxHp: 0
-  moveSpeed: 0
+  moveSpeed: -1
   attackPower: 0
   chargeSpeed: 0
   maxCartridgeNum: 1
