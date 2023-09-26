@@ -50,8 +50,7 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 
 	public void OnMove(InputAction.CallbackContext context)
 	{
-		if (GameManager.Instance.isBattleStart)
-			move.OnMove(context);
+		move.OnMove(context);
 	}
 
 	public void OnLook(InputAction.CallbackContext context)

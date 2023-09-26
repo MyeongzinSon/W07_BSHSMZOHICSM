@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.AI;
 
 public class PlayerRoll : MonoBehaviour
 {
-    private PlayerMove playerMove;
+    private Mover playerMove;
     private Rigidbody2D playerRigidbody;
 
     [Header("구르기 스펙")]
@@ -17,7 +18,13 @@ public class PlayerRoll : MonoBehaviour
     [SerializeField] private int rollMaxFrequency;
     [SerializeField] private bool isRollingCoroutinePlaying = false;
 
-    public bool CanRoll => playerMove.direction != Vector2.zero && !isRollingCoroutinePlaying && rollCurrentFrequency < rollMaxFrequency;
+    public bool CanRoll { get {
+            bool direction = playerMove.direction != Vector2.zero;
+            bool rolling = !isRollingCoroutinePlaying;
+            bool cooltime = rollCurrentFrequency < rollMaxFrequency;
+            //Debug.Log($"CanRoll : direction = {direction}, rolling = {rolling}, cooltime = {cooltime}");
+            return direction && rolling && cooltime;
+                } }
 
     private void Awake()
     {
@@ -62,8 +69,8 @@ public class PlayerRoll : MonoBehaviour
 
     private IEnumerator RollCoroutine()
     {
-        Animator animator = transform.GetChild(0).GetComponent<Animator>();
-        animator.SetTrigger("Stretch");
+        TryGetComponent<NavMeshAgent>(out var agent);
+
         Vector2 direction = playerMove.direction;
         direction = direction.normalized;
         rollCurrentFrequency++;
@@ -74,7 +81,14 @@ public class PlayerRoll : MonoBehaviour
         while (elapsedTime < rollingTime)
         {
             elapsedTime += Time.fixedDeltaTime;
-            playerRigidbody.MovePosition(playerRigidbody.position + rollDistance * Time.fixedDeltaTime * direction);
+            if (agent != null)
+            {
+                agent.Move(rollDistance * Time.fixedDeltaTime * direction);
+            }
+            else
+            {
+                playerRigidbody.MovePosition(playerRigidbody.position + rollDistance * Time.fixedDeltaTime * direction);
+            }
             yield return new WaitForFixedUpdate();
         }
 
