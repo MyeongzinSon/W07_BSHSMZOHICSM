@@ -33,7 +33,7 @@ public class EnemyAIStandard : EnemyAI
         if (main.CurrentTarget != null)
         {
             var diff = main.CurrentTarget.position - main.transform.position;
-            move.SetDirection(diff);
+            move.SetDestination(main.CurrentTarget.position);
             if (roll.CanRoll)
             {
                 roll.TryRoll();
