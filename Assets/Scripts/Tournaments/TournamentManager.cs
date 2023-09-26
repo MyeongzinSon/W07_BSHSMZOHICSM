@@ -23,7 +23,7 @@ public class TournamentManager : MonoBehaviour
     public int playerIdx = 0;
     [SerializeField] private int objectCount = 64;
     public float movementSpeed = 2f; 
-    private float waitTime = 0.5f;
+    private float waitTime = 0.35f;
     private int currentRound = 0;
     private List<Transform> objectsToRemove = new List<Transform>(); // 삭제할 오브젝트 저장
     private List<Transform> remainingTourmantObjects = new List<Transform>();
@@ -37,8 +37,19 @@ public class TournamentManager : MonoBehaviour
         NinjaSpecies.Add("주인공");
         for (int i = 1; i < totalSpecies; i++)
         {
-            if (UnityEngine.Random.Range(0, 2) == 0) NinjaSpecies.Add("공격적");
-            else NinjaSpecies.Add("수비적");
+            if (i == 1) NinjaSpecies.Add("신중한");
+            else if (i == 3) NinjaSpecies.Add("재빠른");
+            else if (i == 6) NinjaSpecies.Add("공격적인");
+            else if (i == 12) NinjaSpecies.Add("신중한");
+            else if (i == 24) NinjaSpecies.Add("재빠른");
+            else if (i == 48) NinjaSpecies.Add("공격적인");
+            else
+            {
+                int rndIdx = UnityEngine.Random.Range(0, 3);
+                if (rndIdx == 0) NinjaSpecies.Add("신중한");
+                else if (rndIdx == 1) NinjaSpecies.Add("재빠른");
+                else NinjaSpecies.Add("공격적인");
+            }
         }
     }
     
@@ -74,8 +85,8 @@ public class TournamentManager : MonoBehaviour
         "Nova",
         "Jade",
         "Wolf",
-        "Cobra",
         "Quake",
+        "Iron",
         "Viper",
         "Saki",
         "Asin",
@@ -92,12 +103,12 @@ public class TournamentManager : MonoBehaviour
         "Kaze",
         "Dawn",
         "Flame",
-        "Koi",
+        "Jun",
         "Jinx",
         "Cov",
         "Stormy",
         "Abyss",
-        "PZ",
+        "Koi",
         "Dagger",
         "Chaos",
         "Dusk",
@@ -136,6 +147,16 @@ public class TournamentManager : MonoBehaviour
         StartTournament();
     }
 
+    public void Update()
+    {
+        #if UNITY_EDITOR
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Init();
+        }
+        #endif
+    }
+    
     private void StartTournament()
     {
         InitDrawLines();
@@ -156,19 +177,19 @@ public class TournamentManager : MonoBehaviour
 
             for (int j = i; j < i + repeatNum; j += 2)
             {
-                    Transform winner = SimulateMatch(remainingTourmantObjects[j], remainingTourmantObjects[j + 1]);
-                    Transform loser = remainingTourmantObjects[j + 1];
-                    if (winner == remainingTourmantObjects[j + 1]) loser = remainingTourmantObjects[j];
+                Transform winner = SimulateMatch(remainingTourmantObjects[j], remainingTourmantObjects[j + 1], j);
+                Transform loser = remainingTourmantObjects[j + 1];
+                if (winner == remainingTourmantObjects[j + 1]) loser = remainingTourmantObjects[j];
 
-                    if (j == 0) // 주인공 항상 이기게 함
-                    {
-                        winner = remainingTourmantObjects[j];
-                        loser = remainingTourmantObjects[j + 1];
-                    }
-                    
+                if (j == 0) // 주인공 항상 이기게 함
+                {
+                    winner = remainingTourmantObjects[j];
+                    loser = remainingTourmantObjects[j + 1];
+                }
+                
 
-                    winners.Add(winner);
-                    losers.Add(loser);
+                winners.Add(winner);
+                losers.Add(loser);
             }
             
             yield return new WaitForSeconds(waitTime);
@@ -250,9 +271,14 @@ public class TournamentManager : MonoBehaviour
         Destroy(targetTransform.gameObject);
     }
     
-    private Transform SimulateMatch(Transform obj1, Transform obj2)
+    private Transform SimulateMatch(Transform obj1, Transform obj2, int idx)
     {
-        return UnityEngine.Random.Range(0, 2) == 0 ? obj1 : obj2;
+        if (idx % 6 == 0) return obj1;
+        else if (idx % 6 == 1) return obj2;
+        else if (idx % 6 == 2) return obj2;
+        else if (idx % 6 == 3) return obj1;
+        else if (idx % 6 == 4) return obj2;
+        else return obj1;
     }
     
 
