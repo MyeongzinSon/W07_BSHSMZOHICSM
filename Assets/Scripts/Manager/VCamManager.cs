@@ -44,11 +44,11 @@ public class VCamManager : MonoBehaviour
     {
         activeVirtualCamera = brain.ActiveVirtualCamera as CinemachineVirtualCamera;
         expandedVirtualCamera = activeVirtualCamera.transform.parent.GetComponentInChildren<TestVCamBlend>();
-        expandedVirtualCamera?.SetActive(true);
+        expandedVirtualCamera?.SetActiveCam(true);
     }
 
     public void Reduce()
     {
-        expandedVirtualCamera?.SetActive(false);
+        expandedVirtualCamera?.SetActiveCam(false);
     }
 }
