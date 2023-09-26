@@ -123,6 +123,23 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &65440390 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3778761451411835261, guid: 3d474e24e286ace4782cee9e11a10017, type: 3}
+  m_PrefabInstance: {fileID: 2436633567141053097}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &65440393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65440390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19eb8343a97525041b1f6f3ae7723c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &176650946
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -249,6 +266,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 100ac12d72dd97b4399c63265a7c07d2, type: 3}
+--- !u!1 &253718720 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2161613079036950405, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
+  m_PrefabInstance: {fileID: 5200608847638117427}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &253718724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 253718720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19eb8343a97525041b1f6f3ae7723c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &254390190
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,6 +1383,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2161613080536109213, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
   m_PrefabInstance: {fileID: 5200608847638117427}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1976141100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976141086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a11ab5a86ddd6949bb594cd1a5cc556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  duration: 0
 --- !u!1001 &2436633567141053097
 PrefabInstance:
   m_ObjectHideFlags: 0
