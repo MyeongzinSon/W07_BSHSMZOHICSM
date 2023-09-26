@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
     public List<CharacterStatsData> characterStatsDataList = new List<CharacterStatsData>();
     public List<CharacterStatsData> upgradedList = new List<CharacterStatsData>();
+    public List<int> upgradedListInt = new List<int>();
     public enum GameState
     {
         Tournament = 100,
