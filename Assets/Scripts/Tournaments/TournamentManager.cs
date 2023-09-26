@@ -269,6 +269,11 @@ public class TournamentManager : MonoBehaviour
         }
         
         Destroy(targetTransform.gameObject);
+
+        if (objectCount == 2)
+        {
+            GameManager.Instance.clearPanel.SetActive(true);
+        }
     }
     
     private Transform SimulateMatch(Transform obj1, Transform obj2, int idx)

@@ -66,12 +66,13 @@ public class Damageable : MonoBehaviour
         if (gameObject.tag == "Player")
         {
 	        Debug.Log("Game Over");
+	        GameObject gameOverText = GameObject.Find("IngameCanvas").transform.Find("GameOverPanel").gameObject;
+	        gameOverText.SetActive(true);
         }
         else //적이 죽었으면 스테이지 클리어
         {
 	        GameManager.Instance.StageClear();
         }
-       
 	}
 	
 	public void TestEnemyDamage()
