@@ -13,7 +13,7 @@ public class ShurikenShooter : MonoBehaviour
 	[Header("플레이어에게서 약간 떨어진 거리에서 발사됩니다.")]
 	public float shootRadius = 0.5f;
 	[Header("여러발 발사할 때의 최대 발사각")]
-	public float launchAngle = 45f;
+	public float launchAngle = 30f;
 
 	#region privateArea
 
@@ -103,12 +103,18 @@ public class ShurikenShooter : MonoBehaviour
 			{
 				for (int i = 0; i < stats.shurikenNum; i++)
 				{
-					Vector3 td = Quaternion.AngleAxis(angle, Vector3.forward) * direction;
+					float radAngle = angle*Mathf.Deg2Rad;
+					Vector2 td
+						= new Vector3(
+							Mathf.Cos(radAngle)*direction.x - Mathf.Sin(radAngle)*direction.y,
+							Mathf.Sin(radAngle)*direction.x + Mathf.Cos(radAngle)*direction.y);
+					//Vector3 td = Quaternion.AngleAxis(angle, Vector3.forward) * direction;
 					if((int)stats.shurikenNum/2==i)
 						Shoot(td,false);
 					else
 						Shoot(td,true);
-					angle += launchAngle/(stats.shurikenNum/2);
+					Debug.Log($"i: {i}, dir: {direction}, cur: {td}, angle: {angle}");
+					angle += launchAngle*2f/(stats.shurikenNum-1);
 				}
 			}
 			return true;
