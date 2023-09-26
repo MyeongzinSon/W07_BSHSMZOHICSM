@@ -173,7 +173,7 @@ public class Shuriken : MonoBehaviour
                 collider.size,
                 angle,
                 mover.direction,
-                Time.fixedDeltaTime*mover.speed*3,
+                Time.fixedDeltaTime*mover.speed,
                 bounceLayer | damageLayer);
         //충돌 체크
         if (hit.collider != null)
@@ -240,7 +240,7 @@ public class Shuriken : MonoBehaviour
     {
         float elapsedTime = 0f;
         float maxTime = 1f;
-        float rotationPerTick = 30;
+        float rotationPerTick = 20;
         canDamage = false;
 
         Vector2 p1 = currentPos;
