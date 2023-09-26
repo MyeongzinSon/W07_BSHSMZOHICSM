@@ -71,6 +71,7 @@ public class PlayerRoll : MonoBehaviour
     {
         TryGetComponent<NavMeshAgent>(out var agent);
         transform.GetChild(0).GetComponent<Animator>().SetTrigger("Stretch");
+        transform.GetChild(0).GetComponent<PlayerAfterImageHandler>().RepeatSpawnTrail();
         Vector2 direction = playerMove.direction;
         direction = direction.normalized;
         rollCurrentFrequency++;
