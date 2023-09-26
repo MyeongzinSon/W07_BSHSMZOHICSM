@@ -24,9 +24,6 @@ public class ShurikenShooter : MonoBehaviour
 	private int shurikenCount;
 	private float currentCharge = 0;
 
-	private bool CanShoot => currentCartridge > 0;
-	bool IsCharging => currentCharge > 0;
-
 	private LineRenderer lineRenderer;
 
 	#endregion
@@ -56,7 +53,7 @@ public class ShurikenShooter : MonoBehaviour
 
 		if (IsCharging)
 		{
-			Vector2 dir = (mainCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+			Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
 			Debug.Log(dir);
 			lineRenderer?.SetPosition(1, transform.position + (Vector3)(dir * (stats.maxDistance * (currentCharge / MaxCharge))));
 
