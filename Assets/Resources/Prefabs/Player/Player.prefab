@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2161613079036950406}
   - component: {fileID: 2161613079036950407}
+  - component: {fileID: 1659181503}
   m_Layer: 0
   m_Name: Renderer
   m_TagString: Untagged
@@ -52,7 +53,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 3f3aef1ea16a9654089c490057a9550c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -73,17 +74,32 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 75a54be0e016a9048981564a12c09e6c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.4, y: 0.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1659181503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2161613079036950405}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5ce27c2dd977d4d9825078c0189bb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteOutline: {fileID: 1659181503}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  outlineSize: 1
 --- !u!1 &2161613079788646885
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +150,8 @@ GameObject:
   - component: {fileID: 268700112459832159}
   - component: {fileID: 6115772962267442698}
   - component: {fileID: 2147070924}
+  - component: {fileID: 1330590512}
+  - component: {fileID: 1330590521}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -293,6 +311,7 @@ MonoBehaviour:
     m_Bits: 1024
   shootRadius: 0.5
   launchAngle: 45
+  catridgeUIManager: {fileID: 0}
 --- !u!114 &6115772962267442698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,3 +423,30 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &1330590512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2161613080536109213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73773f1d7173e5a45ad246deae76a73f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 2161613080536109214}
+--- !u!114 &1330590521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2161613080536109213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3872e59d102bd52449926665e96964dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHpBar: {fileID: 0}
+  playerStats: {fileID: 2161613080536109210}

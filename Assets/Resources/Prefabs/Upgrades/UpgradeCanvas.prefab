@@ -352,7 +352,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6640241273192044883
 RectTransform:
   m_ObjectHideFlags: 0
@@ -685,6 +685,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradeIconContainerLeft
       objectReference: {fileID: 0}
+    - target: {fileID: 8377836522938380109, guid: 4ea09175526093d4f83777af1fcca43c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6640241273192044882}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ea09175526093d4f83777af1fcca43c, type: 3}
 --- !u!224 &9221371635689873033 stripped
@@ -787,6 +791,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradeIconContainerRight
       objectReference: {fileID: 0}
+    - target: {fileID: 8377836522938380109, guid: 4ea09175526093d4f83777af1fcca43c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6640241273192044882}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ea09175526093d4f83777af1fcca43c, type: 3}
 --- !u!224 &9221371636063608105 stripped
@@ -889,6 +897,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradeIconContainerMiddle
       objectReference: {fileID: 0}
+    - target: {fileID: 8377836522938380109, guid: 4ea09175526093d4f83777af1fcca43c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6640241273192044882}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ea09175526093d4f83777af1fcca43c, type: 3}
 --- !u!224 &6640241274315873099 stripped
