@@ -312,6 +312,7 @@ MonoBehaviour:
     m_Bits: 1024
   shootRadius: 0.5
   launchAngle: 20
+  slowOnCharge: 0.3
   catridgeUIManager: {fileID: 0}
 --- !u!114 &6115772962267442698
 MonoBehaviour:

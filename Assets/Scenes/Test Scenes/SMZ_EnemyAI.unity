@@ -1356,6 +1356,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2436633567722104375, guid: 3d474e24e286ace4782cee9e11a10017, type: 3}
+      propertyPath: slowOnCharge
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2436633567722104381, guid: 3d474e24e286ace4782cee9e11a10017, type: 3}
       propertyPath: m_Name
       value: Enemy
