@@ -249,7 +249,7 @@ public class Shuriken : MonoBehaviour
         Vector2 midpoint = (p1 + p3) / 2;
 
         // 원하는 방향 벡터 (예: 오른쪽 방향)
-        Vector2 direction = new Vector2(1f, 0f); // 오른쪽 방향으로 이동하려면 (1, 0) 벡터 사용
+        Vector2 direction = transform.up; // 오른쪽 방향으로 이동하려면 (1, 0) 벡터 사용
 
         // 원하는 거리
         float distance = 5f; // 원하는 거리
@@ -264,12 +264,12 @@ public class Shuriken : MonoBehaviour
 
         while (elapsedTime < maxTime)
         {
-            tick++;
             b1 = Vector2.Lerp(p1, p2, elapsedTime / maxTime);
             b2 = Vector2.Lerp(p2, p3, elapsedTime / maxTime);
             transform.position = Vector2.Lerp(b1, b2, elapsedTime / maxTime);
             transform.Rotate(0f, 0f, rotationPerTick * tick);
             
+            tick++;
             elapsedTime += Time.fixedDeltaTime;
 
             yield return new WaitForFixedUpdate();
