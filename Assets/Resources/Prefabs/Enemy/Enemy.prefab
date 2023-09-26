@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 688280933380367810}
   - component: {fileID: 2436633567722104369}
   - component: {fileID: 2436633567722104373}
-  - component: {fileID: 2436633567722104374}
   - component: {fileID: 2436633567722104375}
   - component: {fileID: 2436633567722104382}
   - component: {fileID: 2436633567722104370}
@@ -20,6 +19,7 @@ GameObject:
   - component: {fileID: 6836496222577029403}
   - component: {fileID: 585245858}
   - component: {fileID: 994628109}
+  - component: {fileID: 1408235159052232110}
   - component: {fileID: 994628110}
   m_Layer: 10
   m_Name: Enemy
@@ -98,26 +98,6 @@ MonoBehaviour:
   attackDistanceOffset: 5
   minProperDistance: 10
   maxProperDistance: 15
---- !u!114 &2436633567722104374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2436633567722104381}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb9a5e67d57baa848badc62dbbf7e8cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canMove: 1
-  speed: 3
-  accel: 0
-  direction: {x: 0, y: 0}
-  angularAccel: {x: 0, y: 0}
-  lastInput: {x: 0, y: -1}
-  isRotate: 1
-  knockbackTime: 0.25
 --- !u!114 &2436633567722104375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +116,7 @@ MonoBehaviour:
     m_Bits: 2048
   shootRadius: 0.5
   launchAngle: 45
+  catridgeUIManager: {fileID: 0}
 --- !u!114 &2436633567722104382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +211,18 @@ MonoBehaviour:
   lastInput: {x: 0, y: -1}
   isRotate: 1
   useDestination: 1
+--- !u!114 &1408235159052232110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436633567722104381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19eb8343a97525041b1f6f3ae7723c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!195 &994628110
 NavMeshAgent:
   m_ObjectHideFlags: 0
