@@ -13,16 +13,21 @@ public class ShurikenShooter : MonoBehaviour
 	[Header("플레이어에게서 약간 떨어진 거리에서 발사됩니다.")]
 	public float shootRadius = 0.5f;
 	[Header("여러발 발사할 때의 최대 발사각")]
-	public float launchAngle = 45f;
+	public float launchAngle = 30f;
+
+	[Header("조준 중 n% 느려집니다.")]
+	public float slowOnCharge = 0.3f;
 
 	#region privateArea
 
+	private Mover mover;
 	private Vector2 direction;
 	private CharacterStats stats;
 	private int maxCartridge;
 	private int currentCartridge;
 	private int shurikenCount;
 	private float currentCharge = 0;
+	private float rawSlowNum = 0;
 
 	private LineRenderer lineRenderer;
 	
@@ -42,6 +47,7 @@ public class ShurikenShooter : MonoBehaviour
         {
 			Debug.LogError($"ShurikenShooter : 해당 캐릭터에서 CharacterStats 컴포넌트를 찾을 수 없음! (Instance ID : {this.GetInstanceID()})");
         }
+		mover = GetComponent<Mover>();
 		maxCartridge = stats.maxCartridgeNum;
 		currentCartridge = maxCartridge;
 		shurikenCount = 0;
@@ -74,6 +80,8 @@ public class ShurikenShooter : MonoBehaviour
 		if (CanShoot && !IsCharging)
         {
 			currentCharge += Time.deltaTime;
+			rawSlowNum = mover.speed*slowOnCharge;
+			mover.speed -= rawSlowNum;
 			return true;
         }
 		return false;
@@ -83,7 +91,8 @@ public class ShurikenShooter : MonoBehaviour
 		if (IsCharging)
 		{
 			if (TryShoot())
-            {
+			{
+				mover.speed += rawSlowNum;
 				currentCharge = 0;
 				return true;
             }
@@ -105,12 +114,18 @@ public class ShurikenShooter : MonoBehaviour
 			{
 				for (int i = 0; i < stats.shurikenNum; i++)
 				{
-					Vector3 td = Quaternion.AngleAxis(angle, Vector3.forward) * direction;
+					float radAngle = angle*Mathf.Deg2Rad;
+					Vector2 td
+						= new Vector3(
+							Mathf.Cos(radAngle)*direction.x - Mathf.Sin(radAngle)*direction.y,
+							Mathf.Sin(radAngle)*direction.x + Mathf.Cos(radAngle)*direction.y);
+					//Vector3 td = Quaternion.AngleAxis(angle, Vector3.forward) * direction;
 					if((int)stats.shurikenNum/2==i)
 						Shoot(td,false);
 					else
 						Shoot(td,true);
-					angle += launchAngle/(stats.shurikenNum/2);
+					Debug.Log($"i: {i}, dir: {direction}, cur: {td}, angle: {angle}");
+					angle += launchAngle*2f/(stats.shurikenNum-1);
 				}
 			}
 			return true;
