@@ -70,7 +70,7 @@ public class PlayerRoll : MonoBehaviour
     private IEnumerator RollCoroutine()
     {
         TryGetComponent<NavMeshAgent>(out var agent);
-
+        transform.GetChild(0).GetComponent<Animator>().SetTrigger("Stretch");
         Vector2 direction = playerMove.direction;
         direction = direction.normalized;
         rollCurrentFrequency++;

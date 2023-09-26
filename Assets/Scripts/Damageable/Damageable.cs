@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Damageable : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class Damageable : MonoBehaviour
 		hp -= damage * damageCoef;
 		GameObject hitParticle = (GameObject)Resources.Load("Prefabs/Particles/BloodParticle");
 		Instantiate(hitParticle, transform.position, Quaternion.identity);
+		transform.GetChild(0).GetComponent<FlashingObject>().MakeObjectFlashSprite(transform.GetChild(0).GetComponent<SpriteRenderer>(), .03f, .1f);
 		if (hp <= 0)
 		{
 			hp = 0f;
@@ -58,8 +60,8 @@ public class Damageable : MonoBehaviour
 	public void Kill()
 	{
 		Debug.Log("Killed: "+name);
+        transform.GetComponent<PlayerHpHandler>().playerHpBar.GetComponent<Image>().fillAmount = 0;
 		gameObject.SetActive(false);
-        
         //플레이어가 죽었으면 게임오버
         if (gameObject.tag == "Player")
         {
