@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5f4fc532d726ade4a875210265431f8c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   owner: {fileID: 0}
+  isShadow: 0
   damage: 3
   canDamage: 1
   damageLayer:
@@ -110,7 +111,7 @@ MonoBehaviour:
   bounceLayer:
     serializedVersion: 2
     m_Bits: 512
-  canReflect: 0
+  useBounce: 0
   wallBounceTime: 0.15
   enemyBounceTime: 1
   moveDistance: 10
@@ -123,7 +124,15 @@ MonoBehaviour:
   explosionTime: 1
   useBoomerang: 0
   boomerangDelay: 5
+  boomerangAccel: 3
   attributes: 
+  useLifeSteal: 0
+  lifeStealAmount: 2
+  useKnockBack: 0
+  knockbackPower: 5
+  useSlow: 0
+  useDamageBuff: 0
+  useInhibitHeal: 0
 --- !u!114 &3743431136012034996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +190,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.5}
+    oldSize: {x: 0.4, y: 0.4}
     newSize: {x: 1, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
