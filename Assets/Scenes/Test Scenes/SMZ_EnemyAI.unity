@@ -832,8 +832,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ae37fbf8ad4d45428b02f4735c6e7a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currnetTarget: {fileID: 0}
-  targetPositionOffset: 0
+  currentTarget: {fileID: 0}
+  targetPositionOffset: 0.1
+  attackDistanceOffset: 5
 --- !u!114 &585245853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -859,10 +860,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48674c3545863f4a94a1ddba566ea30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shurikenPrefab: {fileID: 0}
+  shurikenPrefab: {fileID: 3743431136012034996, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
   damageLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   shootRadius: 0.5
   launchAngle: 45
 --- !u!114 &585245855
@@ -1571,6 +1572,10 @@ PrefabInstance:
     - target: {fileID: 2611023797887767897, guid: c541d32eabf026044bf236a07a72ad68, type: 3}
       propertyPath: m_Name
       value: HealPack
+      objectReference: {fileID: 0}
+    - target: {fileID: 2611023797887767897, guid: c541d32eabf026044bf236a07a72ad68, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c541d32eabf026044bf236a07a72ad68, type: 3}

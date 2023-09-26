@@ -18,6 +18,7 @@ public abstract class EnemyAI
         attack = main.Attack;
     }
 
+    public abstract void OnUpdate();
     public abstract bool UpdateOnFollowTarget();
     public abstract bool UpdateOnAttack();
     public abstract bool UpdateOnIdle();

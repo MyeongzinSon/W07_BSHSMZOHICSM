@@ -21,10 +21,19 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 		TryGetComponent(out roll);
 		TryGetComponent(out attack);
 	}
-
 	private void OnDisable()
 	{
 		inputs.Disable();
+	}
+	void Update()
+    {
+		SetAttackDirection();
+	}
+
+	void SetAttackDirection()
+    {
+		Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+		attack.SetDirection(dir);
 	}
 
 	public void OnMove(InputAction.CallbackContext context)
@@ -48,6 +57,7 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 		}
 		if (context.canceled)
 		{
+			SetAttackDirection();
 			attack.EndCharge();
 		}
 	}

@@ -12,12 +12,14 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] Transform currentTarget;
     [SerializeField] float targetPositionOffset;
+    [SerializeField] float attackDistanceOffset;
 
     public PlayerMove Move => move;
     public PlayerRoll Roll => roll;
     public ShurikenShooter Attack => attack;
     public Transform CurrentTarget => currentTarget;
     public float TargetPositionOffset => targetPositionOffset;
+    public float AttackDistanceOffset => attackDistanceOffset;
 
     public Transform AttackTarget { get; private set; }
 
@@ -37,13 +39,7 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        // follow current Target
-        if (ai.UpdateOnFollowTarget()) return;
-        
-        if (ai.UpdateOnAttack())
-        {
-
-        }
+        ai.OnUpdate();
     }
 
     public void SetTarget(Transform _target)

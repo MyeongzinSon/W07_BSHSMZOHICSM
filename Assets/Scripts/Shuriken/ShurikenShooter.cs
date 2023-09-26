@@ -19,6 +19,7 @@ public class ShurikenShooter : MonoBehaviour
 	#region privateArea
 
 	private Camera mainCamera;
+	private Vector2 direction;
 	private CharacterStats stats;
 	private int maxCartridge;
 	private int currentCartridge;
@@ -29,6 +30,9 @@ public class ShurikenShooter : MonoBehaviour
 
 	public bool CanShoot => currentCartridge > 0;
 	public bool IsCharging => currentCharge > 0;
+	public bool IsCartridgeFull => currentCartridge == maxCartridge;
+	public float CurrentChargeAmount => currentCharge / MaxCharge;
+	public float CurrentDistance => stats.maxDistance * CurrentChargeAmount;
 
 	private void Start()
 	{
@@ -74,19 +78,22 @@ public class ShurikenShooter : MonoBehaviour
 		}
 		return false;
     }
+	public void SetDirection(Vector2 _direction)
+    {
+		direction = _direction;
+    }
 	bool TryShoot()
     {
 		if (currentCartridge > 0)
 		{
-			Vector2 dir = (mainCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
 			float angle = -launchAngle;
 			if(stats.shurikenNum==1)
-				Shoot(dir, false);
+				Shoot(direction, false);
 			else
 			{
 				for (int i = 0; i < stats.shurikenNum; i++)
 				{
-					Vector3 td = Quaternion.AngleAxis(angle, Vector3.forward) * dir;
+					Vector3 td = Quaternion.AngleAxis(angle, Vector3.forward) * direction;
 					if((int)stats.shurikenNum/2==i)
 						Shoot(td,false);
 					else
@@ -111,13 +118,12 @@ public class ShurikenShooter : MonoBehaviour
 		inst.direction = _dir;
 		inst.SetRotationByDirection();
 
-		float chargeAmount = currentCharge / MaxCharge;
 		//슈리켄 값 받아와서 해당 값에 대한 설정
 		Shuriken instSrk = inst.GetComponent<Shuriken>();
 		instSrk.damageLayer = damageLayer;
 		instSrk.owner = gameObject;
 		instSrk.damage = stats.attackPower;
-		instSrk.moveDistance = stats.maxDistance * chargeAmount;
+		instSrk.moveDistance = CurrentDistance;
 		instSrk.isShadow = isShadow;
 		
 		//특대형 수리검
