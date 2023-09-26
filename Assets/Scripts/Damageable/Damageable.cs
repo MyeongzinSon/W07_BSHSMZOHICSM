@@ -24,6 +24,8 @@ public class Damageable : MonoBehaviour
 	{
 		Debug.Log("Damaged: "+name);
 		hp -= damage * damageCoef;
+		GameObject hitParticle = (GameObject)Resources.Load("Prefabs/Particles/BloodParticle");
+		Instantiate(hitParticle, transform.position, Quaternion.identity);
 		if (hp <= 0)
 		{
 			hp = 0f;

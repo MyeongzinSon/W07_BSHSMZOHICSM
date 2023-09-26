@@ -3,6 +3,7 @@ using UnityEngine;
 
 [ExecuteInEditMode]
 public class SpriteOutline : MonoBehaviour {
+    public SpriteOutline spriteOutline;
     public Color color = Color.white;
 
     [Range(0, 16)]
@@ -12,6 +13,7 @@ public class SpriteOutline : MonoBehaviour {
 
     void OnEnable() {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteOutline.UpdateOutline(true);
     }
 
     public void UpdateOutline(bool outline) {
