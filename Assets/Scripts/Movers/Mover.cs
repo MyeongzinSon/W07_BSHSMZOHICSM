@@ -50,7 +50,7 @@ public class Mover : MonoBehaviour
         AfterMove();
     }
 
-    public void Move()
+    public virtual void Move()
     {
         if (body == null)
         {
