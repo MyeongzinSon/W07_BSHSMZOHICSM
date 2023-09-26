@@ -12,6 +12,7 @@ public class UpgradeManager : MonoBehaviour
     public ShurikenDB shurikenDB;
     public Boolean[] isSelected = new Boolean[3];
     public List<int> selectedIdxes; //뜬 3개의 인덱스 리스트
+    public GameObject player;
     private Transform[] UpgradeIconContainers = new Transform[3];
 
     void OnEnable()
@@ -137,16 +138,26 @@ public class UpgradeManager : MonoBehaviour
 
     public void SelectConfirmHandler()
     {
+        int selectedIdx = -1;
         for (int i = 0; i < selectedIdxes.Count; i++)
         {
-            if (shurikenDB.Shurikens[selectedIdxes[i]].showOnlyOnce > 0) // 한번만 나와야 하는 경우
+            if (isSelected[i])
             {
-                GameManager.Instance.canUpgradeIdxList.Remove((GameManager.UpgradeIdx) selectedIdxes[i]);
+                selectedIdx = selectedIdxes[i];
+                if (shurikenDB.Shurikens[selectedIdxes[i]].showOnlyOnce > 0) // 한번만 나와야 하는 경우
+                {
+                    GameManager.Instance.canUpgradeIdxList.Remove((GameManager.UpgradeIdx) selectedIdxes[i]);
+                }
             }
         }
         ResetSelect();
-        //여기에 실제 업글 함수 넣기
-        //GameManager.Instance.UpgradeShuriken(selectedIdxes);
+        
+        //업그레이드 실제 연동
+        if (selectedIdx != -1)
+        {
+            CharacterStatsData data = GameManager.Instance.characterStatsDataList[selectedIdx];
+            GameManager.Instance.upgradedList.Add(data);
+        }
         
         GameManager.Instance.ExitState(GameManager.GameState.Upgrade);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);

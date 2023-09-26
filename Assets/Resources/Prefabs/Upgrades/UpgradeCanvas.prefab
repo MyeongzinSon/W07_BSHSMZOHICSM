@@ -467,6 +467,7 @@ MonoBehaviour:
   shurikenDB: {fileID: 11400000, guid: 45ece209a8cf6794a91977af008ff62b, type: 2}
   isSelected: 000000
   selectedIdxes: 
+  player: {fileID: 0}
 --- !u!1 &6640241273431798970
 GameObject:
   m_ObjectHideFlags: 0

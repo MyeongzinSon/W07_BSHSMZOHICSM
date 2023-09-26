@@ -92,32 +92,6 @@ MonoBehaviour:
     demeritSpecies: none
     demeritAmount: 0
   - id: 0
-    name: "\uC5B4\uC9C0\uB7FC\uC99D \uC720\uBC1C"
-    description: "\uC218\uB9AC\uAC80\uC744 \uB9DE\uCDC4\uC744 \uB54C \uB109\uBC31
-      \uC2DC\uAC04\uC774 \uB298\uC5B4\uB0A9\uB2C8\uB2E4."
-    showOnlyOnce: 1
-    meritSpecies: AtkDmg
-    meritAmount: 2
-    demeritSpecies: none
-    demeritAmount: 0
-  - id: 0
-    name: "\uAC15\uD654!"
-    description: "\uC804\uD22C \uC2DC\uC791\uD6C4 10\uCD08\uAC04 \uAC15\uD574\uC9D1\uB2C8\uB2E4!"
-    showOnlyOnce: 1
-    meritSpecies: none
-    meritAmount: 0
-    demeritSpecies: Hp
-    demeritAmount: 20
-  - id: 0
-    name: "\uB9F9\uB3C5 \uC218\uB9AC\uAC80"
-    description: "\uC218\uB9AC\uAC80\uC5D0 \uB3C4\uD2B8 \uB370\uBBF8\uC9C0\uAC00
-      \uC0DD\uAE41\uB2C8\uB2E4."
-    showOnlyOnce: 1
-    meritSpecies: MoveSpeed
-    meritAmount: 1
-    demeritSpecies: AtkDmg
-    demeritAmount: 1
-  - id: 0
     name: "\uAC70\uBBF8\uC904"
     description: "\uC218\uB9AC\uAC80\uC5D0 \uC2AC\uB85C\uC6B0 \uAE30\uB2A5\uC774
       \uC0DD\uAE41\uB2C8\uB2E4."

@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameState gameState;
+    public List<CharacterStatsData> characterStatsDataList = new List<CharacterStatsData>();
+    public List<CharacterStatsData> upgradedList = new List<CharacterStatsData>();
     public enum GameState
     {
         Tournament = 100,
@@ -24,9 +26,6 @@ public class GameManager : MonoBehaviour
         EXPLOSION,
         THROWNUM,
         WALLSTUN,
-        KNOCKBACKTIME,
-        ENFORCE,
-        POISON,
         SLOW,
         VAMPIRE,
         WEAKNESS,
@@ -43,9 +42,6 @@ public class GameManager : MonoBehaviour
         UpgradeIdx.EXPLOSION,
         UpgradeIdx.THROWNUM,
         UpgradeIdx.WALLSTUN,
-        UpgradeIdx.KNOCKBACKTIME,
-        UpgradeIdx.ENFORCE,
-        UpgradeIdx.POISON,
         UpgradeIdx.SLOW,
         UpgradeIdx.VAMPIRE,
         UpgradeIdx.WEAKNESS,

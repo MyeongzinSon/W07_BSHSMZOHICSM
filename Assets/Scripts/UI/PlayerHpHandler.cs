@@ -24,5 +24,9 @@ public class PlayerHpHandler : MonoBehaviour
         {
             playerHpBar.GetComponent<Image>().fillAmount = smoothHp / playerStats.maxHp;
         }
+        else
+        {
+            playerHpBar.GetComponent<Image>().fillAmount = 0;
+        }
     }
 }
