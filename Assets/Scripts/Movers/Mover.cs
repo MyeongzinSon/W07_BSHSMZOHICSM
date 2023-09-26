@@ -75,12 +75,16 @@ public class Mover : MonoBehaviour
 
     public float SetRotationByDirection()
     {
+        return SetRotationTo(direction);
+    }
+    public float SetRotationTo(Vector2 _direction)
+    {
         Vector2 a = Vector2.right;
-        Vector2 b = direction.normalized;
-        float angle = Vector2.Angle(a,b);
-        float t = ((a.x*b.y - b.x*a.y)>=0)?1f:-1f;
-        transform.rotation = Quaternion.Euler(0f,0f,angle*t);
-        return angle*t;
+        Vector2 b = _direction.normalized;
+        float angle = Vector2.Angle(a, b);
+        float t = ((a.x * b.y - b.x * a.y) >= 0) ? 1f : -1f;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle * t);
+        return angle * t;
     }
 
     public virtual void BeforeMove() { }

@@ -11,8 +11,13 @@ public class EnemyController : MonoBehaviour
     EnemyAI ai;
 
     [SerializeField] Transform currentTarget;
+    [Header("Pickable Target")]
     [SerializeField] float targetPositionOffset;
+    [Header("Shuriken")]
     [SerializeField] float attackDistanceOffset;
+    [Header("Distance Maintenance")]
+    [SerializeField] float minProperDistance;
+    [SerializeField] float maxProperDistance;
 
     public PlayerMove Move => move;
     public PlayerRoll Roll => roll;
@@ -20,6 +25,8 @@ public class EnemyController : MonoBehaviour
     public Transform CurrentTarget => currentTarget;
     public float TargetPositionOffset => targetPositionOffset;
     public float AttackDistanceOffset => attackDistanceOffset;
+    public float MinProperDistance => minProperDistance;
+    public float MaxProperDistance => maxProperDistance;
 
     public Transform AttackTarget { get; private set; }
 
