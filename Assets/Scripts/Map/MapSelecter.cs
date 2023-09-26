@@ -42,7 +42,7 @@ public class MapSelecter : MonoBehaviour
 
     public void StartRandomMap()
     {
-        int num = Random.Range(0, maps.Count - 1);
+        int num = Random.Range(0, maps.Count);
         if (maps[num] != null)
         {
             maps[num].Init();

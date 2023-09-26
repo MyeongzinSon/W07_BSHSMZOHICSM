@@ -980,7 +980,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1274632002669709339
 Transform:
   m_ObjectHideFlags: 0
@@ -3250,7 +3250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8169345205901483362, guid: d819aa929806fb644b39614af1966b85, type: 3}
       propertyPath: m_Lens.OrthographicSize
-      value: 15
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8169345205901483389, guid: d819aa929806fb644b39614af1966b85, type: 3}
       propertyPath: m_LocalPosition.x
