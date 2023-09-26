@@ -15,7 +15,7 @@ MonoBehaviour:
   forDefaultState: 0
   maxHp: 0
   moveSpeed: 0
-  attackPower: 0
+  attackPower: 1
   chargeSpeed: 0
   maxCartridgeNum: 0
   maxDistance: 0

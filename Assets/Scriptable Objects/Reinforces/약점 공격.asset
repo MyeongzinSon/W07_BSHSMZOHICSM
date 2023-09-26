@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "\uC57D\uC810 \uACF5\uACA9"
   m_EditorClassIdentifier: 
   forDefaultState: 0
-  maxHp: 0
+  maxHp: 10
   moveSpeed: 0
   attackPower: 0
   chargeSpeed: 0
