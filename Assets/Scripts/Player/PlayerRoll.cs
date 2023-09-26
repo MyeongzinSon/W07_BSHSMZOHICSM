@@ -17,6 +17,8 @@ public class PlayerRoll : MonoBehaviour
     [SerializeField] private int rollMaxFrequency;
     [SerializeField] private bool isRollingCoroutinePlaying = false;
 
+    public bool CanRoll => playerMove.direction != Vector2.zero && !isRollingCoroutinePlaying && rollCurrentFrequency < rollMaxFrequency;
+
     private void Awake()
     {
         TryGetComponent(out playerMove);
@@ -27,29 +29,35 @@ public class PlayerRoll : MonoBehaviour
     {
         if (_context.performed)
         {
-            if (playerMove.direction != Vector2.zero)
+            TryRoll();
+        }
+    }
+    public bool TryRoll()
+    {
+        if (playerMove.direction != Vector2.zero)
+        {
+            if (!isRollingCoroutinePlaying)
             {
-                if (!isRollingCoroutinePlaying)
+                if (rollCurrentFrequency < rollMaxFrequency)
                 {
-                    if (rollCurrentFrequency < rollMaxFrequency)
-                    {
-                        StartCoroutine(nameof(RollCoroutine));
-                    }
-                    else
-                    {
-                        Debug.Log("쿨타임 기다리는 중");
-                    }
+                    StartCoroutine(nameof(RollCoroutine));
+                    return true;
                 }
                 else
                 {
-                    Debug.Log("구르는 중");
+                    Debug.Log("쿨타임 기다리는 중");
                 }
             }
             else
             {
-                Debug.Log("방향 입력 없음");
+                Debug.Log("구르는 중");
             }
         }
+        else
+        {
+            Debug.Log("방향 입력 없음");
+        }
+        return false;
     }
 
     private IEnumerator RollCoroutine()
