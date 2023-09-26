@@ -19,8 +19,10 @@ public class PlayerHpHandler : MonoBehaviour
 
     void Update()
     {
-
         smoothHp = Mathf.SmoothDamp(smoothHp, playerStats.hp, ref smoothVelocity, 0.2f);
-        playerHpBar.GetComponent<Image>().fillAmount = smoothHp / playerStats.maxHp;
+        if (playerHpBar != null)
+        {
+            playerHpBar.GetComponent<Image>().fillAmount = smoothHp / playerStats.maxHp;
+        }
     }
 }
