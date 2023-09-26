@@ -277,7 +277,6 @@ public class Shuriken : MonoBehaviour
         while (elapsedTime < maxTime)
         {
             tick++;
-            Debug.Log("Tick");
 
             transform.Rotate(Vector3.forward, rotationPerTick * tick);
             b1 = Vector2.Lerp(p1, p2, elapsedTime / maxTime);
