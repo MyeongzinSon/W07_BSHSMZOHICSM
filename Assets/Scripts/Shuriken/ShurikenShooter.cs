@@ -94,7 +94,7 @@ public class ShurikenShooter : MonoBehaviour
     }
 	bool TryShoot()
     {
-		if (currentCartridge > 0)
+		if (currentCartridge > 0 && GameManager.Instance.isBattleStart)
 		{
 			float angle = -launchAngle;
 			if(stats.shurikenNum==1)
