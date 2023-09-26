@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class EnemyAI
 {
     protected EnemyController main;
-    protected PlayerMove move;
+    protected NavMeshMover move;
     protected PlayerRoll roll;
     protected ShurikenShooter attack;
 

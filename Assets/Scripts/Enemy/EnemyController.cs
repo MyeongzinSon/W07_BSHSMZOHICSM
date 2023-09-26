@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    PlayerMove move;
+    NavMeshMover move;
     PlayerRoll roll;
     ShurikenShooter attack;
     EnemyAI ai;
@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] float minProperDistance;
     [SerializeField] float maxProperDistance;
 
-    public PlayerMove Move => move;
+    public NavMeshMover Move => move;
     public PlayerRoll Roll => roll;
     public ShurikenShooter Attack => attack;
     public Transform CurrentTarget => currentTarget;

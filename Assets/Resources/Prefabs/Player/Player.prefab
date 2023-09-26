@@ -311,7 +311,6 @@ MonoBehaviour:
     m_Bits: 1024
   shootRadius: 0.5
   launchAngle: 45
-  catridgeUIManager: {fileID: 0}
 --- !u!114 &6115772962267442698
 MonoBehaviour:
   m_ObjectHideFlags: 0

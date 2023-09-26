@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: 2436633567722104372}
   - component: {fileID: 6836496222577029403}
   - component: {fileID: 585245858}
+  - component: {fileID: 994628109}
+  - component: {fileID: 994628110}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -103,7 +105,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2436633567722104381}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb9a5e67d57baa848badc62dbbf7e8cb, type: 3}
   m_Name: 
@@ -134,7 +136,6 @@ MonoBehaviour:
     m_Bits: 1
   shootRadius: 0.5
   launchAngle: 45
-  catridgeUIManager: {fileID: 0}
 --- !u!114 &2436633567722104382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +210,48 @@ MonoBehaviour:
   rollCurrentFrequency: 0
   rollMaxFrequency: 2
   isRollingCoroutinePlaying: 0
+--- !u!114 &994628109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436633567722104381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 853effaa8a0dc144f9bc17426768bd61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canMove: 1
+  speed: 3
+  accel: 0
+  direction: {x: 0, y: 0}
+  angularAccel: {x: 0, y: 0}
+  lastInput: {x: 0, y: -1}
+  isRotate: 1
+  useDestination: 1
+--- !u!195 &994628110
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436633567722104381}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &3778761451411835261
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +324,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 0f2204ea1cdd3404b8773f60250b4c67, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

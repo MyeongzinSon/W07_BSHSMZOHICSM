@@ -33,7 +33,7 @@ public class EnemyAIStandard : EnemyAI
         if (main.CurrentTarget != null)
         {
             var diff = main.CurrentTarget.position - main.transform.position;
-            move.direction = diff;
+            move.SetDirection(diff);
             if (roll.CanRoll)
             {
                 roll.TryRoll();
@@ -41,13 +41,13 @@ public class EnemyAIStandard : EnemyAI
             if (diff.magnitude < main.TargetPositionOffset)
             {
                 main.SetTarget(null);
-                move.direction = Vector2.zero;
+                move.SetDirection(Vector2.zero);
             }
             return true;
         }
         if (main.CurrentTarget == null)
         {
-            move.direction = Vector2.zero;
+            move.SetDirection(Vector2.zero);
         }
         return false;
     }
@@ -87,7 +87,7 @@ public class EnemyAIStandard : EnemyAI
         var distance = attackDiff.magnitude;
         if (distance < main.MinProperDistance)
         {
-            move.direction = -attackDiff;
+            move.SetDirection(-attackDiff);
             if (roll.CanRoll)
             {
                 roll.TryRoll();
@@ -96,7 +96,7 @@ public class EnemyAIStandard : EnemyAI
         }
         if (distance > main.MaxProperDistance)
         {
-            move.direction = attackDiff;
+            move.SetDirection(attackDiff);
             if (roll.CanRoll)
             {
                 roll.TryRoll();
