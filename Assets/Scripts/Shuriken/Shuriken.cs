@@ -357,6 +357,8 @@ public class Shuriken : MonoBehaviour
     IEnumerator BounceCoroutine(float _moveTime)
     {
         //벽에 충돌 후 더이상 데미지를 주지 않는다.
+        if (state == ShurikenState.PICKUP)
+            yield break;
         mover.CanMove = true;
         canDamage = false;
         float orgSpeed = mover.speed*0.5f;
