@@ -64,6 +64,7 @@ public class Shuriken : MonoBehaviour
     public bool useSlow = false;
     public bool useDamageBuff = false;
     public bool useInhibitHeal = false;
+    private SpriteOutline spriteOutline;
 
     #region privateValues
 
@@ -77,6 +78,7 @@ public class Shuriken : MonoBehaviour
     {
         mover = GetComponent<Mover>();
         collider = GetComponent<BoxCollider2D>();
+        spriteOutline = GetComponent<SpriteOutline>();
     }
 
     public void Start()
@@ -156,8 +158,17 @@ public class Shuriken : MonoBehaviour
             //부메랑 리턴은 PICKUP이어도 작동한다.
             AdaptBoomerangReturnMove();
         }
+
         if (state == ShurikenState.PICKUP)
+        {
+            spriteOutline.UpdateOutline(true);
             return;
+        }
+        else
+        {
+            spriteOutline.UpdateOutline(false);
+        }
+            
         CalculateMoveDistance();
 
         //유도 처리
