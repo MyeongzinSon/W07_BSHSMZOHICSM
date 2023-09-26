@@ -59,6 +59,8 @@ public class ShurikenShooter : MonoBehaviour
 			//Debug.Log(dir);
 			lineRenderer?.SetPosition(1, transform.position + (Vector3)(dir * CurrentDistance));
 
+			Debug.Log(dir + " " + (transform.position + (Vector3)(dir * CurrentDistance)));
+
 			currentCharge += Time.deltaTime * stats.chargeSpeed;
 			currentCharge = Mathf.Min(currentCharge, MaxCharge);
 		}
