@@ -49,6 +49,7 @@ public class Shuriken : MonoBehaviour
     public float explosionScale = 10f;
     public float explosionTime = 1f;
     public float explosionDamageRatio = 0.3f; //수리검 데미지의 n%의 데미지
+    private bool isExploded = false;
 
     [Header("부메랑")]
     public bool useBoomerang;
@@ -328,6 +329,11 @@ public class Shuriken : MonoBehaviour
 
     void Explosion()
     {
+        if (isExploded)
+        {
+            return;
+        }
+        isExploded = true;
         ExplosionDamager ex = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         ex.transform.localScale = new Vector3(explosionScale, explosionScale, 1f);
         ex.destroyTimer = explosionTime;
