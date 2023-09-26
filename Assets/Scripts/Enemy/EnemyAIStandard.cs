@@ -180,10 +180,10 @@ public class EnemyAIStandard : EnemyAI
     {
         if (main.CurrentTarget != null) return;
 
-        var epsilon = 3f;
+        var epsilon = 1.5f;
         if (attackDiff.magnitude < main.MinProperDistance)
         {
-            if (Physics2D.Raycast(main.transform.position, -attackDiff.normalized, epsilon, 1 << LayerMask.NameToLayer("Wall")))
+            if (Physics2D.Raycast(main.transform.position, move.direction, epsilon, 1 << LayerMask.NameToLayer("Wall")))
             {
                 var newTarget = new GameObject();
                 newTarget.name = "EscapeTarget";
