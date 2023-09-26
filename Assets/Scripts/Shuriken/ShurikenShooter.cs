@@ -24,6 +24,8 @@ public class ShurikenShooter : MonoBehaviour
 	private int shurikenCount;
 	private float currentCharge = 0;
 
+	private LineRenderer lineRenderer;
+
 	#endregion
 
 	public bool CanShoot => currentCartridge > 0;
@@ -41,14 +43,26 @@ public class ShurikenShooter : MonoBehaviour
 		maxCartridge = stats.maxCartridgeNum;
 		currentCartridge = maxCartridge;
 		shurikenCount = 0;
+
+		TryGetComponent(out lineRenderer);
 	}
 
 	private void Update()
 	{
+		lineRenderer?.SetPosition(0, transform.position);
+
 		if (IsCharging)
 		{
+			Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+			Debug.Log(dir);
+			lineRenderer?.SetPosition(1, transform.position + (Vector3)(dir * (stats.maxDistance * (currentCharge / MaxCharge))));
+
 			currentCharge += Time.deltaTime * stats.chargeSpeed;
 			currentCharge = Mathf.Min(currentCharge, MaxCharge);
+		}
+		else
+		{
+			lineRenderer?.SetPosition(1, transform.position);
 		}
 	}
 	public bool StartCharge()
