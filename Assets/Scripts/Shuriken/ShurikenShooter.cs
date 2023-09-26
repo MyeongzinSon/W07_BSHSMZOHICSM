@@ -6,7 +6,6 @@ using UnityEngine;
 public class ShurikenShooter : MonoBehaviour
 {
 	const float MaxCharge = 1;
-	const float chargeDelay = 0.5f;
 
 	public Mover shurikenPrefab;
 	public LayerMask damageLayer;
@@ -18,7 +17,6 @@ public class ShurikenShooter : MonoBehaviour
 
 	#region privateArea
 
-	private Camera mainCamera;
 	private Vector2 direction;
 	private CharacterStats stats;
 	private int maxCartridge;
@@ -36,7 +34,6 @@ public class ShurikenShooter : MonoBehaviour
 
 	private void Start()
 	{
-		mainCamera = Camera.main;
 		if (!TryGetComponent(out stats))
         {
 			Debug.LogError($"ShurikenShooter : 해당 캐릭터에서 CharacterStats 컴포넌트를 찾을 수 없음! (Instance ID : {this.GetInstanceID()})");
@@ -52,8 +49,6 @@ public class ShurikenShooter : MonoBehaviour
 		{
 			currentCharge += Time.deltaTime * stats.chargeSpeed;
 			currentCharge = Mathf.Min(currentCharge, MaxCharge);
-			if (currentCharge >= chargeDelay)
-				VCamManager.Instance.Expand();
 		}
 	}
 	public bool StartCharge()
@@ -72,7 +67,6 @@ public class ShurikenShooter : MonoBehaviour
 			if (TryShoot())
             {
 				currentCharge = 0;
-				VCamManager.Instance.Reduce();
 				return true;
             }
 		}

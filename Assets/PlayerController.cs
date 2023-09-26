@@ -6,10 +6,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 {
+	const float cameraExpandDelay  = 0.5f;
+
 	private NewInputActions inputs;
 	private PlayerMove move;
 	private PlayerRoll roll;
 	private ShurikenShooter attack;
+
+	float cameraExpandTimer;
 
 	void Awake()
 	{
@@ -28,6 +32,14 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 	void Update()
     {
 		SetAttackDirection();
+		if (cameraExpandTimer >= 0)
+        {
+			cameraExpandTimer += Time.deltaTime;
+			if (cameraExpandTimer >= cameraExpandDelay)
+			{
+				VCamManager.Instance.Expand();
+			}
+		}
 	}
 
 	void SetAttackDirection()
@@ -54,11 +66,16 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 		if (context.started)
 		{
 			attack.StartCharge();
+			cameraExpandTimer = 0;
 		}
 		if (context.canceled)
 		{
 			SetAttackDirection();
-			attack.EndCharge();
+			if (attack.EndCharge())
+            {
+				cameraExpandTimer = -1;
+				VCamManager.Instance.Reduce();
+			}
 		}
 	}
 
