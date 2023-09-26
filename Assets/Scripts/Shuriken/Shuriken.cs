@@ -10,6 +10,7 @@ public class Shuriken : MonoBehaviour
     public enum ShurikenState
     {
         ATTACK,
+        AIRBORN,
         PICKUP,
     }
 
@@ -197,6 +198,7 @@ public class Shuriken : MonoBehaviour
                 //적 
                 if (hit.collider.gameObject.TryGetComponent<Damageable>(out var target))
                 {
+                    canDamage = false;
                     if (isBoomerangReturning)
                     {
                         isBoomerangReturning = false;
@@ -217,6 +219,7 @@ public class Shuriken : MonoBehaviour
                         //벽이 있다면, 가장 가까운 거리에 Drop한다.
                         dropPos = transform.position + (Vector3) mover.direction*(hitToDrop.distance - collider.size.y*0.5f);
                     }
+                    state = ShurikenState.AIRBORN;
                     StartCoroutine(DropCoroutine(transform.position, dropPos));
                     //SetPickUpState();
                     //StartCoroutine(BounceCoroutine(enemyBounceTime));
@@ -252,15 +255,14 @@ public class Shuriken : MonoBehaviour
         float elapsedTime = 0f;
         float maxTime = 1f;
         float rotationPerTick = 20;
-        canDamage = false;
 
         Vector2 p1 = currentPos;
         Vector2 p3 = dropPos;
 
         Vector2 midpoint = (p1 + p3) / 2;
 
-        // 원하는 방향 벡터 (예: 오른쪽 방향)
-        Vector2 direction = transform.up; // 오른쪽 방향으로 이동하려면 (1, 0) 벡터 사용
+        // 원하는 방향 벡터
+        Vector2 direction = transform.up;
 
         // 원하는 거리
         float distance = 5f; // 원하는 거리
@@ -272,15 +274,15 @@ public class Shuriken : MonoBehaviour
         Vector2 b2;
 
         int tick = 0;
-
         while (elapsedTime < maxTime)
         {
+            tick++;
+
+            transform.Rotate(Vector3.forward, rotationPerTick * tick);
             b1 = Vector2.Lerp(p1, p2, elapsedTime / maxTime);
             b2 = Vector2.Lerp(p2, p3, elapsedTime / maxTime);
             transform.position = Vector2.Lerp(b1, b2, elapsedTime / maxTime);
-            transform.Rotate(0f, 0f, rotationPerTick * tick);
             
-            tick++;
             elapsedTime += Time.fixedDeltaTime;
 
             yield return new WaitForFixedUpdate();

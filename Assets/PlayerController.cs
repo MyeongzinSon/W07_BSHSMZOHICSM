@@ -6,10 +6,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 {
+	const float cameraExpandDelay  = 0.5f;
+
 	private NewInputActions inputs;
 	private PlayerMove move;
 	private PlayerRoll roll;
 	private ShurikenShooter attack;
+
+	float cameraExpandTimer = -1f;
 
 	void Awake()
 	{
@@ -21,10 +25,27 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 		TryGetComponent(out roll);
 		TryGetComponent(out attack);
 	}
-
 	private void OnDisable()
 	{
 		inputs.Disable();
+	}
+	void Update()
+    {
+		SetAttackDirection();
+		if (cameraExpandTimer >= 0)
+        {
+			cameraExpandTimer += Time.deltaTime;
+			if (cameraExpandTimer >= cameraExpandDelay)
+			{
+				VCamManager.Instance.Expand();
+			}
+		}
+	}
+
+	void SetAttackDirection()
+    {
+		Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+		attack.SetDirection(dir);
 	}
 
 	public void OnMove(InputAction.CallbackContext context)
@@ -45,15 +66,24 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 		if (context.started)
 		{
 			attack.StartCharge();
+			cameraExpandTimer = 0;
 		}
 		if (context.canceled)
 		{
-			attack.EndCharge();
+			SetAttackDirection();
+			if (attack.EndCharge())
+            {
+				cameraExpandTimer = -1;
+				VCamManager.Instance.Reduce();
+			}
 		}
 	}
 
 	public void OnRoll(InputAction.CallbackContext context)
 	{
 		roll.OnRoll(context);
+		attack.Cancel();
+		cameraExpandTimer = -1;
+		VCamManager.Instance.Reduce();
 	}
 }
