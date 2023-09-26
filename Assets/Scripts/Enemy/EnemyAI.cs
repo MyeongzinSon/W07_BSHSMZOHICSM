@@ -11,6 +11,7 @@ public abstract class EnemyAI
     protected ShurikenShooter attack;
 
     protected bool useRoll;
+    protected bool canDodgeRoll;
     protected float rollSpeed;
     protected float rollCooldown;
     protected float minProperDistance;
@@ -28,6 +29,7 @@ public abstract class EnemyAI
     public void SetPersonalVariables(EnemyAIData _data)
     {
         useRoll = _data.useRoll;
+        canDodgeRoll = _data.canDodgeRoll;
         rollSpeed = _data.rollSpeed;
         rollCooldown = _data.rollCooldown;
         minProperDistance = _data.minProperDistance;
