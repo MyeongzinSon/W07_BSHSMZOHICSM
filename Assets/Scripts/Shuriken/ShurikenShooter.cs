@@ -25,10 +25,11 @@ public class ShurikenShooter : MonoBehaviour
 	private int shurikenCount;
 	private float currentCharge = 0;
 
-	private bool CanShoot => currentCartridge > 0;
-	bool IsCharging => currentCharge > 0;
 	#endregion
-	
+
+	public bool CanShoot => currentCartridge > 0;
+	public bool IsCharging => currentCharge > 0;
+
 	private void Start()
 	{
 		mainCamera = Camera.main;
