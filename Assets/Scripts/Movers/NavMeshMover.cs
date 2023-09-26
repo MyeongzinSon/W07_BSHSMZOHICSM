@@ -32,20 +32,22 @@ public class NavMeshMover : Mover
 		}
 		else
 		{
-			SetDestination(transform.position+(Vector3)direction);
+			if (agent != null)
+			{
+				agent.SetDestination(transform.position + (Vector3) direction);
+			}
 		}
 		
 		if(isRotate)
 			SetRotationByDirection();
 	}
-	
-	//테스트
-	private void Update()
+
+	public override void BeforeMove()
 	{
-		// if (Input.GetMouseButtonDown(0))
-		// {
-		// 	SetDestination(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-		// }
+		if (agent != null)
+		{
+			agent.isStopped = !_canMove;
+		}
 	}
 
 	//외부에서 목적지 설정할 때 사용
@@ -57,6 +59,7 @@ public class NavMeshMover : Mover
 			agent.updateRotation = false;
 			agent.updateUpAxis = false;
 		}
+		useDestination = true;
 		agent.SetDestination((Vector2)_moveTo);
 	}
 
