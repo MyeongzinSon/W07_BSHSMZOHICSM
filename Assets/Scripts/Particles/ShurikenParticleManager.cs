@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShurikenParticleManager : MonoBehaviour
 {
     public Gradient colorGradient; // 원하는 색상 변화를 정의한 그래디언트
+    public Color col;
     private ParticleSystem particleSystem;
 
     void Start()
@@ -21,6 +22,6 @@ public class ShurikenParticleManager : MonoBehaviour
         colorOverLifetimeModule.color = new ParticleSystem.MinMaxGradient(colorGradient);
 
         // Color Over Lifetime 모듈을 적용합니다.
-        mainModule.startColor = Color.white; // 시작 색상 설정 (원하는 색상으로 변경 가능)
+        mainModule.startColor = col;
     }
 }

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5659675096001688349}
   - component: {fileID: 5659675096001688348}
   - component: {fileID: 7896408292047072267}
+  - component: {fileID: 4052549713392261634}
   m_Layer: 0
   m_Name: Shuriken
   m_TagString: Untagged
@@ -216,3 +217,15 @@ MonoBehaviour:
   spriteOutline: {fileID: 7896408292047072267}
   color: {r: 1, g: 1, b: 1, a: 1}
   outlineSize: 1
+--- !u!114 &4052549713392261634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5659675096001688358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4f438a9ad3bfc4eaf0437988f88f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

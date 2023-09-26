@@ -30,8 +30,13 @@ public class DropItemCreateHandler : MonoBehaviour
 
         if (dropItemSpawnerPrefab != null)
         {
-            Vector3 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-            Vector3 enemyPosition = GameObject.FindGameObjectWithTag("Enemy").transform.position;
+            var player = GameObject.FindGameObjectWithTag("Player");
+            if (player == null) return;
+            Vector3 playerPosition = player.transform.position;
+                
+            var enemy = GameObject.FindGameObjectWithTag("Enemy");
+            if (enemy == null) return;
+            Vector3 enemyPosition = enemy.transform.position;
             Vector3 spawnPosition = (playerPosition + enemyPosition) / 2.0f;
 
             GameObject dropItemSpawner = Instantiate(dropItemSpawnerPrefab, spawnPosition, Quaternion.identity);

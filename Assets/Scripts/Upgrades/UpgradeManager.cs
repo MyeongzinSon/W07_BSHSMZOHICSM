@@ -156,6 +156,7 @@ public class UpgradeManager : MonoBehaviour
         {
             CharacterStatsData data = GameManager.Instance.characterStatsDataList[selectedIdx];
             GameManager.Instance.upgradedList.Add(data);
+            GameManager.Instance.upgradedListInt.Add(selectedIdx);
         }
         
         GameManager.Instance.ExitState(GameManager.GameState.Upgrade);
