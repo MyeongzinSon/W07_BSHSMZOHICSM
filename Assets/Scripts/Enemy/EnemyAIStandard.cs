@@ -7,11 +7,16 @@ public class EnemyAIStandard : EnemyAI
 {
     protected bool IsCharging => main.Attack.IsCharging;
     protected bool CanAttack => main.Attack.CanShoot;
+    protected bool shouldRoll = false;
 
     Vector2 attackDiff;
     Transform escapeTarget;
     bool isReloading = false;
 
+    public override void SetPersonalVariables()
+    {
+
+    }
     public override void OnUpdate()
     {
         attackDiff = main.AttackTarget.position - main.transform.position;
@@ -36,10 +41,7 @@ public class EnemyAIStandard : EnemyAI
         {
             var diff = main.CurrentTarget.position - main.transform.position;
             move.SetDestination(main.CurrentTarget.position);
-            if (roll.CanRoll)
-            {
-                roll.TryRoll();
-            }
+            TryRoll();
             if (diff.magnitude < main.TargetPositionOffset)
             {
                 if (main.CurrentTarget.Equals(escapeTarget))
@@ -95,19 +97,13 @@ public class EnemyAIStandard : EnemyAI
         if (distance < main.MinProperDistance)
         {
             move.SetDirection(-attackDiff);
-            if (roll.CanRoll)
-            {
-                roll.TryRoll();
-            }
+            TryRoll();
             return true;
         }
         if (distance > main.MaxProperDistance)
         {
             move.SetDirection(attackDiff);
-            if (roll.CanRoll)
-            {
-                roll.TryRoll();
-            }
+            TryRoll();
             return true;
         }
         return false;
@@ -192,6 +188,15 @@ public class EnemyAIStandard : EnemyAI
                 main.SetTarget(escapeTarget);
             }
         }
+    }
+    bool TryRoll()
+    {
+        if (shouldRoll && roll.CanRoll)
+        {
+            roll.TryRoll();
+            return true;
+        }
+        return false;
     }
 }
 
