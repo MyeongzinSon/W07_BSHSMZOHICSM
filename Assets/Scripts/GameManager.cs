@@ -144,7 +144,6 @@ public class GameManager : MonoBehaviour
     public void GoToBattle()
     {
         ExitState(GameState.Tournament);
-        EnterState(GameState.Battle);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

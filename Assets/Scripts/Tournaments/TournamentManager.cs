@@ -321,7 +321,9 @@ public class TournamentManager : MonoBehaviour
         GameObject parent = GameObject.Find("TournamentCanvas");
         GameObject iconContainer = Instantiate(PortraitIconContainerPrefab, position, Quaternion.identity);
         iconContainer.transform.SetParent(parent.transform, false);
-        remainingTourmantObjects.Add(iconContainer.transform); 
+        remainingTourmantObjects.Add(iconContainer.transform);
+        int rndIdx = UnityEngine.Random.Range(1, 7);
+        iconContainer.transform.GetChild(2).GetComponent<Image>().sprite = Resources.Load<Sprite>("Prefabs/Sprites/TournamentPortraits/Ninja" + rndIdx);
         iconContainer.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = NinjaSpecies[idx];
         iconContainer.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = NinjaNames[idx];
     }

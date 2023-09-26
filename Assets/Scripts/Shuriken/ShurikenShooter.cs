@@ -112,6 +112,7 @@ public class ShurikenShooter : MonoBehaviour
 		inst.direction = _dir;
 		inst.SetRotationByDirection();
 
+		Debug.Log(inst.speed);
 		//슈리켄 값 받아와서 해당 값에 대한 설정
 		Shuriken instSrk = inst.GetComponent<Shuriken>();
 		instSrk.damageLayer = damageLayer;
@@ -123,7 +124,7 @@ public class ShurikenShooter : MonoBehaviour
 		//특대형 수리검
 		instSrk.transform.localScale *= 1f + stats.shurikenScale;
 
-		inst.speed = stats.shurikenSpeed;
+		inst.speed = stats.shurikenSpeed * CurrentChargeAmount;
 		foreach (var a in stats.shurikenAttributes)
         {
 			if (shurikenCount % a.GetActivateNumber() == 0)

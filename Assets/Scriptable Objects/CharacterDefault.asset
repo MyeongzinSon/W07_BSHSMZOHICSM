@@ -19,6 +19,7 @@ MonoBehaviour:
   chargeSpeed: 1
   maxCartridgeNum: 3
   maxDistance: 20
-  shurikenSpeed: 10
+  shurikenSpeed: 30
   shurikenNum: 1
+  shurikenScale: 0
   shurikenAttributes: 
