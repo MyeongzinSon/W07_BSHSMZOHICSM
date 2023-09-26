@@ -9,6 +9,7 @@ public class EnemyAIStandard : EnemyAI
     protected bool CanAttack => main.Attack.CanShoot;
 
     Vector2 attackDiff;
+    Transform escapeTarget;
     bool isReloading = false;
 
     public override void OnUpdate()
@@ -17,6 +18,7 @@ public class EnemyAIStandard : EnemyAI
 
         if (EvaluateTarget()) { }
         CheckReloading();
+        CheckEscape();
 
         // follow current Target
         if (UpdateOnFollowTarget()) return;
@@ -40,6 +42,11 @@ public class EnemyAIStandard : EnemyAI
             }
             if (diff.magnitude < main.TargetPositionOffset)
             {
+                if (main.CurrentTarget.Equals(escapeTarget))
+                {
+                    GameObject.Destroy(escapeTarget.gameObject);
+                    escapeTarget = null;
+                }
                 main.SetTarget(null);
                 move.SetDirection(Vector2.zero);
             }
@@ -166,6 +173,23 @@ public class EnemyAIStandard : EnemyAI
             if (attack.IsCartridgeFull)
             {
                 isReloading = false;
+            }
+        }
+    }
+    void CheckEscape()
+    {
+        if (main.CurrentTarget != null) return;
+
+        var epsilon = 3f;
+        if (attackDiff.magnitude < main.MinProperDistance)
+        {
+            if (Physics2D.Raycast(main.transform.position, -attackDiff.normalized, epsilon, 1 << LayerMask.NameToLayer("Wall")))
+            {
+                var newTarget = new GameObject();
+                newTarget.name = "EscapeTarget";
+                escapeTarget = newTarget.transform;
+                escapeTarget.position = main.AttackTarget.position + (Vector3)attackDiff.normalized * epsilon;
+                main.SetTarget(escapeTarget);
             }
         }
     }
