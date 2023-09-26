@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/MainScene.unity
     guid: a564eb34e76dcba47936916d72b4304d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Haein/HaeinTournamentScene.unity
     guid: 72b8acf371a416341af5cb429fb45626
   - enabled: 1
