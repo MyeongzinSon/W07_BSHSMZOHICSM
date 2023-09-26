@@ -200,15 +200,13 @@ public class Shuriken : MonoBehaviour
 
                     //레이캐스트를 쏴서, 벽이 없는지 확인한다.
                     RaycastHit2D hitToDrop = Physics2D.Raycast(transform.position, dropPos - transform.position, dropDistance, bounceLayer);
+
                     if (hitToDrop.collider != null)
                     {
                         //벽이 있다면, 가장 가까운 거리에 Drop한다.
                         dropPos = transform.position + (Vector3) mover.direction*(hitToDrop.distance - collider.size.y*0.5f);
                     }
-                    transform.position = dropPos;
-                    canDamage = false;
-
-                    SetPickUpState();
+                    StartCoroutine(DropCoroutine(transform.position, dropPos));
                     //SetPickUpState();
                     //StartCoroutine(BounceCoroutine(enemyBounceTime));
                 }
@@ -236,6 +234,48 @@ public class Shuriken : MonoBehaviour
         }
 
 
+    }
+
+    private IEnumerator DropCoroutine(Vector2 currentPos, Vector2 dropPos)
+    {
+        float elapsedTime = 0f;
+        float maxTime = 1f;
+        float rotationPerTick = 30;
+        canDamage = false;
+
+        Vector2 p1 = currentPos;
+        Vector2 p3 = dropPos;
+
+        Vector2 midpoint = (p1 + p3) / 2;
+
+        // 원하는 방향 벡터 (예: 오른쪽 방향)
+        Vector2 direction = new Vector2(1f, 0f); // 오른쪽 방향으로 이동하려면 (1, 0) 벡터 사용
+
+        // 원하는 거리
+        float distance = 5f; // 원하는 거리
+
+        // 중점에서 원하는 방향과 거리만큼 떨어진 좌표 계산
+        Vector2 p2 = midpoint + direction.normalized * distance;
+
+        Vector2 b1;
+        Vector2 b2;
+
+        int tick = 0;
+
+        while (elapsedTime < maxTime)
+        {
+            tick++;
+            b1 = Vector2.Lerp(p1, p2, elapsedTime / maxTime);
+            b2 = Vector2.Lerp(p2, p3, elapsedTime / maxTime);
+            transform.position = Vector2.Lerp(b1, b2, elapsedTime / maxTime);
+            transform.Rotate(0f, 0f, rotationPerTick * tick);
+            
+            elapsedTime += Time.fixedDeltaTime;
+
+            yield return new WaitForFixedUpdate();
+        }
+        //transform.position = dropPos;
+        SetPickUpState();
     }
 
     void AdaptGuidedMove()
