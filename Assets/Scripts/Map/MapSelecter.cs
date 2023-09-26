@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,16 +16,24 @@ public class MapSelecter : MonoBehaviour
         {
             instance = this;
 
-            DontDestroyOnLoad(this.gameObject);
+            //DontDestroyOnLoad(this.gameObject);
         }
         else
         {   
             Destroy(this.gameObject);
         }
 
-        maps = FindObjectsOfType<OnMapActive>().ToList();
+        //maps = FindObjectsOfType<OnMapActive>().ToList();
 
         StartRandomMap();
+    }
+
+    private void OnDestroy()
+    {
+        if (instance == this)
+        {
+            instance = null;
+        }
     }
 
     //게임 매니저 인스턴스에 접근할 수 있는 프로퍼티. static이므로 다른 클래스에서 맘껏 호출할 수 있다.
@@ -42,11 +51,12 @@ public class MapSelecter : MonoBehaviour
 
     public void StartRandomMap()
     {
-        int num = Random.Range(0, maps.Count);
+        // num = Random.Range(0, maps.Count);
+        int num = GameManager.Instance.stageCount-1;
         if (maps[num] != null)
         {
             maps[num].Init();
-            maps[num] = null;
+            //maps[num] = null;
         }
         else
         {

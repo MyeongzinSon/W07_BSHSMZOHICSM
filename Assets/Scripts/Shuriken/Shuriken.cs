@@ -77,6 +77,8 @@ public class Shuriken : MonoBehaviour
 
     #endregion
 
+    public Vector2 direction => mover.direction;
+
     private void Awake()
     {
         mover = GetComponent<Mover>();

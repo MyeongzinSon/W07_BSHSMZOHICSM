@@ -8,6 +8,7 @@ public class EnemyAIData : ScriptableObject
 {
     [Header("AI")]
     public bool useRoll;
+    public bool canDodgeRoll;
     public float rollSpeed;
     public float rollCooldown;
     public float minProperDistance;
