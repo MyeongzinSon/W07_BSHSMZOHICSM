@@ -2765,10 +2765,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIManager
       objectReference: {fileID: 0}
-    - target: {fileID: 5020459336089740946, guid: 0fa4482b9fedca445b8414a5c1f292f6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5020459336089740956, guid: 0fa4482b9fedca445b8414a5c1f292f6, type: 3}
       propertyPath: m_RootOrder
       value: 8
