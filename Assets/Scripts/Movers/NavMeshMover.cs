@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class NavMeshMover : Mover
 {
@@ -17,6 +18,12 @@ public class NavMeshMover : Mover
 			agent.updateRotation = false;
 			agent.updateUpAxis = false;
 		}
+
+		agent.speed = speed;
+		agent.angularSpeed = angularAccel.magnitude;
+		
+		
+		
 		if(useDestination)
 		{
 			//AI를 통한 이동 중, Rotation 설정
@@ -35,10 +42,10 @@ public class NavMeshMover : Mover
 	//테스트
 	private void Update()
 	{
-		if (Input.GetMouseButtonDown(0))
-		{
-			SetDestination(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-		}
+		// if (Input.GetMouseButtonDown(0))
+		// {
+		// 	SetDestination(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+		// }
 	}
 
 	//외부에서 목적지 설정할 때 사용
