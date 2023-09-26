@@ -25,6 +25,8 @@ public class ShurikenShooter : MonoBehaviour
 	private float currentCharge = 0;
 
 	private LineRenderer lineRenderer;
+	
+	[SerializeField] private CatridgeUIManager catridgeUIManager;
 
 	#endregion
 
@@ -137,6 +139,9 @@ public class ShurikenShooter : MonoBehaviour
 		
 		//특대형 수리검
 		instSrk.transform.localScale *= 1f + stats.shurikenScale;
+		
+		//수리검 UI 연동
+		catridgeUIManager.ChangeCurrentKunai();
 
 		inst.speed = stats.shurikenSpeed * CurrentChargeAmount;
 		foreach (var a in stats.shurikenAttributes)
@@ -151,5 +156,12 @@ public class ShurikenShooter : MonoBehaviour
 	public void AddCurrentCartridge(int _amount)
 	{
 		currentCartridge += _amount;
+		//수리검 UI 연동
+		catridgeUIManager.ChangeCurrentKunai();
+	}
+
+	public int GetcurrentCartridge()
+	{
+		return currentCartridge;
 	}
 }

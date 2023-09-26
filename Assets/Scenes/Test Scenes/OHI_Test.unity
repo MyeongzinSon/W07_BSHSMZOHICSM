@@ -1678,6 +1678,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 268700112459832159, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
+      propertyPath: catridgeUIManager
+      value: 
+      objectReference: {fileID: 1700835936}
     - target: {fileID: 2161613079036950407, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
       propertyPath: m_Size.x
       value: 0.4
