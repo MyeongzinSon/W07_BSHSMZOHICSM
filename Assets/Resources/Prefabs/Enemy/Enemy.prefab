@@ -133,7 +133,7 @@ MonoBehaviour:
   shurikenPrefab: {fileID: 3743431136012034996, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
   damageLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 2048
   shootRadius: 0.5
   launchAngle: 45
 --- !u!114 &2436633567722104382
