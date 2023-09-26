@@ -34,13 +34,15 @@ public class CatridgeUIManager : MonoBehaviour
         }
     }
 
-    public void ChangeCurrentKunai(int remainNum)
+    public void ChangeCurrentKunai()
     {
         for (int i = 2; i < transform.childCount; i++)
         {
             Destroy(transform.GetChild(i).gameObject);
         }
         GameObject kunaiPrefab = (GameObject)Resources.Load("Prefabs/UI/KunaiImage");
+        
+        int remainNum = player.GetComponent<ShurikenShooter>().GetcurrentCartridge();
         for (int i = 0; i < remainNum; i++)
         {
             GameObject kunai = Instantiate(kunaiPrefab, transform);
