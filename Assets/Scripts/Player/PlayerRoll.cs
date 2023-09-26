@@ -100,5 +100,11 @@ public class PlayerRoll : MonoBehaviour
 
         rollCurrentFrequency--;
     }
+    
+    public void SetVariables(float _speed, float _cooltime)
+    {
+        rollDistance = _speed;
+        rollCoolTime = _cooltime;
+    }
 
 }

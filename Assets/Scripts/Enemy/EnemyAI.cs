@@ -33,6 +33,8 @@ public abstract class EnemyAI
         minProperDistance = _data.minProperDistance;
         maxProperDistance = _data.maxProperDistance;
         attackDistanceOffset = _data.attackDistanceOffset;
+
+        roll.SetVariables(rollSpeed, rollCooldown);
     }
     public abstract void OnUpdate();
     public abstract bool UpdateOnFollowTarget();

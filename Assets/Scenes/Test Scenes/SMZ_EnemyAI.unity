@@ -1800,6 +1800,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2436633567722104373, guid: 3d474e24e286ace4782cee9e11a10017, type: 3}
+      propertyPath: aiData
+      value: 
+      objectReference: {fileID: 11400000, guid: 535e3a4ad4ef3ba46981594de28a9472, type: 2}
     - target: {fileID: 2436633567722104381, guid: 3d474e24e286ace4782cee9e11a10017, type: 3}
       propertyPath: m_Name
       value: Enemy

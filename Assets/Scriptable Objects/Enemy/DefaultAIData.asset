@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: DefaultAIData
   m_EditorClassIdentifier: 
   useRoll: 1
-  rollSpeed: 0
-  rollCooldown: 0
-  minProperDistance: 0
-  maxProperDistance: 0
-  attackDistanceOffset: 0
+  rollSpeed: 15
+  rollCooldown: 2
+  minProperDistance: 10
+  maxProperDistance: 15
+  attackDistanceOffset: 10
