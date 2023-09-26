@@ -2829,10 +2829,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 160422249963966379, guid: 5ad360a1b0d6f4441b1164591d287b40, type: 3}
-      propertyPath: isBattleStart
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ad360a1b0d6f4441b1164591d287b40, type: 3}
 --- !u!1001 &714050682
@@ -2924,7 +2920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8169345205901483362, guid: d819aa929806fb644b39614af1966b85, type: 3}
       propertyPath: m_Lens.OrthographicSize
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8169345205901483389, guid: d819aa929806fb644b39614af1966b85, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3126,10 +3122,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1438214692, guid: 65b746dec7f52874ea4dbdbf13893144, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1700835936, guid: 65b746dec7f52874ea4dbdbf13893144, type: 3}
       propertyPath: player
       value: 
