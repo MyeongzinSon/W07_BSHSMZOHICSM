@@ -796,7 +796,7 @@ MonoBehaviour:
         m_MethodName: AddCharacterStats
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: ee59970d95d285548a81dbfb9e77ae05, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: d1381af371395b1408220ed833c919b2, type: 2}
           m_ObjectArgumentAssemblyTypeName: CharacterStatsData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0

@@ -117,7 +117,7 @@ MonoBehaviour:
   enemyBounceTime: 1
   moveDistance: 10
   useGuidedMove: 0
-  maxGuidedAngularSpeed: 1
+  maxGuidedAngularSpeed: 5
   guidedTarget: {fileID: 0}
   explosionPrefab: {fileID: 4663520320846168782, guid: aad20f4c5a862eb48a5656860ce05e42, type: 3}
   useExplosion: 0
