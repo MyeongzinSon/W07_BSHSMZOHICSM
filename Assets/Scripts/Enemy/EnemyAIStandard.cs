@@ -15,20 +15,17 @@ public class EnemyAIStandard : EnemyAI
     {
         attackDiff = main.AttackTarget.position - main.transform.position;
 
+        if (EvaluateTarget()) { }
+        CheckReloading();
+
         // follow current Target
         if (UpdateOnFollowTarget()) return;
+
+        if (UpdateOnMaintainDistance()) return;
 
         // attack Player;
         bool isAttacking = UpdateOnAttack();
         if (isAttacking) return;
-
-
-        if (EvaluateTarget())
-        {
-
-        }
-
-        CheckReloading();
     }
 
     public override bool UpdateOnFollowTarget()
@@ -37,6 +34,10 @@ public class EnemyAIStandard : EnemyAI
         {
             var diff = main.CurrentTarget.position - main.transform.position;
             move.direction = diff;
+            if (roll.CanRoll)
+            {
+                roll.TryRoll();
+            }
             if (diff.magnitude < main.TargetPositionOffset)
             {
                 main.SetTarget(null);
@@ -50,11 +51,11 @@ public class EnemyAIStandard : EnemyAI
         }
         return false;
     }
-
     public override bool UpdateOnAttack()
     {
         if (isReloading) return false;
 
+        move.SetRotationTo(attackDiff.normalized);
         if (IsCharging)
         {
             if (attack.CurrentDistance > attackDiff.magnitude + main.AttackDistanceOffset || attack.CurrentChargeAmount == 1)
@@ -76,6 +77,31 @@ public class EnemyAIStandard : EnemyAI
                 Debug.LogWarning($"AI에서 attack.StartCharge를 성공하지 못함!");
                 return false;
             }
+        }
+        return false;
+    }
+    public virtual bool UpdateOnMaintainDistance()
+    {
+        if (isReloading || IsCharging) return false;
+
+        var distance = attackDiff.magnitude;
+        if (distance < main.MinProperDistance)
+        {
+            move.direction = -attackDiff;
+            if (roll.CanRoll)
+            {
+                roll.TryRoll();
+            }
+            return true;
+        }
+        if (distance > main.MaxProperDistance)
+        {
+            move.direction = attackDiff;
+            if (roll.CanRoll)
+            {
+                roll.TryRoll();
+            }
+            return true;
         }
         return false;
     }
@@ -116,7 +142,7 @@ public class EnemyAIStandard : EnemyAI
     {
         if (list.Count > 0)
         {
-            list.ForEach(item => Debug.Log($"{item.name}, {item.GetInstanceID()}"));
+            //list.ForEach(item => Debug.Log($"{item.name}, {item.GetInstanceID()}"));
             var desiredTarget = list.OrderBy(s => Vector3.Distance(main.transform.position, s.transform.position))
                 .First().transform;
             main.SetTarget(desiredTarget);

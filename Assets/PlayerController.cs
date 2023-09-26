@@ -50,7 +50,8 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 
 	public void OnMove(InputAction.CallbackContext context)
 	{
-		move.OnMove(context);
+		if (GameManager.Instance.isBattleStart)
+			move.OnMove(context);
 	}
 
 	public void OnLook(InputAction.CallbackContext context)
@@ -63,24 +64,33 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 
 	public void OnFire(InputAction.CallbackContext context)
 	{
-		if (context.started)
+		if (GameManager.Instance.isBattleStart)
 		{
-			attack.StartCharge();
-			cameraExpandTimer = 0;
-		}
-		if (context.canceled)
-		{
-			SetAttackDirection();
-			if (attack.EndCharge())
-            {
-				cameraExpandTimer = -1;
-				VCamManager.Instance.Reduce();
+			if (context.started)
+			{
+				if (attack.StartCharge())
+					cameraExpandTimer = 0;
+			}
+			if (context.canceled)
+			{
+				SetAttackDirection();
+				if (attack.EndCharge())
+				{
+					cameraExpandTimer = -1;
+					VCamManager.Instance.Reduce();
+				}
 			}
 		}
 	}
 
 	public void OnRoll(InputAction.CallbackContext context)
 	{
-		roll.OnRoll(context);
+		if (GameManager.Instance.isBattleStart)
+		{
+			roll.OnRoll(context);
+			attack.Cancel();
+			cameraExpandTimer = -1;
+			VCamManager.Instance.Reduce();
+		}
 	}
 }

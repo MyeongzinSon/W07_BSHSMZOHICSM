@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2436633567722104370}
   - component: {fileID: 2436633567722104372}
   - component: {fileID: 6836496222577029403}
+  - component: {fileID: 585245858}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -77,7 +78,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &2436633567722104373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +94,8 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   targetPositionOffset: 0.1
   attackDistanceOffset: 5
+  minProperDistance: 10
+  maxProperDistance: 15
 --- !u!114 &2436633567722104374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,6 +134,7 @@ MonoBehaviour:
     m_Bits: 1
   shootRadius: 0.5
   launchAngle: 45
+  catridgeUIManager: {fileID: 0}
 --- !u!114 &2436633567722104382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +190,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHpBar: {fileID: 0}
   playerStats: {fileID: 2436633567722104382}
+--- !u!114 &585245858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436633567722104381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a390b65abe51db24ebe2220b0b4e79cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollDistance: 15
+  rollCoolTime: 0.5
+  rollingTime: 0.2
+  elapsedTime: 0
+  rollCurrentFrequency: 0
+  rollMaxFrequency: 2
+  isRollingCoroutinePlaying: 0
 --- !u!1 &3778761451411835261
 GameObject:
   m_ObjectHideFlags: 0

@@ -146,8 +146,6 @@ public class Shuriken : MonoBehaviour
                 {
                     SetPickUpState();
                 }
-
-
             }
         }
     }
