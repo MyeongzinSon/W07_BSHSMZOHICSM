@@ -82,5 +82,8 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 	public void OnRoll(InputAction.CallbackContext context)
 	{
 		roll.OnRoll(context);
+		attack.Cancel();
+		cameraExpandTimer = -1;
+		VCamManager.Instance.Reduce();
 	}
 }

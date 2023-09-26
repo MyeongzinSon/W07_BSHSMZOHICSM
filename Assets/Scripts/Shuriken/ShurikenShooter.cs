@@ -153,6 +153,11 @@ public class ShurikenShooter : MonoBehaviour
         }
 	}
 
+	public void Cancel()
+	{
+		currentCharge = 0f;
+	}
+
 	public void AddCurrentCartridge(int _amount)
 	{
 		currentCartridge += _amount;
