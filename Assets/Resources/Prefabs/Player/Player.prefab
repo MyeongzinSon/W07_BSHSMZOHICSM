@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2161613079036950406}
   - component: {fileID: 2161613079036950407}
   - component: {fileID: 1659181503}
+  - component: {fileID: 5200608847638117429}
   m_Layer: 0
   m_Name: Renderer
   m_TagString: Untagged
@@ -100,6 +101,27 @@ MonoBehaviour:
   spriteOutline: {fileID: 1659181503}
   color: {r: 1, g: 1, b: 1, a: 1}
   outlineSize: 1
+--- !u!95 &5200608847638117429
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2161613079036950405}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 14bdf620a37042049bb443e1d991edb9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2161613079788646885
 GameObject:
   m_ObjectHideFlags: 0

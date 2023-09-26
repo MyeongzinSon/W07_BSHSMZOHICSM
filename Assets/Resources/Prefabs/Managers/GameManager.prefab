@@ -59,6 +59,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ee59970d95d285548a81dbfb9e77ae05, type: 2}
   - {fileID: 11400000, guid: 1e4d7506ad5cddc43847e676bab5986b, type: 2}
   - {fileID: 11400000, guid: 96bed05f408782740884121dc7fff7fa, type: 2}
+  upgradedList: []
   canUpgradeIdxList: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c000000
   upgradeIdxCount: 13
   isBattleStart: 0
