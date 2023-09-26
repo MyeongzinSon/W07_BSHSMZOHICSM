@@ -13,10 +13,6 @@ public class EnemyAIStandard : EnemyAI
     Transform escapeTarget;
     bool isReloading = false;
 
-    public override void SetPersonalVariables()
-    {
-
-    }
     public override void OnUpdate()
     {
         attackDiff = main.AttackTarget.position - main.transform.position;
@@ -67,7 +63,7 @@ public class EnemyAIStandard : EnemyAI
         move.SetRotationTo(attackDiff.normalized);
         if (IsCharging)
         {
-            if (attack.CurrentDistance > attackDiff.magnitude + main.AttackDistanceOffset || attack.CurrentChargeAmount == 1)
+            if (attack.CurrentDistance > attackDiff.magnitude + attackDistanceOffset || attack.CurrentChargeAmount == 1)
             {
                 attack.SetDirection(attackDiff.normalized);
                 if (attack.EndCharge()) return true;
@@ -94,13 +90,13 @@ public class EnemyAIStandard : EnemyAI
         if (isReloading || IsCharging) return false;
 
         var distance = attackDiff.magnitude;
-        if (distance < main.MinProperDistance)
+        if (distance < minProperDistance)
         {
             move.SetDirection(-attackDiff);
             TryRoll();
             return true;
         }
-        if (distance > main.MaxProperDistance)
+        if (distance > maxProperDistance)
         {
             move.SetDirection(attackDiff);
             TryRoll();
@@ -177,7 +173,7 @@ public class EnemyAIStandard : EnemyAI
         if (main.CurrentTarget != null) return;
 
         var epsilon = 1.5f;
-        if (attackDiff.magnitude < main.MinProperDistance)
+        if (attackDiff.magnitude < minProperDistance)
         {
             if (Physics2D.Raycast(main.transform.position, move.direction, epsilon, 1 << LayerMask.NameToLayer("Wall")))
             {
@@ -191,7 +187,7 @@ public class EnemyAIStandard : EnemyAI
     }
     bool TryRoll()
     {
-        if (shouldRoll && roll.CanRoll)
+        if (useRoll && roll.CanRoll)
         {
             roll.TryRoll();
             return true;

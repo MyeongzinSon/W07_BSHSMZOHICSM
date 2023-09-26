@@ -11,6 +11,8 @@ public class EnemyController : MonoBehaviour
     EnemyAI ai;
 
     [SerializeField] Transform currentTarget;
+    [Header("AI Data")]
+    [SerializeField] EnemyAIData aiData;
     [Header("Pickable Target")]
     [SerializeField] float targetPositionOffset;
     [Header("Shuriken")]
@@ -24,9 +26,9 @@ public class EnemyController : MonoBehaviour
     public ShurikenShooter Attack => attack;
     public Transform CurrentTarget => currentTarget;
     public float TargetPositionOffset => targetPositionOffset;
-    public float AttackDistanceOffset => attackDistanceOffset;
-    public float MinProperDistance => minProperDistance;
-    public float MaxProperDistance => maxProperDistance;
+    //public float AttackDistanceOffset => attackDistanceOffset;
+    //public float MinProperDistance => minProperDistance;
+    //public float MaxProperDistance => maxProperDistance;
 
     public Transform AttackTarget { get; private set; }
 
@@ -42,6 +44,7 @@ public class EnemyController : MonoBehaviour
 
         ai = new EnemyAIStandard();
         ai.Initialize(this);
+        ai.SetPersonalVariables(aiData);
     }
 
     private void Update()
