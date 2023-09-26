@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DefaultAIData
   m_EditorClassIdentifier: 
   useRoll: 1
+  canDodgeRoll: 0
   rollSpeed: 15
   rollCooldown: 2
   minProperDistance: 10
