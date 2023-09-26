@@ -17,7 +17,7 @@ MonoBehaviour:
   moveSpeed: 0
   attackPower: 0
   chargeSpeed: 0
-  maxCartridgeNum: 0
+  maxCartridgeNum: -1
   maxDistance: 0
   shurikenSpeed: 0
   shurikenNum: 0

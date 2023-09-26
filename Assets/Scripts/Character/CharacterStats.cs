@@ -8,9 +8,9 @@ public class CharacterStats : MonoBehaviour
     [SerializeField] CharacterStatsData initialStats;
 
     //hp
-    public float maxHp { get; private set; }
+    public float maxHp { get { return damageable.maxHp;} private set { damageable.maxHp = value; } }
     //move
-    public float moveSpeed { get; private set; }
+    public float moveSpeed { get { return mover.speed;} private set { mover.speed = value; } }
     //shuriken
     public float attackPower { get; private set; }
     public float chargeSpeed { get; private set; }
@@ -20,10 +20,14 @@ public class CharacterStats : MonoBehaviour
     public float shurikenNum { get; private set; }
     public float shurikenScale { get; private set; }
     public List<ShurikenAttribute> shurikenAttributes { get; private set; }
-    
+
+    private Mover mover;
+    private Damageable damageable;
 
     private void Awake()
     {
+        mover = GetComponent<Mover>();
+        damageable = GetComponent<Damageable>();
         SetCharacterStats(initialStats);
     }
 
@@ -43,6 +47,8 @@ public class CharacterStats : MonoBehaviour
         maxDistance = info.maxDistance;
         shurikenSpeed = info.shurikenSpeed;
         shurikenNum = info.shurikenNum;
+        
+        CheckMinValues();
 
         shurikenAttributes = new();
         shurikenAttributes.AddRange(info.shurikenAttributes);
@@ -57,15 +63,34 @@ public class CharacterStats : MonoBehaviour
         }
 
         maxHp += info.maxHp;
-        moveSpeed += info.moveSpeed;
-        attackPower += info.attackPower;
-        chargeSpeed += info.chargeSpeed;
+        moveSpeed +=  info.moveSpeed;
+        attackPower +=  info.attackPower;
+        chargeSpeed +=  info.chargeSpeed;
         maxCartridgeNum += info.maxCartridgeNum;
-        maxDistance += info.maxDistance;
-        shurikenSpeed += info.shurikenSpeed;
+        maxDistance +=  info.maxDistance;
         shurikenNum += info.shurikenNum;
         shurikenScale += info.shurikenScale;
-
+        
+        //AtkSpeed ==shurikenSpeed == 투척 속도: %로 증가합니다.
+        shurikenSpeed += info.shurikenSpeed*shurikenSpeed*0.01f;
+        
+        CheckMinValues();
+        
         shurikenAttributes.AddRange(info.shurikenAttributes);
+    }
+
+    void CheckMinValues()
+    {
+        //최소값 처리, ex: 발사 속도가 0보다 작으면 안됨
+        maxHp = Mathf.Max(10f,maxHp);
+        moveSpeed =  Mathf.Max(1f, moveSpeed);
+        attackPower =  Mathf.Max(1f, attackPower);
+        chargeSpeed =  Mathf.Max(0.1f, chargeSpeed);
+        maxCartridgeNum = Mathf.Max(1,maxCartridgeNum);
+        maxDistance = Mathf.Max(0.01f, maxDistance);
+        shurikenNum = Mathf.Max(1,shurikenNum);
+        shurikenScale = Mathf.Max(0.01f,shurikenScale);
+        shurikenSpeed = Mathf.Max(1f,shurikenSpeed);
+        
     }
 }

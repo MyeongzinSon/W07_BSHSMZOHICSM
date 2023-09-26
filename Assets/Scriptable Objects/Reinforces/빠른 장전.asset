@@ -16,10 +16,10 @@ MonoBehaviour:
   maxHp: 0
   moveSpeed: 0
   attackPower: 0
-  chargeSpeed: 0.2
+  chargeSpeed: 1
   maxCartridgeNum: 0
   maxDistance: 0
-  shurikenSpeed: 0
+  shurikenSpeed: 1
   shurikenNum: 0
   shurikenScale: 0
   shurikenAttributes: 

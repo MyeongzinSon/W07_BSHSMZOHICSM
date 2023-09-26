@@ -46,8 +46,8 @@ MonoBehaviour:
     showOnlyOnce: 0
     meritSpecies: none
     meritAmount: 0
-    demeritSpecies: none
-    demeritAmount: 0
+    demeritSpecies: ChargeSpeed
+    demeritAmount: 1
   - id: 0
     name: "\uBD80\uBA54\uB791!"
     description: "\uC218\uB9AC\uAC80\uC774 \uD50C\uB808\uC774\uC5B4\uC5D0\uAC8C \uB2E4\uC2DC

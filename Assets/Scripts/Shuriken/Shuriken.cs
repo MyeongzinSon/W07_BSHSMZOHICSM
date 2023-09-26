@@ -145,6 +145,7 @@ public class Shuriken : MonoBehaviour
                 else
                 {
                     SetPickUpState();
+                    Debug.Log($"{owner.name} 거리 이동완료, ");
                 }
             }
         }
@@ -394,6 +395,9 @@ public class Shuriken : MonoBehaviour
         attributes.ForEach(a => { Debug.Log($"Attribute : {a}"); });
         state = ShurikenState.PICKUP;
         mover.CanMove = false;
+        
+        //PICKUP모드로 들어가면, 더이상 데미지를 줄 수 없다.
+        canDamage = false;
 
 
         //쉐도우라면, PICKUP으로 들어가면서 사라진다.
