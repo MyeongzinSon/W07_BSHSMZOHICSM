@@ -56,7 +56,7 @@ public class ShurikenShooter : MonoBehaviour
 		if (IsCharging)
 		{
 			Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
-			Debug.Log(dir);
+			//Debug.Log(dir);
 			lineRenderer?.SetPosition(1, transform.position + (Vector3)(dir * CurrentDistance));
 
 			currentCharge += Time.deltaTime * stats.chargeSpeed;

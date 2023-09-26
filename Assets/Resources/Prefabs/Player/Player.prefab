@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 2147070924}
   - component: {fileID: 1330590512}
   - component: {fileID: 1330590521}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +311,6 @@ MonoBehaviour:
     m_Bits: 1024
   shootRadius: 0.5
   launchAngle: 45
-  catridgeUIManager: {fileID: 0}
 --- !u!114 &6115772962267442698
 MonoBehaviour:
   m_ObjectHideFlags: 0
