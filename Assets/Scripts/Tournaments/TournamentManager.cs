@@ -127,20 +127,13 @@ public class TournamentManager : MonoBehaviour
         GenerateNinjaSpecies();
         PortraitIconContainerPrefab = Resources.Load<GameObject>("Prefabs/Tournaments/PortraitIconContainer");
         CreateIconContainers();
-        Init();
+        InitDrawLines();
     }
     
     public void Init()
     {
+        transform.GetChild(2).gameObject.SetActive(false);
         StartTournament();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartTournament();
-        }
     }
 
     private void StartTournament()
@@ -196,6 +189,7 @@ public class TournamentManager : MonoBehaviour
             StartCoroutine(MoveOffScreen(objToRemove, 1.0f));
         }
         objectsToRemove.Clear();
+        transform.GetChild(2).gameObject.SetActive(true);
 
         GoToNextRound();
     }
