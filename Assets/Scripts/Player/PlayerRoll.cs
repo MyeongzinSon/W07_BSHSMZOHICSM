@@ -62,6 +62,8 @@ public class PlayerRoll : MonoBehaviour
 
     private IEnumerator RollCoroutine()
     {
+        Animator animator = transform.GetChild(0).GetComponent<Animator>();
+        animator.SetTrigger("Stretch");
         Vector2 direction = playerMove.direction;
         direction = direction.normalized;
         rollCurrentFrequency++;
