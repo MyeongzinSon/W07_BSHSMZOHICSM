@@ -115,7 +115,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   shootRadius: 0.5
-  launchAngle: 45
+  launchAngle: 30
+  slowOnCharge: 0.3
   catridgeUIManager: {fileID: 0}
 --- !u!114 &2436633567722104382
 MonoBehaviour:
