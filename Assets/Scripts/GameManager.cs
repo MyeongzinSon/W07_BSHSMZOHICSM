@@ -164,11 +164,7 @@ public class GameManager : MonoBehaviour
         Invoke("GoToUpgrade", 3.5f);
 
         stageCount += 1;
-        if (stageCount > maxStage)
-        {
-            //게임 종료
-            SceneManager.LoadScene("End");
-        }
+        
     }
     
     
