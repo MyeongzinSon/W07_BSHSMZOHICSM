@@ -19,7 +19,7 @@ MonoBehaviour:
       \uD53C\uACA9 \uBC94\uC704\uAC00 \uB298\uC5B4\uB0A9\uB2C8\uB2E4."
     showOnlyOnce: 0
     meritSpecies: AtkDmg
-    meritAmount: 2
+    meritAmount: 5
     demeritSpecies: none
     demeritAmount: 0
   - id: 0
@@ -72,7 +72,7 @@ MonoBehaviour:
     meritSpecies: none
     meritAmount: 0
     demeritSpecies: AtkDmg
-    demeritAmount: 2
+    demeritAmount: 5
   - id: 0
     name: "\uC720\uB3C4\uC218\uB9AC\uAC80"
     description: "\uC218\uB9AC\uAC80\uC5D0 \uC720\uB3C4 \uAE30\uB2A5\uC774 \uC0DD\uAE41\uB2C8\uB2E4."
@@ -80,12 +80,10 @@ MonoBehaviour:
     meritSpecies: none
     meritAmount: 0
     demeritSpecies: Hp
-    demeritAmount: 10
+    demeritAmount: 20
   - id: 0
-    name: "\uBCBD\uAFCD"
-    description: "\uC218\uB9AC\uAC80\uC744 \uB358\uC838\uC11C \uC801\uC744 \uBCBD\uC5D0
-      \uBD80\uB52A\uD788\uAC8C \uB9CC\uB4E4\uBA74 \uAE30\uC808\uD558\uACE0, \uCD94\uAC00
-      \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    name: "\uB109\uBC31!"
+    description: "\uC218\uB9AC\uAC80\uC774 \uC801\uC744 \uBC00\uCE69\uB2C8\uB2E4."
     showOnlyOnce: 1
     meritSpecies: none
     meritAmount: 0
