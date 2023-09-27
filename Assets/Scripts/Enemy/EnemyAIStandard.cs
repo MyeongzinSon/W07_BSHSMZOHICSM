@@ -18,9 +18,20 @@ public class EnemyAIStandard : EnemyAI
     {
         attackDiff = main.AttackTarget.position - main.transform.position;
 
-        if (EvaluateTarget()) { }
         CheckReloading();
+        if (!CheckIsPlayerInSight())
+        {
+            main.SetTarget(main.AttackTarget);
+        }
+        else
+        {
+            if (main.CurrentTarget != null && main.CurrentTarget.Equals(main.AttackTarget))
+            {
+                main.SetTarget(null);
+            }
+        }
         CheckEscape();
+        if (EvaluateTarget()) { }
 
         if (UpdateOnDodge())
         {
@@ -194,6 +205,13 @@ public class EnemyAIStandard : EnemyAI
                 main.SetTarget(escapeTarget);
             }
         }
+    }
+    bool CheckIsPlayerInSight()
+    {
+        var hit = Physics2D.Raycast(main.transform.position, attackDiff.normalized, float.MaxValue, (1 << LayerMask.NameToLayer("Player")) | (1 << LayerMask.NameToLayer("Wall")));
+        var result = hit.transform.Equals(main.AttackTarget);
+        //Debug.Log($"CheckIsPlayerInSight = {hit.transform.name}");
+        return result;
     }
     bool UpdateOnDodge()
     {
