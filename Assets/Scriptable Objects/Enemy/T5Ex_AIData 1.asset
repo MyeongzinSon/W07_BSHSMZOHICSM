@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0310fb754aa04a94a912ff96b96aa47f, type: 3}
+  m_Name: T5Ex_AIData 1
+  m_EditorClassIdentifier: 
+  useRoll: 1
+  rollSpeed: 20
+  rollCooldown: 1
+  minProperDistance: 10
+  maxProperDistance: 15
+  attackDistanceOffset: 10

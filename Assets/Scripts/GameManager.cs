@@ -53,6 +53,11 @@ public class GameManager : MonoBehaviour
     public bool isBattleStart = false;
     public float magneticFieldAppearCount = 30f;
     private static GameManager _instance;
+    
+    //몇번째 스테이지인가
+    public int stageCount = 1;
+    public int maxStage = 6;
+    
     public static GameManager Instance
     {
         get
@@ -157,6 +162,13 @@ public class GameManager : MonoBehaviour
         GameObject gameClearText = GameObject.Find("IngameCanvas").transform.Find("ClearText").gameObject;
         gameClearText.SetActive(true);
         Invoke("GoToUpgrade", 3.5f);
+
+        stageCount += 1;
+        if (stageCount > maxStage)
+        {
+            //게임 종료
+            SceneManager.LoadScene("End");
+        }
     }
     
     
