@@ -12,6 +12,8 @@ public class Damageable : MonoBehaviour
 	public float damageCoef = 1f;
 	public bool canHeal = true;
 
+	private bool isKilled = false;
+
 	private void Start()
 	{ 
 		if (TryGetComponent<CharacterStats>(out var stats))
@@ -59,6 +61,9 @@ public class Damageable : MonoBehaviour
 
 	public void Kill()
 	{
+		if (isKilled)
+			return;
+		isKilled = true;
 		Debug.Log("Killed: "+name);
         transform.GetComponent<PlayerHpHandler>().playerHpBar.GetComponent<Image>().fillAmount = 0;
 		gameObject.SetActive(false);
