@@ -6,6 +6,7 @@ using UnityEngine;
 public class ShurikenParticleCreator : MonoBehaviour
 {
     private GameObject shurikenParticlePrefab;
+    public ShurikenShooter shurikenShooter;
     public Color[] colors = new Color[]
     {
         new Color(0.0f, 0.0f, 1.0f),      // 파란색
@@ -43,11 +44,18 @@ public class ShurikenParticleCreator : MonoBehaviour
     {
         if (shurikenParticlePrefab != null)
         {
-            for (int i = 0; i < GameManager.Instance.upgradedListInt.Count; i++)
+            if (GetComponent<Shuriken>().owner.tag == "Player")
             {
-                GameObject particle = Instantiate(shurikenParticlePrefab, transform.position, Quaternion.identity);
-                var idx = GameManager.Instance.upgradedListInt[i];
-                particle.GetComponent<ShurikenParticleManager>().col = colors[idx];
+                for (int i = 0; i < GameManager.Instance.upgradedListInt.Count; i++)
+                {
+                    GameObject particle = Instantiate(shurikenParticlePrefab, transform.position, Quaternion.identity);
+                    var idx = GameManager.Instance.upgradedListInt[i];
+                    particle.GetComponent<ShurikenParticleManager>().col = colors[idx];
+                }
+            }
+            else
+            {
+                
             }
         }
     }

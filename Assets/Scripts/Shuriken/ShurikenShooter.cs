@@ -171,6 +171,9 @@ public class ShurikenShooter : MonoBehaviour
 				instSrk.AddAttribute(a);
             }
         }
+		
+		// 파티클 정보 전달
+		instSrk.GetComponent<ShurikenParticleCreator>().shurikenShooter = this;
 	}
 
 	public void Cancel()

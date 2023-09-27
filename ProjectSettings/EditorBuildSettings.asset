@@ -15,15 +15,15 @@ EditorBuildSettings:
     path: Assets/Scenes/MainScene.unity
     guid: a564eb34e76dcba47936916d72b4304d
   - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 8e4f63b9059c71c41b929fcf5542520b
+  - enabled: 1
     path: Assets/Scenes/HaeinTournamentScene.unity
     guid: 72b8acf371a416341af5cb429fb45626
   - enabled: 1
     path: Assets/Scenes/MainStage_Enemy.unity
     guid: 7f466cd80cd360545b2ac0a65c6f3bc4
-  - enabled: 1
-    path: Assets/Scenes/MainFightStage.unity
-    guid: a373f23787318224493f6af32e98393b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test Scenes/OHI_EnemyAI.unity
     guid: 9a5237a939eb58047b3522b81716463d
   m_configObjects: {}
