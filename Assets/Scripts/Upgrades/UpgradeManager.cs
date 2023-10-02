@@ -10,6 +10,7 @@ public class UpgradeManager : MonoBehaviour
 {
     public ShurikenDB shurikenDB;
     public Boolean[] isSelected = new Boolean[3];
+    public Boolean[] canSelect = new Boolean[3];
     public List<int> selectedIdxes; //뜬 3개의 인덱스 리스트
     public GameObject player;
     private Transform[] UpgradeIconContainers = new Transform[3];
@@ -109,7 +110,7 @@ public class UpgradeManager : MonoBehaviour
     private List<int> GetRandomUpgradeNumbers() //3개의 랜덤한 숫자를 뽑음
     {
         bool isSpecial = false;
-        if (GameManager.Instance.stageCount == 2 || GameManager.Instance.stageCount == 5)
+        if (GameManager.Instance.stageCount == 1 || GameManager.Instance.stageCount == 4) //특일일특일일
         {
             isSpecial = true;
         }
