@@ -98,7 +98,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6459394101203437735}
   - component: {fileID: 6459394101203437752}
-  - component: {fileID: 6459394101203437753}
   - component: {fileID: 6459394101203437734}
   m_Layer: 0
   m_Name: ExpandedVCam
@@ -161,18 +160,6 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 6459394100581412835}
---- !u!114 &6459394101203437753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6459394101203437754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e04599fdc987c4d4689b230fac5f3428, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6459394101203437734
 MonoBehaviour:
   m_ObjectHideFlags: 0
