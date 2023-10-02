@@ -20,35 +20,40 @@ public class GameManager : MonoBehaviour
     }
     public enum UpgradeIdx
     {
-        LARGE = 0,
+        HPUP = 0,
+        DAMAGEUP,
         BACKPACK,
-        BOUNCE,
+        DASHNUM,
+        RANGEUP,
         RELOAD,
+        BOUNCE,
         BOOMERANG,
         EXPLOSION,
         THROWNUM,
-        WALLSTUN,
-        SLOW,
-        VAMPIRE,
-        WEAKNESS,
-        FIRE
+        GUIDANCE,
+        SPIDERWEB,
+        CURSE
     }
+
+    public int specialStartIdx = 6;
     
     public List<UpgradeIdx> canUpgradeIdxList = new List<UpgradeIdx>
     {
-        UpgradeIdx.LARGE,
+        UpgradeIdx.HPUP,
+        UpgradeIdx.DAMAGEUP,
         UpgradeIdx.BACKPACK,
-        UpgradeIdx.BOUNCE,
+        UpgradeIdx.DASHNUM,
+        UpgradeIdx.RANGEUP,
         UpgradeIdx.RELOAD,
+        UpgradeIdx.BOUNCE,
         UpgradeIdx.BOOMERANG,
         UpgradeIdx.EXPLOSION,
         UpgradeIdx.THROWNUM,
-        UpgradeIdx.WALLSTUN,
-        UpgradeIdx.SLOW,
-        UpgradeIdx.VAMPIRE,
-        UpgradeIdx.WEAKNESS,
-        UpgradeIdx.FIRE
+        UpgradeIdx.GUIDANCE,
+        UpgradeIdx.SPIDERWEB,
+        UpgradeIdx.CURSE
     };
+    
     public int upgradeIdxCount = System.Enum.GetValues(typeof(UpgradeIdx)).Length;
     public bool isBattleStart = false;
     public float magneticFieldAppearCount = 30f;
