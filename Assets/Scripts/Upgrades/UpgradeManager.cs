@@ -60,6 +60,9 @@ public class UpgradeManager : MonoBehaviour
                     case "Range":
                         meritText = "최대사거리";
                         break;
+                    case "DashNum":
+                        meritText = "대시 횟수";
+                        break;
                 }
                 UpgradeIconContainers[i].GetChild(6).GetComponent<TextMeshProUGUI>().text = meritText;
                 UpgradeIconContainers[i].GetChild(7).GetComponent<TextMeshProUGUI>().text = meritAmount;
@@ -93,6 +96,9 @@ public class UpgradeManager : MonoBehaviour
                         break;
                     case "Range":
                         meritText = "최대사거리";
+                        break;
+                    case "DashNum":
+                        meritText = "대시 횟수";
                         break;
                 }
                 UpgradeIconContainers[i].GetChild(8).GetComponent<TextMeshProUGUI>().text = meritText;

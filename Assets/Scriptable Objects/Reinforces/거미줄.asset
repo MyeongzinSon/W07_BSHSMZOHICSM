@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: "\uAC70\uBBF8\uC904"
   m_EditorClassIdentifier: 
   forDefaultState: 0
-  maxHp: -20
+  maxHp: 0
   moveSpeed: 0
   attackPower: 0
   chargeSpeed: 0
   maxCartridgeNum: 0
   maxDistance: 0
-  shurikenSpeed: 20
+  shurikenSpeed: -20
   shurikenNum: 0
   shurikenScale: 0
   shurikenAttributes: 07000000
