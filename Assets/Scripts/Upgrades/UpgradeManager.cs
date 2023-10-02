@@ -54,6 +54,9 @@ public class UpgradeManager : MonoBehaviour
                     case "Hp":
                         meritText = "체력";
                         break;
+                    case "ChargeSpeed":
+                        meritText = "장전속도";
+                        break;
                 }
                 UpgradeIconContainers[i].GetChild(6).GetComponent<TextMeshProUGUI>().text = meritText;
                 UpgradeIconContainers[i].GetChild(7).GetComponent<TextMeshProUGUI>().text = meritAmount;
@@ -81,6 +84,9 @@ public class UpgradeManager : MonoBehaviour
                         break;
                     case "Hp":
                         meritText = "체력";
+                        break;
+                    case "ChargeSpeed":
+                        meritText = "장전속도";
                         break;
                 }
                 UpgradeIconContainers[i].GetChild(8).GetComponent<TextMeshProUGUI>().text = meritText;

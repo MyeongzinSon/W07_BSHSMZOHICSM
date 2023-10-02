@@ -51,6 +51,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2611023797887767893, guid: c541d32eabf026044bf236a07a72ad68, type: 3}
+      propertyPath: healAmount
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 2611023797887767897, guid: c541d32eabf026044bf236a07a72ad68, type: 3}
       propertyPath: m_Name
       value: EnforcePack
