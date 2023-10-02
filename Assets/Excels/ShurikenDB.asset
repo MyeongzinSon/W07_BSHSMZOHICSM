@@ -14,12 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Shurikens:
   - id: 0
-    name: "\uD2B9\uB300\uD615 \uC218\uB9AC\uAC80"
-    description: "\uC218\uB9AC\uAC80\uC774 \uB354\uC6B1 \uCEE4\uC9D1\uB2C8\uB2E4.
-      \uD53C\uACA9 \uBC94\uC704\uAC00 \uB298\uC5B4\uB0A9\uB2C8\uB2E4."
+    name: "\uCCB4\uB825 \uC99D\uAC00"
+    description: "\uCCB4\uB825\uC774 20 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    showOnlyOnce: 0
+    meritSpecies: Hp
+    meritAmount: 20
+    demeritSpecies: none
+    demeritAmount: 0
+  - id: 0
+    name: "\uACF5\uACA9\uB825 \uC99D\uAC00"
+    description: "\uACF5\uACA9\uB825\uC774 15 \uC99D\uAC00\uD569\uB2C8\uB2E4."
     showOnlyOnce: 0
     meritSpecies: AtkDmg
-    meritAmount: 2
+    meritAmount: 15
     demeritSpecies: none
     demeritAmount: 0
   - id: 0
@@ -32,6 +39,30 @@ MonoBehaviour:
     demeritSpecies: MoveSpeed
     demeritAmount: 1
   - id: 0
+    name: "\uB300\uC2DC \uC218 \uC99D\uAC00"
+    description: "\uCD5C\uB300 \uB300\uC2DC \uC218\uAC00 1 \uB298\uC5B4\uB0A9\uB2C8\uB2E4."
+    showOnlyOnce: 0
+    meritSpecies: DashNum
+    meritAmount: 1
+    demeritSpecies: none
+    demeritAmount: 0
+  - id: 0
+    name: "\uCD5C\uB300\uC0AC\uAC70\uB9AC \uC99D\uAC00"
+    description: "\uCD5C\uB300 \uC0AC\uAC70\uB9AC\uAC00 3 \uB298\uC5B4\uB0A9\uB2C8\uB2E4."
+    showOnlyOnce: 0
+    meritSpecies: Range
+    meritAmount: 3
+    demeritSpecies: none
+    demeritAmount: 0
+  - id: 0
+    name: "\uCC28\uC9D5\uC18D\uB3C4 \uAC10\uC18C"
+    description: "\uC218\uB9AC\uAC80\uC758 \uCC28\uC9D5 \uC18D\uB3C4\uAC00 50% \uAC10\uC18C\uD569\uB2C8\uB2E4."
+    showOnlyOnce: 0
+    meritSpecies: none
+    meritAmount: 0
+    demeritSpecies: ChargeSpeed
+    demeritAmount: 1
+  - id: 0
     name: "\uBC14\uC6B4\uC2A4!"
     description: "\uC218\uB9AC\uAC80\uC774 \uBCBD\uC5D0 \uBD80\uB52A\uD788\uBA74
       \uD295\uAE41\uB2C8\uB2E4."
@@ -40,14 +71,6 @@ MonoBehaviour:
     meritAmount: 0
     demeritSpecies: none
     demeritAmount: 0
-  - id: 0
-    name: "\uBE60\uB978 \uC7A5\uC804"
-    description: "\uC218\uB9AC\uAC80\uC758 \uCC28\uC9D5 \uC18D\uB3C4\uAC00 \uAC10\uC18C\uD569\uB2C8\uB2E4."
-    showOnlyOnce: 0
-    meritSpecies: none
-    meritAmount: 0
-    demeritSpecies: ChargeSpeed
-    demeritAmount: 1
   - id: 0
     name: "\uBD80\uBA54\uB791!"
     description: "\uC218\uB9AC\uAC80\uC774 \uD50C\uB808\uC774\uC5B4\uC5D0\uAC8C \uB2E4\uC2DC
@@ -72,7 +95,7 @@ MonoBehaviour:
     meritSpecies: none
     meritAmount: 0
     demeritSpecies: AtkDmg
-    demeritAmount: 2
+    demeritAmount: 5
   - id: 0
     name: "\uC720\uB3C4\uC218\uB9AC\uAC80"
     description: "\uC218\uB9AC\uAC80\uC5D0 \uC720\uB3C4 \uAE30\uB2A5\uC774 \uC0DD\uAE41\uB2C8\uB2E4."
@@ -80,17 +103,7 @@ MonoBehaviour:
     meritSpecies: none
     meritAmount: 0
     demeritSpecies: Hp
-    demeritAmount: 10
-  - id: 0
-    name: "\uBCBD\uAFCD"
-    description: "\uC218\uB9AC\uAC80\uC744 \uB358\uC838\uC11C \uC801\uC744 \uBCBD\uC5D0
-      \uBD80\uB52A\uD788\uAC8C \uB9CC\uB4E4\uBA74 \uAE30\uC808\uD558\uACE0, \uCD94\uAC00
-      \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
-    showOnlyOnce: 1
-    meritSpecies: none
-    meritAmount: 0
-    demeritSpecies: none
-    demeritAmount: 0
+    demeritAmount: 20
   - id: 0
     name: "\uAC70\uBBF8\uC904"
     description: "\uC218\uB9AC\uAC80\uC5D0 \uC2AC\uB85C\uC6B0 \uAE30\uB2A5\uC774
@@ -101,28 +114,12 @@ MonoBehaviour:
     demeritSpecies: AtkSpeed
     demeritAmount: 10
   - id: 0
-    name: "\uBC40\uD30C\uC774\uC5B4"
-    description: "\uC218\uB9AC\uAC80\uC5D0 \uD761\uD608 \uAE30\uB2A5\uC774 \uC0DD\uAE41\uB2C8\uB2E4."
+    name: "\uC800\uC8FC"
+    description: "\uC790\uC2E0\uC758 \uCCB4\uB825\uC774 40\uC73C\uB85C \uACE0\uC815\uB429\uB2C8\uB2E4.
+      \uC218\uB9AC\uAC80\uC744 \uC0C1\uB300\uC5D0\uAC8C 3\uBC88 \uB9DE\uCD94\uBA74
+      \uC0C1\uB300\uAC00 \uC989\uC0AC\uD569\uB2C8\uB2E4."
     showOnlyOnce: 1
-    meritSpecies: AtkSpeed
-    meritAmount: 20
-    demeritSpecies: Hp
-    demeritAmount: 20
-  - id: 0
-    name: "\uC57D\uC810 \uACF5\uACA9"
-    description: "\uC218\uB9AC\uAC80\uC5D0 \uB9DE\uC740 \uC801\uC740 3\uCD08\uB3D9\uC548
-      \uBC1B\uB294 \uD53C\uD574\uB7C9\uC774 \uC99D\uAC00\uD569\uB2C8\uB2E4."
-    showOnlyOnce: 1
-    meritSpecies: Hp
-    meritAmount: 10
-    demeritSpecies: none
-    demeritAmount: 0
-  - id: 0
-    name: "\uBD88\uD0C0\uB294 \uC218\uB9AC\uAC80"
-    description: "\uC218\uB9AC\uAC80\uC5D0 \uCE58\uC720\uB7C9 \uAC10\uC18C \uD6A8\uACFC\uAC00
-      \uC0DD\uAE41\uB2C8\uB2E4."
-    showOnlyOnce: 1
-    meritSpecies: AtkDmg
-    meritAmount: 1
+    meritSpecies: none
+    meritAmount: 0
     demeritSpecies: none
     demeritAmount: 0

@@ -70,7 +70,7 @@ public class StatusEffectController : MonoBehaviour
 		switch (_data.status)
 		{
 			case StatusEffect.KNOCKBACK:
-				_data.duration = _data.value;
+				_data.duration = _data.duration;
 				break;
 			case StatusEffect.SLOW:
 				_data.value = mover.speed*_data.value;

@@ -341,6 +341,9 @@ public class Shuriken : MonoBehaviour
         ex.destroyTimer = explosionTime;
         ex.damageLayer = damageLayer;
         ex.damage = damage*explosionDamageRatio;
+        
+        GameObject particle = Resources.Load("Prefabs/Particles/ExplosionParticle") as GameObject;
+        Instantiate(particle, transform.position, Quaternion.identity);
     }
 
 

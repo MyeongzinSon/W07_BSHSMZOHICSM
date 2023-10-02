@@ -37,12 +37,12 @@ public class TournamentManager : MonoBehaviour
         NinjaSpecies.Add("주인공");
         for (int i = 1; i < totalSpecies; i++)
         {
-            if (i == 1) NinjaSpecies.Add("신중한");
-            else if (i == 3) NinjaSpecies.Add("재빠른");
-            else if (i == 6) NinjaSpecies.Add("공격적인");
-            else if (i == 12) NinjaSpecies.Add("신중한");
-            else if (i == 24) NinjaSpecies.Add("재빠른");
-            else if (i == 48) NinjaSpecies.Add("공격적인");
+            if (i == 1) NinjaSpecies.Add("멍청한");
+            else if (i == 3) NinjaSpecies.Add("폭발적인");
+            else if (i == 6) NinjaSpecies.Add("묵직한");
+            else if (i == 12) NinjaSpecies.Add("충동적인");
+            else if (i == 24) NinjaSpecies.Add("날렵한");
+            else if (i == 48) NinjaSpecies.Add("숙련된");
             else
             {
                 int rndIdx = UnityEngine.Random.Range(0, 3);
@@ -196,8 +196,16 @@ public class TournamentManager : MonoBehaviour
 
             for (int j = 0; j < (int)repeatNum / 2; j++)
             {
-                winners[j].GetChild(0).GetComponent<Image>().color = Color.green;
-                losers[j].GetChild(0).GetComponent<Image>().color = Color.red;
+                if (j == 0 && i == 0)
+                {
+                    winners[j].GetChild(0).GetComponent<Image>().color = Color.yellow;
+                    losers[j].GetChild(0).GetComponent<Image>().color = Color.red;
+                }
+                else
+                {
+                    winners[j].GetChild(0).GetComponent<Image>().color = Color.green;
+                    losers[j].GetChild(0).GetComponent<Image>().color = Color.red;
+                }
                 objectsToRemove.Add(losers[j]);
             }
 
@@ -270,7 +278,7 @@ public class TournamentManager : MonoBehaviour
         
         Destroy(targetTransform.gameObject);
 
-        if (objectCount == 2)
+        if (objectCount == 1)
         {
             GameManager.Instance.clearPanel.SetActive(true);
         }
@@ -289,13 +297,13 @@ public class TournamentManager : MonoBehaviour
 
     private void GoToNextRound()
     {
-        foreach (Transform obj in remainingTourmantObjects)
+        for (int i = 1; i < remainingTourmantObjects.Count; i++)
         {
+            Transform obj = remainingTourmantObjects[i];
             Image image = obj.GetChild(0).GetComponent<Image>();
             Color lightGray = new Color(0.75f, 0.75f, 0.75f, 1.0f);
             image.color = lightGray;
         }
-        
         float moveDistance = 200f;
         float screenWidth = Screen.width;
         foreach (Transform obj in remainingTourmantObjects)
@@ -354,6 +362,10 @@ public class TournamentManager : MonoBehaviour
         iconContainer.transform.SetParent(parent.transform, false);
         remainingTourmantObjects.Add(iconContainer.transform);
         int rndIdx = UnityEngine.Random.Range(1, 7);
+        if (idx == 0)
+        {
+            iconContainer.transform.GetChild(0).GetComponent<Image>().color = Color.yellow;
+        }
         iconContainer.transform.GetChild(2).GetComponent<Image>().sprite = Resources.Load<Sprite>("Prefabs/Sprites/TournamentPortraits/Ninja" + rndIdx);
         iconContainer.transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = NinjaSpecies[idx];
         iconContainer.transform.GetChild(4).GetComponent<TextMeshProUGUI>().text = NinjaNames[idx];

@@ -54,6 +54,12 @@ public class UpgradeManager : MonoBehaviour
                     case "Hp":
                         meritText = "체력";
                         break;
+                    case "ChargeSpeed":
+                        meritText = "장전속도";
+                        break;
+                    case "Range":
+                        meritText = "최대사거리";
+                        break;
                 }
                 UpgradeIconContainers[i].GetChild(6).GetComponent<TextMeshProUGUI>().text = meritText;
                 UpgradeIconContainers[i].GetChild(7).GetComponent<TextMeshProUGUI>().text = meritAmount;
@@ -82,6 +88,12 @@ public class UpgradeManager : MonoBehaviour
                     case "Hp":
                         meritText = "체력";
                         break;
+                    case "ChargeSpeed":
+                        meritText = "장전속도";
+                        break;
+                    case "Range":
+                        meritText = "최대사거리";
+                        break;
                 }
                 UpgradeIconContainers[i].GetChild(8).GetComponent<TextMeshProUGUI>().text = meritText;
                 UpgradeIconContainers[i].GetChild(9).GetComponent<TextMeshProUGUI>().text = meritAmount;
@@ -90,13 +102,18 @@ public class UpgradeManager : MonoBehaviour
     }
     private List<int> GetRandomUpgradeNumbers() //3개의 랜덤한 숫자를 뽑음
     {
+        bool isSpecial = false;
+        if (GameManager.Instance.stageCount == 2 || GameManager.Instance.stageCount == 5)
+        {
+            isSpecial = true;
+        }
         List<int> selectedNumbers = new List<int>();
         for (int i = 0; i < 3; i++)
         {
-            int randomNum = getCanUpgradeRandomNumber();
+            int randomNum = getCanUpgradeRandomNumber(isSpecial);
             while(randomNum == -1 || CheckRedundancy(selectedNumbers, randomNum))
             {
-                randomNum = getCanUpgradeRandomNumber();
+                randomNum = getCanUpgradeRandomNumber(isSpecial);
             }
             selectedNumbers.Add(randomNum);
         }
@@ -104,9 +121,18 @@ public class UpgradeManager : MonoBehaviour
         return selectedNumbers;
     }
 
-    private int getCanUpgradeRandomNumber() //ShowOnlyOnce를 고려해서 Int 변수 하나 뽑음
+    private int getCanUpgradeRandomNumber(bool isSpecial = false) //ShowOnlyOnce를 고려해서 Int 변수 하나 뽑음
     {
-        int randomInt = Random.Range(0, GameManager.Instance.upgradeIdxCount + 1);
+        int randomInt;
+        if (isSpecial) //특수
+        {
+            randomInt = Random.Range(GameManager.Instance.specialStartIdx, GameManager.Instance.upgradeIdxCount + 1);
+        }
+        else //일반
+        {
+            randomInt = Random.Range(0, GameManager.Instance.specialStartIdx);
+        }
+        
         if (GameManager.Instance.canUpgradeIdxList.Contains((GameManager.UpgradeIdx) randomInt))
         {
             return randomInt;

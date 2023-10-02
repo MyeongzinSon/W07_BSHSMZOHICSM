@@ -39,7 +39,10 @@ public class Damageable : MonoBehaviour
 		hp -= damage * damageCoef;
 		GameObject hitParticle = (GameObject)Resources.Load("Prefabs/Particles/BloodParticle");
 		Instantiate(hitParticle, transform.position, Quaternion.identity);
-		transform.GetChild(0).GetComponent<FlashingObject>().MakeObjectFlashSprite(transform.GetChild(0).GetComponent<SpriteRenderer>(), .03f, .1f);
+		if (gameObject.activeSelf)
+		{
+			transform.GetChild(0).GetComponent<FlashingObject>().MakeObjectFlashSprite(transform.GetChild(0).GetComponent<SpriteRenderer>(), .03f, .1f);
+		}
 		if (hp <= 0)
 		{
 			hp = 0f;

@@ -15,7 +15,7 @@ MonoBehaviour:
   forDefaultState: 1
   maxHp: 100
   moveSpeed: 5
-  attackPower: 10
+  attackPower: 15
   chargeSpeed: 1
   maxCartridgeNum: 3
   maxDistance: 20
