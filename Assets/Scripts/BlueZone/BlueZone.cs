@@ -32,7 +32,7 @@ public class BlueZone : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Damageable>(out Damageable obj))
+        if (collision.TryGetComponent<Damageable>(out Damageable obj) && obj.gameObject.activeSelf)
         {
             objectOut.Add(obj);  
         }
