@@ -35,7 +35,7 @@ public class Damageable : MonoBehaviour
 
 	public void Hit(float damage)
 	{
-		Debug.Log("Damaged: "+name);
+		Debug.Log("Damaged: "+name + " " + Time.time);
 		hp -= damage * damageCoef;
 		GameObject hitParticle = (GameObject)Resources.Load("Prefabs/Particles/BloodParticle");
 		Instantiate(hitParticle, transform.position, Quaternion.identity);
