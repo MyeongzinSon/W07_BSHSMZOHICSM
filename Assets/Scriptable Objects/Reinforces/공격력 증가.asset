@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9be4da6ba60ca3646b8bb410bc4c5bf1, type: 3}
-  m_Name: "\uBD88\uD0C0\uB294 \uC218\uB9AC\uAC80"
+  m_Name: "\uACF5\uACA9\uB825 \uC99D\uAC00"
   m_EditorClassIdentifier: 
   forDefaultState: 0
   maxHp: 0
   moveSpeed: 0
-  attackPower: 1
+  attackPower: 15
   chargeSpeed: 0
   maxCartridgeNum: 0
   maxDistance: 0

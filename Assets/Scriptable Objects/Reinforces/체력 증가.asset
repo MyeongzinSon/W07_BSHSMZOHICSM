@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9be4da6ba60ca3646b8bb410bc4c5bf1, type: 3}
-  m_Name: "\uBC40\uD30C\uC774\uC5B4"
+  m_Name: "\uCCB4\uB825 \uC99D\uAC00"
   m_EditorClassIdentifier: 
   forDefaultState: 0
-  maxHp: -20
+  maxHp: 20
   moveSpeed: 0
-  attackPower: 0
+  attackPower: 2
   chargeSpeed: 0
   maxCartridgeNum: 0
   maxDistance: 0
   shurikenSpeed: 0
   shurikenNum: 0
   shurikenScale: 0
-  shurikenAttributes: 09000000
+  shurikenAttributes: 

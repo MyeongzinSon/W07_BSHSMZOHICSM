@@ -383,10 +383,6 @@ PrefabInstance:
       propertyPath: clearPanel
       value: 
       objectReference: {fileID: 1018675893}
-    - target: {fileID: 160422249963966379, guid: 5ad360a1b0d6f4441b1164591d287b40, type: 3}
-      propertyPath: TournamentCanvas
-      value: 
-      objectReference: {fileID: 2403143410111406521}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ad360a1b0d6f4441b1164591d287b40, type: 3}
 --- !u!1001 &2403143410111406520
