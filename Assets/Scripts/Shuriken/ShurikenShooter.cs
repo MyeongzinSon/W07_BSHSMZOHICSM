@@ -31,6 +31,7 @@ public class ShurikenShooter : MonoBehaviour
 
 	private LineRenderer lineRenderer;
 	
+	[SerializeField] private GameObject chargeParticle;
 	[SerializeField] private CatridgeUIManager catridgeUIManager;
 
 	#endregion
@@ -69,10 +70,12 @@ public class ShurikenShooter : MonoBehaviour
 
 			currentCharge += Time.deltaTime * stats.chargeSpeed;
 			currentCharge = Mathf.Min(currentCharge, MaxCharge);
+			if (chargeParticle != null) chargeParticle.SetActive(true);
 		}
 		else
 		{
 			lineRenderer?.SetPosition(1, transform.position);
+			if (chargeParticle != null) chargeParticle.SetActive(false);
 		}
 	}
 	public bool StartCharge()
