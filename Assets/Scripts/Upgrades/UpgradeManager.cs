@@ -11,6 +11,7 @@ public class UpgradeManager : MonoBehaviour
     public ShurikenDB shurikenDB;
     public Boolean[] isSelected = new Boolean[3];
     public Boolean[] canSelect = new Boolean[3];
+    public int remainingSelectCount = 2;
     public List<int> selectedIdxes; //뜬 3개의 인덱스 리스트
     public GameObject player;
     private Transform[] UpgradeIconContainers = new Transform[3];
@@ -139,14 +140,28 @@ public class UpgradeManager : MonoBehaviour
         {
             randomInt = Random.Range(0, GameManager.Instance.specialStartIdx);
         }
-        
-        if (GameManager.Instance.canUpgradeIdxList.Contains((GameManager.UpgradeIdx) randomInt))
+
+        if (remainingSelectCount == 2)
         {
-            return randomInt;
+            if (GameManager.Instance.canUpgradeIdxListPlayer1.Contains((GameManager.UpgradeIdx) randomInt))
+            {
+                return randomInt;
+            }
+            else
+            {
+                return -1;
+            }
         }
         else
         {
-            return -1;
+            if (GameManager.Instance.canUpgradeIdxListPlayer2.Contains((GameManager.UpgradeIdx) randomInt))
+            {
+                return randomInt;
+            }
+            else
+            {
+                return -1;
+            }
         }
     }
     
@@ -167,37 +182,67 @@ public class UpgradeManager : MonoBehaviour
             isSelected[i] = false;
         }
     }
+    
+    public void ResetSelectAll()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            canSelect[i] = true;
+            remainingSelectCount = 2;
+        }
+    }
 
     public void SelectConfirmHandler()
     {
         int selectedIdx = -1;
+        int curIdx = -1;
         for (int i = 0; i < selectedIdxes.Count; i++)
         {
             if (isSelected[i])
             {
                 selectedIdx = selectedIdxes[i];
-                if (shurikenDB.Shurikens[selectedIdxes[i]].showOnlyOnce > 0) // 한번만 나와야 하는 경우
+                curIdx = i;
+            }
+        }
+
+        if (selectedIdx == -1)
+        {
+            return;
+        }
+        else
+        {
+            if (shurikenDB.Shurikens[selectedIdxes[curIdx]].showOnlyOnce > 0) // 한번만 나와야 하는 경우
+            {
+                if (remainingSelectCount == 1)
                 {
-                    GameManager.Instance.canUpgradeIdxList.Remove((GameManager.UpgradeIdx) selectedIdxes[i]);
+                    GameManager.Instance.canUpgradeIdxListPlayer1.Remove((GameManager.UpgradeIdx) selectedIdxes[curIdx]);
+                    CharacterStatsData data = GameManager.Instance.characterStatsDataList[selectedIdx];
+                    GameManager.Instance.upgradedListPlayer1.Add(data);
+                    GameManager.Instance.upgradedListIntPlayer1.Add(selectedIdx);
+                }
+                else
+                {
+                    GameManager.Instance.canUpgradeIdxListPlayer2.Remove((GameManager.UpgradeIdx) selectedIdxes[curIdx]);
+                    CharacterStatsData data = GameManager.Instance.characterStatsDataList[selectedIdx];
+                    GameManager.Instance.upgradedListPlayer2.Add(data);
+                    GameManager.Instance.upgradedListIntPlayer2.Add(selectedIdx);
                 }
             }
         }
+
+        remainingSelectCount--;
         ResetSelect();
-        
-        //업그레이드 실제 연동
-        if (selectedIdx != -1)
+
+        if (remainingSelectCount <= 0)
         {
-            CharacterStatsData data = GameManager.Instance.characterStatsDataList[selectedIdx];
-            GameManager.Instance.upgradedList.Add(data);
-            GameManager.Instance.upgradedListInt.Add(selectedIdx);
+            GameManager.Instance.ExitState(GameManager.GameState.Upgrade);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            GameManager.Instance.EnterState(GameManager.GameState.Tournament);
+            TournamentManager.Instance.gameObject.SetActive(true);
+            TournamentManager.Instance.Init();
+            gameObject.SetActive(false);
+
         }
-        
-        GameManager.Instance.ExitState(GameManager.GameState.Upgrade);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-        GameManager.Instance.EnterState(GameManager.GameState.Tournament);
-        TournamentManager.Instance.gameObject.SetActive(true);
-        TournamentManager.Instance.Init();
-        gameObject.SetActive(false);
         
     }
 }

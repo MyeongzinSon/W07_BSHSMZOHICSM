@@ -8,8 +8,10 @@ public class GameManager : MonoBehaviour
 {
     public GameState gameState;
     public List<CharacterStatsData> characterStatsDataList = new List<CharacterStatsData>();
-    public List<CharacterStatsData> upgradedList = new List<CharacterStatsData>();
-    public List<int> upgradedListInt = new List<int>();
+    public List<CharacterStatsData> upgradedListPlayer1 = new List<CharacterStatsData>();
+    public List<int> upgradedListIntPlayer1 = new List<int>();
+    public List<CharacterStatsData> upgradedListPlayer2 = new List<CharacterStatsData>();
+    public List<int> upgradedListIntPlayer2 = new List<int>();
     public GameObject clearPanel;
     public enum GameState
     {
@@ -38,7 +40,24 @@ public class GameManager : MonoBehaviour
 
     public int specialStartIdx = 6;
     
-    public List<UpgradeIdx> canUpgradeIdxList = new List<UpgradeIdx>
+    public List<UpgradeIdx> canUpgradeIdxListPlayer1 = new List<UpgradeIdx>
+    {
+        UpgradeIdx.HPUP,
+        UpgradeIdx.DAMAGEUP,
+        UpgradeIdx.BACKPACK,
+        UpgradeIdx.DASHNUM,
+        UpgradeIdx.RANGEUP,
+        UpgradeIdx.RELOAD,
+        UpgradeIdx.BOUNCE,
+        UpgradeIdx.BOOMERANG,
+        UpgradeIdx.EXPLOSION,
+        UpgradeIdx.THROWNUM,
+        UpgradeIdx.GUIDANCE,
+        UpgradeIdx.SPIDERWEB,
+        UpgradeIdx.CURSE
+    };
+    
+    public List<UpgradeIdx> canUpgradeIdxListPlayer2 = new List<UpgradeIdx>
     {
         UpgradeIdx.HPUP,
         UpgradeIdx.DAMAGEUP,
