@@ -70,16 +70,18 @@ public class Damageable : MonoBehaviour
 		Debug.Log("Killed: "+name);
         transform.GetComponent<PlayerHpHandler>().playerHpBar.GetComponent<Image>().fillAmount = 0;
 		gameObject.SetActive(false);
-        //플레이어가 죽었으면 게임오버
-        if (gameObject.tag == "Player")
+        if (gameObject.tag == "Player1") //플레이어1 승리
         {
+	        /*
 	        Debug.Log("Game Over");
 	        GameObject gameOverText = GameObject.Find("IngameCanvas").transform.Find("GameOverPanel").gameObject;
 	        gameOverText.SetActive(true);
+	        */
+	        GameManager.Instance.StageClear(1);
         }
-        else //적이 죽었으면 스테이지 클리어
+        else //플레이어2 승리
         {
-	        GameManager.Instance.StageClear();
+	        GameManager.Instance.StageClear(2);
         }
 	}
 	

@@ -1543,11 +1543,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2542188011916759609, guid: 198eb79cd66d5214f9bea22ad8d996cd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2542188012328571676, guid: 198eb79cd66d5214f9bea22ad8d996cd, type: 3}
       propertyPath: m_Name
-      value: GameOverPanel
+      value: GameEndPanel
       objectReference: {fileID: 0}
     - target: {fileID: 2542188012328571676, guid: 198eb79cd66d5214f9bea22ad8d996cd, type: 3}
       propertyPath: m_IsActive

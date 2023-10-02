@@ -44,18 +44,23 @@ public class ShurikenParticleCreator : MonoBehaviour
     {
         if (shurikenParticlePrefab != null)
         {
-            if (GetComponent<Shuriken>().owner.tag == "Player")
+            if (GetComponent<Shuriken>().owner.tag == "Player1")
             {
-                for (int i = 0; i < GameManager.Instance.upgradedListInt.Count; i++)
+                for (int i = 0; i < GameManager.Instance.upgradedListIntPlayer1.Count; i++)
                 {
                     GameObject particle = Instantiate(shurikenParticlePrefab, transform.position, Quaternion.identity);
-                    var idx = GameManager.Instance.upgradedListInt[i];
+                    var idx = GameManager.Instance.upgradedListIntPlayer1[i];
                     particle.GetComponent<ShurikenParticleManager>().col = colors[idx];
                 }
             }
             else
             {
-                
+                for (int i = 0; i < GameManager.Instance.upgradedListIntPlayer2.Count; i++)
+                {
+                    GameObject particle = Instantiate(shurikenParticlePrefab, transform.position, Quaternion.identity);
+                    var idx = GameManager.Instance.upgradedListIntPlayer2[i];
+                    particle.GetComponent<ShurikenParticleManager>().col = colors[idx];
+                }
             }
         }
     }
