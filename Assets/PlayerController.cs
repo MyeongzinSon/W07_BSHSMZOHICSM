@@ -37,7 +37,8 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 			cameraExpandTimer += Time.deltaTime;
 			if (cameraExpandTimer >= cameraExpandDelay)
 			{
-				VCamManager.Instance.Expand();
+				// set PlayerNum
+				VCamManager.Instance.Expand(0);
 			}
 		}
 	}
