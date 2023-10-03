@@ -31,7 +31,15 @@ public class PlayerRoll : MonoBehaviour
         TryGetComponent(out playerMove);
         TryGetComponent(out playerRigidbody);
     }
-
+    private void Start()
+    {
+        if (TryGetComponent<CharacterStats>(out var stats))
+        {
+            rollDistance = stats.rollDistance;
+            rollCoolTime = stats.rollCooldown;
+            rollMaxFrequency = stats.maxRollNum;
+        }
+    }
     public void OnRoll(InputAction.CallbackContext _context)
     {
         if (_context.performed)

@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class ShurikenShooter : MonoBehaviour
 {
-	const float MaxCharge = 1;
-
 	public Mover shurikenPrefab;
 	public LayerMask damageLayer;
 
@@ -23,6 +21,7 @@ public class ShurikenShooter : MonoBehaviour
 	private Mover mover;
 	private Vector2 direction;
 	private CharacterStats stats;
+	private float maxCharge = 1;
 	private int maxCartridge;
 	private int currentCartridge;
 	private int shurikenCount;
@@ -39,7 +38,7 @@ public class ShurikenShooter : MonoBehaviour
 	public bool CanShoot => currentCartridge > 0;
 	public bool IsCharging => currentCharge > 0;
 	public bool IsCartridgeFull => currentCartridge == maxCartridge;
-	public float CurrentChargeAmount => currentCharge / MaxCharge;
+	public float CurrentChargeAmount => currentCharge / maxCharge;
 	public float CurrentDistance => stats.maxDistance * CurrentChargeAmount;
 
 	private void Start()
@@ -49,6 +48,7 @@ public class ShurikenShooter : MonoBehaviour
 			Debug.LogError($"ShurikenShooter : 해당 캐릭터에서 CharacterStats 컴포넌트를 찾을 수 없음! (Instance ID : {this.GetInstanceID()})");
         }
 		mover = GetComponent<Mover>();
+		maxCharge = stats.maxChargeAmount;
 		maxCartridge = stats.maxCartridgeNum;
 		currentCartridge = maxCartridge;
 		shurikenCount = 0;
@@ -68,7 +68,7 @@ public class ShurikenShooter : MonoBehaviour
 			//Debug.Log(dir);
 
 			currentCharge += Time.deltaTime * stats.chargeSpeed;
-			currentCharge = Mathf.Min(currentCharge, MaxCharge);
+			currentCharge = Mathf.Min(currentCharge, maxCharge);
 			if (chargeParticle != null) chargeParticle.SetActive(true);
 		}
 		else

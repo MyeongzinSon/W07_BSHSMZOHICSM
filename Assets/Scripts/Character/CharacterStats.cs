@@ -11,9 +11,13 @@ public class CharacterStats : MonoBehaviour
     public float maxHp { get { return damageable.maxHp;} private set { damageable.maxHp = value; } }
     //move
     public float moveSpeed { get { return mover.speed;} private set { mover.speed = value; } }
+    public float rollDistance { get; private set; }
+    public float rollCooldown { get; private set; }
+    public int maxRollNum { get; private set; }
     //shuriken
     public float attackPower { get; private set; }
     public float chargeSpeed { get; private set; }
+    public float maxChargeAmount { get; private set; }
     public int maxCartridgeNum { get; private set; }
     public float maxDistance { get; private set; }
     public float shurikenSpeed { get; private set; }
@@ -43,8 +47,12 @@ public class CharacterStats : MonoBehaviour
 
         maxHp = info.maxHp;
         moveSpeed = info.moveSpeed;
+        rollDistance = info.rollDistance;
+        rollCooldown = info.rollCooldown;
+        maxRollNum = info.maxRollNum;
         attackPower = info.attackPower;
         chargeSpeed = info.chargeSpeed;
+        maxChargeAmount = info.maxChargeAmount;
         maxCartridgeNum = info.maxCartridgeNum;
         maxDistance = info.maxDistance;
         shurikenSpeed = info.shurikenSpeed;
@@ -66,6 +74,9 @@ public class CharacterStats : MonoBehaviour
 
         maxHp += info.maxHp;
         moveSpeed +=  info.moveSpeed;
+        rollDistance += info.rollDistance;
+        rollCooldown += info.rollCooldown;
+        maxRollNum += info.maxRollNum;
         attackPower +=  info.attackPower;
         chargeSpeed +=  info.chargeSpeed;
         maxCartridgeNum += info.maxCartridgeNum;
@@ -88,6 +99,9 @@ public class CharacterStats : MonoBehaviour
         maxHp = Mathf.Max(10f,maxHp);
         moveSpeed =  Mathf.Max(1f, moveSpeed);
         attackPower =  Mathf.Max(1f, attackPower);
+        rollDistance = Mathf.Max(1f, rollDistance);
+        rollCooldown = Mathf.Max(0f, rollCooldown);
+        maxRollNum = Mathf.Max(1, maxRollNum);
         chargeSpeed =  Mathf.Max(0.1f, chargeSpeed);
         maxCartridgeNum = Mathf.Max(1,maxCartridgeNum);
         maxDistance = Mathf.Max(0.01f, maxDistance);
