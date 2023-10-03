@@ -33,7 +33,7 @@ public class ShurikenShooter : MonoBehaviour
 	private float currentCharge = 0;
 	private float rawSlowNum = 0;
 
-	private LineRenderer lineRenderer;
+	private ShurikenIndicator shurikenIndicator;
 	
 	[SerializeField] private GameObject chargeParticle;
 	[SerializeField] private CatridgeUIManager catridgeUIManager;
@@ -58,23 +58,23 @@ public class ShurikenShooter : MonoBehaviour
 		currentCartridge = maxCartridge;
 		shurikenCount = 0;
 
-		TryGetComponent(out lineRenderer);
+		shurikenIndicator = transform.GetComponentInChildren<ShurikenIndicator>();
 	}
 
 	private void Update()
 	{
-		lineRenderer?.SetPosition(0, transform.position);
+		shurikenIndicator?.SetPosition(0, transform.position);
 
 		if (IsCharging)
 		{
 			//Debug.Log(dir);
-			lineRenderer?.SetPosition(1, transform.position + (Vector3)direction * CurrentDistance);
+			shurikenIndicator?.SetPosition(1, transform.position + (Vector3)direction * CurrentDistance);
 			
 			//Debug.Log(dir);
 
 			currentCharge += Time.deltaTime * stats.chargeSpeed;
 			currentCharge = Mathf.Min(currentCharge, maxCharge);
-			if (lineRenderer != null)
+			if (shurikenIndicator != null)
 			{
 				Color newColor;
 				if (currentCharge >= 7)
@@ -118,15 +118,14 @@ public class ShurikenShooter : MonoBehaviour
 					newColor = new Color(0.4078f, 0.9922f, 0.8902f, .3f);
 					chargeDamageMultiplier = 0.25f;
 				}
-				lineRenderer.startColor = newColor;
-				lineRenderer.endColor = newColor;
+				shurikenIndicator.SetColor(newColor);
 			}
 			
 			SwitchChargeParticle();
 		}
 		else
 		{
-			lineRenderer?.SetPosition(1, transform.position);
+			shurikenIndicator?.SetPosition(1, transform.position);
 			if (chargeParticle != null)
 			{
 				chargeParticle.SetActive(false);
