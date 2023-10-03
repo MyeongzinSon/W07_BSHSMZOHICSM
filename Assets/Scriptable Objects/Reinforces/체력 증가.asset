@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: "\uCCB4\uB825 \uC99D\uAC00"
   m_EditorClassIdentifier: 
   forDefaultState: 0
-  maxHp: 20
+  maxHp: 30
   moveSpeed: 0
+  rollDistance: 0
+  rollCooldown: 0
+  maxRollNum: 0
   attackPower: 2
   chargeSpeed: 0
+  maxChargeAmount: 0
   maxCartridgeNum: 0
   maxDistance: 0
   shurikenSpeed: 0
