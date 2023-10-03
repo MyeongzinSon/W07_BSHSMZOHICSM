@@ -21,7 +21,7 @@ public class OnMapActive : MonoBehaviour
         map.SetActive(true);
         blueZone.SetActive(true);
 
-        playerSpawnPosition = map.transform.Find("@PlayerSpawnPoint");
+        playerSpawnPosition = map.transform.Find("@Player1SpawnPoint");
 
         player = FindObjectOfType<PlayerController>().gameObject;
 

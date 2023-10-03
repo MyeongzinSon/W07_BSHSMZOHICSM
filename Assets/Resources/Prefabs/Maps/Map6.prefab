@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3890958458275370839}
   m_Layer: 0
-  m_Name: '@PlayerSpawnPoint'
+  m_Name: '@Player1SpawnPoint'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5919343201825702379}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.4, y: -1.5, z: 0}
+  m_LocalPosition: {x: 2.62, y: 1.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1213,6 +1213,7 @@ Transform:
   - {fileID: 7536807955811834273}
   - {fileID: 6135967441854925385}
   - {fileID: 3890958458275370839}
+  - {fileID: 1428115995302649366}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2938,7 +2939,7 @@ Tilemap:
   - m_RefCount: 165
     m_Data: {fileID: -1248212155, guid: 510693e0f1137a041b58fadd1717fdba, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 3
+  - m_RefCount: 165
     m_Data:
       e00: 1
       e01: 0
@@ -2957,7 +2958,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 3
+  - m_RefCount: 165
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -3125,6 +3126,37 @@ PolygonCollider2D:
       - {x: -9.973888, y: 10.058964}
       - {x: -9.975529, y: -2.9390302}
       - {x: 4.9491205, y: -2.9720814}
+--- !u!1 &8022472012188093375
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1428115995302649366}
+  m_Layer: 0
+  m_Name: '@Player2SpawnPoint'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1428115995302649366
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8022472012188093375}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -7.48, y: 7.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7536807954914834473}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2627865562577692107
 PrefabInstance:
   m_ObjectHideFlags: 0
