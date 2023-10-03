@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5200608847638117429}
   - component: {fileID: 5200608847638117433}
   - component: {fileID: 510946915}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2161613079788646886}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: '@VCamTarget'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,9 +202,9 @@ GameObject:
   - component: {fileID: 1330590521}
   - component: {fileID: 1330590515}
   - component: {fileID: 335330138299867738}
-  m_Layer: 11
+  m_Layer: 12
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -276,6 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bf267b97ca4b46479547f907cb85c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMouseInput: 1
 --- !u!114 &151654153272765878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,6 +364,8 @@ MonoBehaviour:
   shootRadius: 0.5
   launchAngle: 20
   slowOnCharge: 0.3
+  chargeDamageMultiplier: 0.25
+  chargeLevel: 1
   chargeParticle: {fileID: 4277757297554001488}
   catridgeUIManager: {fileID: 0}
 --- !u!114 &6115772962267442698
@@ -502,6 +505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHpBar: {fileID: 0}
+  playerHpText: {fileID: 0}
   playerStats: {fileID: 2161613080536109210}
 --- !u!114 &1330590515
 MonoBehaviour:
@@ -535,6 +539,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2161613080536109214}
     m_Modifications:
+    - target: {fileID: 3102500916287141645, guid: cc203e585b0ea10428afc88ed3769828, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3102500916287141650, guid: cc203e585b0ea10428afc88ed3769828, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7cb2b7854938df84f8d1e2caa2fd256a, type: 2}
     - target: {fileID: 3102500916287141651, guid: cc203e585b0ea10428afc88ed3769828, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 2.08
@@ -542,6 +554,14 @@ PrefabInstance:
     - target: {fileID: 3102500916287141651, guid: cc203e585b0ea10428afc88ed3769828, type: 3}
       propertyPath: InitialModule.startSize.minScalar
       value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 3437688042928410345, guid: cc203e585b0ea10428afc88ed3769828, type: 3}
+      propertyPath: hue
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 3437688042928410345, guid: cc203e585b0ea10428afc88ed3769828, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4141911784361011338, guid: cc203e585b0ea10428afc88ed3769828, type: 3}
       propertyPath: m_RootOrder
@@ -591,13 +611,33 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4639020958568401306, guid: cc203e585b0ea10428afc88ed3769828, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8915e9b96073b1545a9a1fa53e911ff9, type: 2}
+    - target: {fileID: 4639020958568401307, guid: cc203e585b0ea10428afc88ed3769828, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4639020958568401309, guid: cc203e585b0ea10428afc88ed3769828, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 5649337780337528719, guid: cc203e585b0ea10428afc88ed3769828, type: 3}
+      propertyPath: hue
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 5649337780337528719, guid: cc203e585b0ea10428afc88ed3769828, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8958199048641706779, guid: cc203e585b0ea10428afc88ed3769828, type: 3}
       propertyPath: m_Name
       value: ChargeParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8958199048641706779, guid: cc203e585b0ea10428afc88ed3769828, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8958199048641706779, guid: cc203e585b0ea10428afc88ed3769828, type: 3}
       propertyPath: m_IsActive

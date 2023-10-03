@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHpHandler : MonoBehaviour
 {
     public GameObject playerHpBar;
+    public GameObject playerHpText;
     public Damageable playerStats;
 
     private float smoothHp; 
@@ -23,6 +25,7 @@ public class PlayerHpHandler : MonoBehaviour
         if (playerHpBar != null)
         {
             playerHpBar.GetComponent<Image>().fillAmount = smoothHp / playerStats.maxHp;
+            playerHpText.GetComponent<TextMeshProUGUI>().text = playerStats.hp.ToString("F0") + " / " + playerStats.maxHp.ToString("F0");
         }
         //else
         //{
