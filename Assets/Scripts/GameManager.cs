@@ -203,10 +203,10 @@ public class GameManager : MonoBehaviour
             string descriptionText = "";
             switch (stageCount)
             {
-                case 3:
+                case 4:
                     descriptionText = "압도적인 경기력이었습니다! \n실력 차이가 어마어마하네요.";
                     break;
-                case 6:
+                case 7:
                     descriptionText = "정말 치열한 접전이었습니다! \n두 플레이어의 희비가 교차하는 순간입니다.";
                     break;
                 default:

@@ -53,7 +53,6 @@ public class UpgradeManager : MonoBehaviour
                         break;
                     case "Cartridge":
                         meritText = "총 수리검";
-                        meritAmount = shurikenDB.Shurikens[selectedIdxes[i]].meritAmount.ToString() + " (고정)";
                         break;
                     case "MoveSpeed":
                         meritText = "이동속도";
@@ -90,7 +89,6 @@ public class UpgradeManager : MonoBehaviour
                         break;
                     case "Cartridge":
                         meritText = "총 수리검";
-                        meritAmount = shurikenDB.Shurikens[selectedIdxes[i]].meritAmount.ToString() + " (고정)";
                         break;
                     case "MoveSpeed":
                         meritText = "이동속도";
