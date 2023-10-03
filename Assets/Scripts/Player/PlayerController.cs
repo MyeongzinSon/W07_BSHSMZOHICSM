@@ -4,13 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
+public class PlayerController : MonoBehaviour
 {
 	const float cameraExpandDelay  = 0.5f;
 
 	[SerializeField] int playerIndex;
-
-	private NewInputActions inputs;
+	
 	private PlayerMove move;
 	private PlayerRoll roll;
 	private ShurikenShooter attack;
@@ -22,18 +21,13 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 	bool IsKeyboardInput => assignedDevice is Keyboard;
 
 	void Awake()
-	{
-		inputs = new();
-		inputs.Player.SetCallbacks(this);
-		inputs.Enable();
-		
+	{		
 		TryGetComponent(out move);
 		TryGetComponent(out roll);
 		TryGetComponent(out attack);
 	}
 	private void OnDisable()
 	{
-		inputs.Disable();
 	}
 	void Update()
     {
@@ -61,6 +55,7 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 
     bool CheckMyDevice(InputAction.CallbackContext context)
     {
+		Debug.Log($"아 여기는 무조건 찍히지 : {context.control.device.name}");
 		if(IsKeyboardInput
 			&& context.control.device is Mouse)
         {
@@ -72,7 +67,12 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 
 	public void OnMove(InputAction.CallbackContext context)
 	{
-		if (!CheckMyDevice(context)) return;
+		Debug.Log("뭐가 하나가 연결이 안 된 것 같은데");
+		if (!CheckMyDevice(context))
+		{
+			Debug.Log($"여기서 이걸 봐야돼 : index={playerIndex}, name={assignedDevice.name}");
+			return; 
+		}
 
 		//Debug.Log($"클릭한 디바이스: {context.control.device.name}");
 		

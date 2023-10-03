@@ -206,7 +206,7 @@ public class ShurikenShooter : MonoBehaviour
 		inst.direction = _dir;
 		inst.SetRotationByDirection();
 
-		Debug.Log($"Shoot : transform.tag = {transform.tag}");
+		//Debug.Log($"Shoot : transform.tag = {transform.tag}");
 		//총알 이미지 변경
 		if (transform.CompareTag("Player1"))
 		{
