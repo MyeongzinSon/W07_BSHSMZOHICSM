@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
         {
             temp += t.name + ",";
         }
-        Debug.Log($"{gameObject.name}.Move : " + temp);
+        //Debug.Log($"{gameObject.name}.Move : " + temp);
 
 
         if (!CheckMyDevice(context))

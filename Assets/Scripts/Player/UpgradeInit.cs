@@ -7,14 +7,25 @@ public class UpgradeInit : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < GameManager.Instance.upgradedListPlayer1.Count; i++)
+        var playerIndex = GetComponent<PlayerController>().playerIndex;
+
+        if (playerIndex == 0)
         {
-            transform.GetComponent<CharacterStats>().AddCharacterStats(GameManager.Instance.upgradedListPlayer1[i]);
+            for (int i = 0; i < GameManager.Instance.upgradedListPlayer1.Count; i++)
+            {
+                transform.GetComponent<CharacterStats>().AddCharacterStats(GameManager.Instance.upgradedListPlayer1[i]);
+            }
         }
-        
-        for (int i = 0; i < GameManager.Instance.upgradedListPlayer2.Count; i++)
+        else if (playerIndex == 1)
         {
-            transform.GetComponent<CharacterStats>().AddCharacterStats(GameManager.Instance.upgradedListPlayer2[i]);
+            for (int i = 0; i < GameManager.Instance.upgradedListPlayer2.Count; i++)
+            {
+                transform.GetComponent<CharacterStats>().AddCharacterStats(GameManager.Instance.upgradedListPlayer2[i]);
+            }
+        }
+        else
+        {
+            Debug.LogError("UpgradeInit.Start() : PlayerIndex가 0 또는 1이 아님!");
         }
     }
 }
