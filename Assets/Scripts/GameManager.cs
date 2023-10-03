@@ -184,6 +184,8 @@ public class GameManager : MonoBehaviour
     
     public void StageClear(int winPlayerNum)
     {
+        if (winPlayerNum == 1) VersusManager.Instance.victoryCountPlayer1++;
+        else VersusManager.Instance.victoryCountPlayer2++;
         if (VersusManager.Instance.victoryCountPlayer1 == 4 || VersusManager.Instance.victoryCountPlayer2 == 4)
         {
             GameObject gameEndPanel = GameObject.Find("GameEndPanel").gameObject;
