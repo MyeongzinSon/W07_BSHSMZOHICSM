@@ -56,7 +56,7 @@ public class ControllerSelector : MonoBehaviour
 			Debug.Log($"Device 0 : {inputDevices[0].name}");
 			Debug.Log($"Device 1 : {inputDevices[1].name}");
 
-			UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+			UnityEngine.SceneManagement.SceneManager.LoadScene("HaeinTournamentScene");
 		}
 	}
 }
