@@ -21,6 +21,20 @@ public class VersusManager : MonoBehaviour
         }
     }
     
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else if (_instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
+    
     [Header("VictoryCount")]
     public int victoryCountPlayer1 = 0;
     public int victoryCountPlayer2 = 0;
