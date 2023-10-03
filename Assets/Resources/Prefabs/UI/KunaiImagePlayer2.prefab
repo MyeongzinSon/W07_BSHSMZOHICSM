@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3760169527469069458}
   - component: {fileID: 293363633447277585}
   m_Layer: 5
-  m_Name: KunaiImage
+  m_Name: KunaiImagePlayer2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5f4fc532d726ade4a875210265431f8c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 614f2165eb50d5d42b981cd2b7c1f95f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

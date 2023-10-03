@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShurikenShooter : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class ShurikenShooter : MonoBehaviour
 	private LineRenderer lineRenderer;
 	
 	[SerializeField] private GameObject chargeParticle;
+	
 	[SerializeField] private CatridgeUIManager catridgeUIManager;
 
 	#endregion
@@ -69,12 +71,15 @@ public class ShurikenShooter : MonoBehaviour
 
 			currentCharge += Time.deltaTime * stats.chargeSpeed;
 			currentCharge = Mathf.Min(currentCharge, MaxCharge);
-			if (chargeParticle != null) chargeParticle.SetActive(true);
+			SwitchChargeParticle();
 		}
 		else
 		{
 			lineRenderer?.SetPosition(1, transform.position);
-			if (chargeParticle != null) chargeParticle.SetActive(false);
+			if (chargeParticle != null)
+			{
+				chargeParticle.SetActive(false);
+			}
 		}
 	}
 	public bool StartCharge()
@@ -150,7 +155,19 @@ public class ShurikenShooter : MonoBehaviour
 		inst.direction = _dir;
 		inst.SetRotationByDirection();
 
-		Debug.Log(inst.speed);
+		//총알 이미지 변경
+		if (transform.CompareTag("Player1"))
+		{
+			Sprite kunaiRed = Resources.Load<Sprite>("Prefabs/Sprites/KunaiRed");
+			shurikenPrefab.GetComponent<SpriteRenderer>().sprite = kunaiRed;
+		}
+		else
+		{
+			Sprite kunaiBlue = Resources.Load<Sprite>("Prefabs/Sprites/KunaiBlue");
+			shurikenPrefab.GetComponent<SpriteRenderer>().sprite = kunaiBlue;
+		}
+		
+		//Debug.Log(inst.speed);
 		//슈리켄 값 받아와서 해당 값에 대한 설정
 		Shuriken instSrk = inst.GetComponent<Shuriken>();
 		instSrk.damageLayer = damageLayer;
@@ -165,7 +182,8 @@ public class ShurikenShooter : MonoBehaviour
 		//플레이어 수리검 UI 연동
 		if (TryGetComponent<PlayerController>(out var _))
         {
-			catridgeUIManager.ChangeCurrentKunai();
+	        int playerNum = transform.CompareTag("Player1") ? 1 : 2;
+			catridgeUIManager.ChangeCurrentKunai(playerNum);
         }
 
 		inst.speed = stats.shurikenSpeed * CurrentChargeAmount;
@@ -192,12 +210,36 @@ public class ShurikenShooter : MonoBehaviour
 		//수리검 UI 연동
 		if (TryGetComponent<PlayerController>(out var _))
 		{
-			catridgeUIManager.ChangeCurrentKunai();
+			int playerNum = transform.CompareTag("Player1") ? 1 : 2;
+			catridgeUIManager.ChangeCurrentKunai(playerNum);
 		}
 	}
 
 	public int GetcurrentCartridge()
 	{
 		return currentCartridge;
+	}
+
+	public void SwitchChargeParticle()
+	{
+		if (chargeParticle != null)
+		{
+			if (transform.tag == "Player1") //플레이어 1
+			{
+				Material chargeMat = (Material)Resources.Load("Prefabs/Particles/ChargeParticleRed");
+				Material sketchMat = (Material)Resources.Load("Prefabs/Particles/SketchParticleRed");
+				chargeParticle.transform.GetChild(0).GetComponent<ParticleSystem>().GetComponent<Renderer>().material = chargeMat;
+				chargeParticle.transform.GetChild(1).GetComponent<ParticleSystem>().GetComponent<Renderer>().material = sketchMat;
+			}
+			else //플레이어 2
+			{
+				Debug.Log("플레이어2");
+				Material chargeMat = (Material)Resources.Load("Prefabs/Particles/ChargeParticleBlue");
+				Material sketchMat = (Material)Resources.Load("Prefabs/Particles/SketchParticleBlue");
+				chargeParticle.transform.GetChild(0).GetComponent<ParticleSystem>().GetComponent<Renderer>().material = chargeMat;
+				chargeParticle.transform.GetChild(1).GetComponent<ParticleSystem>().GetComponent<Renderer>().material = sketchMat;
+			}
+			chargeParticle.SetActive(true);
+		}
 	}
 }
