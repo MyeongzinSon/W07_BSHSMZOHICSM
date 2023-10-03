@@ -6,7 +6,6 @@ public class OnMapActive : MonoBehaviour
 {
     private GameObject blueZone;
     private PlayerController[] players;
-    private GameObject enemy;
     private GameObject map;
 
     private Transform player1SpawnPosition;
