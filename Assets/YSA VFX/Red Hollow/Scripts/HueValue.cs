@@ -50,6 +50,7 @@ public class HueValue: MonoBehaviour
             ParticleSystem.MainModule m = transform.GetComponent<ParticleSystem>().main;
             m.startColor = Hue(color, hue);
         }
+        
     }
 
     Color Hue(Color main, float hue)
