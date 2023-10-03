@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Particle
+  m_Name: ChargeParticleRed
   m_Shader: {fileID: -6465566751694194690, guid: 5024ac33a05514144bc25667947e336a, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []

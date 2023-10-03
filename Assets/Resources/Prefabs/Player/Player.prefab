@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9486882b2c15c2b44bfaf2cc91ea3921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialStats: {fileID: 11400000, guid: ef51ae7319ff6264e9e6d556d20371d4, type: 2}
+  initialStats: {fileID: 11400000, guid: a603566f086b0ff4c95edeaf3d9c53e1, type: 2}
 --- !u!114 &2161613080536109215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,11 +322,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rollDistance: 15
-  rollCoolTime: 0.5
+  rollCoolTime: 1
   rollingTime: 0.2
   elapsedTime: 0
   rollCurrentFrequency: 0
-  rollMaxFrequency: 2
+  rollMaxFrequency: 1
   isRollingCoroutinePlaying: 0
 --- !u!114 &2161613080536109210
 MonoBehaviour:

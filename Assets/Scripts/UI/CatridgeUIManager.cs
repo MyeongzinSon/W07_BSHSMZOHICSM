@@ -24,30 +24,39 @@ public class CatridgeUIManager : MonoBehaviour
         float yy = transform.GetChild(1).GetComponent<RectTransform>().sizeDelta.y;
         transform.GetChild(0).GetComponent<RectTransform>().sizeDelta = new Vector2(xx + 20, yy + 20);
         transform.GetChild(1).GetComponent<RectTransform>().sizeDelta = new Vector2(xx, yy);
-
-        GameObject kunaiPrefab = (GameObject)Resources.Load("Prefabs/UI/KunaiImage");
-        for (int i = 0; i < catridgeNum; i++)
-        {
-            GameObject kunai = Instantiate(kunaiPrefab, transform);
-            kunai.transform.SetParent(transform);
-            kunai.transform.GetComponent<RectTransform>().position = new Vector3(transform.position.x + (offset * 2) * i, transform.position.y, transform.position.z);
-        }
+        int playerNum = player.CompareTag("Player1") ? 1 : 2;
+        ChangeCurrentKunai(playerNum);
     }
 
-    public void ChangeCurrentKunai()
+    public void ChangeCurrentKunai(int playerNum)
     {
         for (int i = 2; i < transform.childCount; i++)
         {
             Destroy(transform.GetChild(i).gameObject);
         }
-        GameObject kunaiPrefab = (GameObject)Resources.Load("Prefabs/UI/KunaiImage");
         
-        int remainNum = player.GetComponent<ShurikenShooter>().GetcurrentCartridge();
-        for (int i = 0; i < remainNum; i++)
+        if (playerNum == 1)
         {
-            GameObject kunai = Instantiate(kunaiPrefab, transform);
-            kunai.transform.SetParent(transform);
-            kunai.transform.GetComponent<RectTransform>().position = new Vector3(transform.position.x + (offset * 2) * i, transform.position.y, transform.position.z);
+            GameObject kunaiPrefab = (GameObject)Resources.Load("Prefabs/UI/KunaiImagePlayer1");
+            int remainNum = player.GetComponent<ShurikenShooter>().GetcurrentCartridge();
+            for (int i = 0; i < remainNum; i++)
+            {
+                GameObject kunai = Instantiate(kunaiPrefab, transform);
+                kunai.transform.SetParent(transform);
+                kunai.transform.GetComponent<RectTransform>().position = new Vector3(transform.position.x + (offset * 2) * i, transform.position.y, transform.position.z);
+            }
         }
+        else
+        {
+            GameObject kunaiPrefab = (GameObject)Resources.Load("Prefabs/UI/KunaiImagePlayer2");
+            int remainNum = player.GetComponent<ShurikenShooter>().GetcurrentCartridge();
+            for (int i = remainNum; i > 0; i--)
+            {
+                GameObject kunai = Instantiate(kunaiPrefab, transform);
+                kunai.transform.SetParent(transform);
+                kunai.transform.GetComponent<RectTransform>().position = new Vector3(transform.position.x + (offset * 2) * i, transform.position.y, transform.position.z);
+            }
+        }
+        
     }
 }

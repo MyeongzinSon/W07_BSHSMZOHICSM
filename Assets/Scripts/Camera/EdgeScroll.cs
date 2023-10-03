@@ -53,7 +53,7 @@ public class EdgeScroll : MonoBehaviour
         {
             cameraMovement.Normalize();
 
-            Vector3 newPosition = followObj.transform.position + ( Camera.main.ScreenToWorldPoint(Input.mousePosition) - followObj.transform.parent.position).normalized * scrollSpeed * Time.deltaTime;
+            Vector3 newPosition = followObj.transform.position + cameraMovement * scrollSpeed * Time.deltaTime;
             newPosition = Vector3.ClampMagnitude(newPosition - followObj.transform.parent.position, maxMovePosition) + followObj.transform.parent.position;
             followObj.transform.position = newPosition;
         }

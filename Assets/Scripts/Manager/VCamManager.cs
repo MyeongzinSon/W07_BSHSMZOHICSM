@@ -9,7 +9,7 @@ public class VCamManager : MonoBehaviour
 
     private TestVCamBlend expandedVirtualCamera;
     private CinemachineVirtualCamera activeVirtualCamera;
-    private CinemachineBrain brain;
+    private List<CinemachineBrain> brains = new List<CinemachineBrain>();
 
     // ΩÃ±€≈Ê ¿ŒΩ∫≈œΩ∫
     private static VCamManager instance;
@@ -35,14 +35,9 @@ public class VCamManager : MonoBehaviour
         }
     }
 
-    private void Awake()
+    public void Expand(int playerNum)
     {
-        brain = FindObjectOfType<CinemachineBrain>();
-    }
-
-    public void Expand()
-    {
-        activeVirtualCamera = brain.ActiveVirtualCamera as CinemachineVirtualCamera;
+        activeVirtualCamera = brains[playerNum].ActiveVirtualCamera as CinemachineVirtualCamera;
         expandedVirtualCamera = activeVirtualCamera.transform.parent.GetComponentInChildren<TestVCamBlend>();
         expandedVirtualCamera?.SetActiveCam(true);
     }
