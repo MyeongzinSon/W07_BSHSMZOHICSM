@@ -162,7 +162,9 @@ public class ShurikenShooter : MonoBehaviour
 		if (_direction != Vector2.zero)
         {
 			direction = _direction.normalized;
-        }
+			var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+			transform.rotation = Quaternion.Euler(0, 0, angle);
+		}
     }
 	bool TryShoot()
     {
