@@ -18,7 +18,7 @@ MonoBehaviour:
   rollDistance: 0
   rollCooldown: 0
   maxRollNum: 0
-  attackPower: 15
+  attackPower: 10
   chargeSpeed: 0
   maxChargeAmount: 0
   maxCartridgeNum: 0

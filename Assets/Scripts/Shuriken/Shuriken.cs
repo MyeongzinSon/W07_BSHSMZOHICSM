@@ -62,6 +62,10 @@ public class Shuriken : MonoBehaviour
     public float boomerangDelay = 5f;
     public float boomerangAccel = 3f;
     private bool isBoomerangReturning = false;
+    
+    [Header("바운스")]
+    public bool isWallBounce = false;
+        
     [Header("수리검 속성")]
     public List<ShurikenAttribute> attributes = new();
 
@@ -250,7 +254,16 @@ public class Shuriken : MonoBehaviour
                     canDamage = false;
                     StartCoroutine(BounceCoroutine(wallBounceTime));
                 }
-                //부메랑 모드
+                else
+                {
+                    if (isWallBounce == false)
+                    {
+                        damage *= 2;
+                        mover.speed *= 1.5f;
+                        isWallBounce = true;
+                    }
+                    GetComponent<SpriteRenderer>().color = Color.yellow;
+                }
                 //벽과 충돌 시, 공격은 유지하면서, 방향만 플레이어쪽으로 향한다.
                 if (useBoomerang)
                 {
