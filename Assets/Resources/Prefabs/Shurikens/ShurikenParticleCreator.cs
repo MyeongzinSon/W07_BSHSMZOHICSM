@@ -23,21 +23,32 @@ public class ShurikenParticleCreator : MonoBehaviour
         new Color(1.0f, 0.270f, 0.0f),    // 주황 빨간색
         new Color(1.0f, 0.0f, 0.0f)       // 빨간색
     };
+
+    private Shuriken shuriken;
+    
     void Start()
     {
         shurikenParticlePrefab = (GameObject)Resources.Load("Prefabs/Particles/ShurikenParticle");
+
+        shuriken = GetComponent<Shuriken>();
+        //InvokeRepeating("SpawnShurikenParticle", 0f, 0.3f);
+        StartCoroutine(IE_Particle());
+    }
+
+
+    IEnumerator IE_Particle()
+    {
+        while (shuriken.state == Shuriken.ShurikenState.ATTACK)
+        {
+            SpawnShurikenParticle();
+            yield return new WaitForSeconds(0.2f);
+        }
+        Debug.Log("수리검 파티클 종료");
+        
     }
 
     private void Update()
     {
-        if (GetComponent<Shuriken>().state == Shuriken.ShurikenState.ATTACK)
-        {
-            InvokeRepeating("SpawnShurikenParticle", 0f, 0.3f);
-        }
-        else
-        {
-            CancelInvoke("SpawnShurikenParticle");
-        }
     }
 
     void SpawnShurikenParticle()
@@ -46,6 +57,7 @@ public class ShurikenParticleCreator : MonoBehaviour
         {
             if (GetComponent<Shuriken>().owner.tag == "Player1")
             {
+                Debug.Log($"내 파티클: {GameManager.Instance.upgradedListIntPlayer1.Count}");
                 for (int i = 0; i < GameManager.Instance.upgradedListIntPlayer1.Count; i++)
                 {
                     GameObject particle = Instantiate(shurikenParticlePrefab, transform.position, Quaternion.identity);
@@ -55,6 +67,7 @@ public class ShurikenParticleCreator : MonoBehaviour
             }
             else
             {
+                Debug.Log($"내 파티클: {GameManager.Instance.upgradedListIntPlayer2.Count}");
                 for (int i = 0; i < GameManager.Instance.upgradedListIntPlayer2.Count; i++)
                 {
                     GameObject particle = Instantiate(shurikenParticlePrefab, transform.position, Quaternion.identity);
