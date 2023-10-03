@@ -84,13 +84,18 @@ public class CharacterStats : MonoBehaviour
         shurikenNum += info.shurikenNum;
         shurikenScale += info.shurikenScale;
         
-        //AtkSpeed ==shurikenSpeed == 투척 속도: %로 증가합니다.
+        //AtkSpeed ==shurikenSpeed== 투척 속도: %로 증가합니다.
         shurikenSpeed += info.shurikenSpeed*shurikenSpeed*0.01f;
         
         CheckMinValues();
         
         shooter.AddCurrentCartridge(info.maxCartridgeNum);
         shurikenAttributes.AddRange(info.shurikenAttributes);
+
+        if (shurikenAttributes.Contains(ShurikenAttribute.Curse))
+        {
+            maxHp = 50;
+        }
     }
 
     void CheckMinValues()
@@ -108,6 +113,5 @@ public class CharacterStats : MonoBehaviour
         shurikenNum = Mathf.Max(1,shurikenNum);
         shurikenScale = Mathf.Max(0.01f,shurikenScale);
         shurikenSpeed = Mathf.Max(1f,shurikenSpeed);
-        
     }
 }

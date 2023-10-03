@@ -15,8 +15,12 @@ MonoBehaviour:
   forDefaultState: 0
   maxHp: 0
   moveSpeed: 0
+  rollDistance: 0
+  rollCooldown: 0
+  maxRollNum: 0
   attackPower: -2
   chargeSpeed: 0
+  maxChargeAmount: 0
   maxCartridgeNum: 0
   maxDistance: 0
   shurikenSpeed: 0
