@@ -163,7 +163,7 @@ public class Shuriken : MonoBehaviour
             AdaptBoomerangReturnMove();
         }
 
-        if (state == ShurikenState.PICKUP && owner.tag == "Player")
+        if (state == ShurikenState.PICKUP && owner.tag == "Player1")
         {
             spriteOutline.UpdateOutline(true);
             return;
