@@ -4,13 +4,15 @@ using Cinemachine;
 
 public class EdgeScroll : MonoBehaviour
 {
-    //나중에 playerManager?에서 값 받아오기
-    public bool isPlayer1 = true;
+    private bool isPlayer1 => controller.playerIndex == 0;
+
+    private PlayerController controller;
 
     private GameObject followObj;
     private float scrollSpeed = 20.0f;
     private float edgeSizePercent = 20.0f;
     private float maxMovePosition = 5f;
+    private Vector2 mousePosition;
 
     private void Awake()
     {
@@ -18,9 +20,18 @@ public class EdgeScroll : MonoBehaviour
         followObj = transform.Find("@VCamTarget").gameObject;
     }
 
+    private void OnEnable()
+    {
+        TryGetComponent(out controller);
+    }
+
+    public void GetMouseInput(Vector2 input)
+    {
+        mousePosition = input;
+    }
+
     private void Update()
     {
-        Vector3 mousePosition = Input.mousePosition;
         Vector3 screenSize = new Vector3(Screen.width, Screen.height, 0f);
 
         bool isCursorAtLeftEdge = mousePosition.x < screenSize.x / 2 * (edgeSizePercent / 100f) + (isPlayer1 ? 0f : screenSize.x / 2);
@@ -41,11 +52,11 @@ public class EdgeScroll : MonoBehaviour
 
         if (isCursorAtTopEdge)
         {
-            cameraMovement += Vector3.down * (screenSize.x / screenSize.y);
+            cameraMovement += Vector3.down;
         }
         else if (isCursorAtBottomEdge)
         {
-            cameraMovement += Vector3.up * (screenSize.x / screenSize.y);
+            cameraMovement += Vector3.up;
         }
 
         // Normalize camera movement vector to maintain consistent speed

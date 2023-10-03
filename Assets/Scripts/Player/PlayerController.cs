@@ -10,11 +10,13 @@ public class PlayerController : MonoBehaviour
 {
     const float cameraExpandDelay = 0.5f;
 
-    [SerializeField] int playerIndex;
+    public int playerIndex;
 
     private PlayerMove move;
     private PlayerRoll roll;
     private ShurikenShooter attack;
+    private EdgeScroll edgeScrollMouse;
+    private EdgeScrollPad edgeScrollPad;
 
     bool isLooking = false;
     float cameraExpandTimer = -1f;
@@ -27,6 +29,8 @@ public class PlayerController : MonoBehaviour
         TryGetComponent(out move);
         TryGetComponent(out roll);
         TryGetComponent(out attack);
+        TryGetComponent(out edgeScrollMouse);
+        TryGetComponent(out edgeScrollPad);
     }
 
     void Start()
@@ -47,10 +51,14 @@ public class PlayerController : MonoBehaviour
                 }
             }
             schemeDevices = new[] {assignedDevice, currentMouse};
+
+            DisableEdgeScrollPad();
         }
         else
         {
             schemeDevices = new[] {assignedDevice};
+
+            DisableEdgeScrollMouse();
         }
 
         if (!playerInput.SwitchCurrentControlScheme(schemeDevices))
@@ -69,9 +77,19 @@ public class PlayerController : MonoBehaviour
             if (cameraExpandTimer >= cameraExpandDelay)
             {
                 // set PlayerNum
-                VCamManager.Instance.Expand(0);
+                VCamManager.Instance.Expand(playerIndex);
             }
         }
+    }
+
+    private void DisableEdgeScrollMouse()
+    {
+        edgeScrollMouse.enabled = false;
+    }
+
+    private void DisableEdgeScrollPad()
+    {
+        edgeScrollPad.enabled = false;
     }
 
     void SetAttackDirectionWithMouse()
@@ -129,6 +147,9 @@ public class PlayerController : MonoBehaviour
         if (!CheckMyDevice(context)) return;
 
         var direction = context.ReadValue<Vector2>();
+
+        edgeScrollPad.GetStickInput(direction);
+
         if (!IsKeyboardInput && direction != Vector2.zero)
         {
             attack.SetDirection(direction);
@@ -148,6 +169,11 @@ public class PlayerController : MonoBehaviour
     public void OnLookOnMouse(InputAction.CallbackContext context)
     {
         if (!CheckMyDevice(context)) return;
+
+        if (edgeScrollMouse.enabled)
+        {
+            edgeScrollMouse.GetMouseInput(context.ReadValue<Vector2>());
+        }
     }
 
     public void OnFire(InputAction.CallbackContext context)

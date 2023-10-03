@@ -5,11 +5,12 @@ using UnityEngine;
 public class OnMapActive : MonoBehaviour
 {
     private GameObject blueZone;
-    private GameObject player;
+    private PlayerController[] players;
     private GameObject enemy;
     private GameObject map;
 
-    private Transform playerSpawnPosition;
+    private Transform player1SpawnPosition;
+    private Transform player2SpawnPosition;
 
     public void Init(GameObject _enemy = null)
     {
@@ -21,12 +22,22 @@ public class OnMapActive : MonoBehaviour
         map.SetActive(true);
         blueZone.SetActive(true);
 
-        playerSpawnPosition = map.transform.Find("@Player1SpawnPoint");
+        player1SpawnPosition = map.transform.Find("@Player1SpawnPoint");
+        player2SpawnPosition = map.transform.Find("@Player2SpawnPoint");
 
-        player = FindObjectOfType<PlayerController>().gameObject;
+        players = FindObjectsOfType<PlayerController>();
 
-        player.transform.position = playerSpawnPosition.position;
-
-
+        foreach (PlayerController playerController in players)
+        {
+            switch (playerController.playerIndex)
+            {
+                case 0:
+                    playerController.gameObject.transform.position = player1SpawnPosition.position;
+                    break;
+                case 1:
+                    playerController.gameObject.transform.position = player2SpawnPosition.position;
+                    break;
+            }
+        }
     }
 }
