@@ -37,6 +37,11 @@ public class Damageable : MonoBehaviour
 	{
 		Debug.Log("Damaged: "+name + " " + Time.time);
 		hp -= damage * damageCoef;
+		
+		GameObject damageTextPrefab = (GameObject)Resources.Load("Prefabs/UI/DamageText");
+		GameObject damageText = Instantiate(damageTextPrefab, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
+		damageText.GetComponent<MoveAndDestroy>()._text = "-" + (damage * damageCoef).ToString("F0");
+		
 		GameObject hitParticle = (GameObject)Resources.Load("Prefabs/Particles/BloodParticle");
 		Instantiate(hitParticle, transform.position, Quaternion.identity);
 		if (gameObject.activeSelf)

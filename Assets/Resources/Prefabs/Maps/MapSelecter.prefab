@@ -44,4 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dffdd06bc623cc41994379335d42783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maps: []
+  maps:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
