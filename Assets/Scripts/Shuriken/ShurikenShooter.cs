@@ -31,6 +31,7 @@ public class ShurikenShooter : MonoBehaviour
 
 	private LineRenderer lineRenderer;
 	
+	[SerializeField] private GameObject chargeParticle;
 	[SerializeField] private CatridgeUIManager catridgeUIManager;
 
 	#endregion
@@ -61,18 +62,19 @@ public class ShurikenShooter : MonoBehaviour
 
 		if (IsCharging)
 		{
-			Vector3 dir = ((Vector2)Camera.main.ScreenToWorldPoint((Vector2)Input.mousePosition) - (Vector2)transform.position).normalized;
 			//Debug.Log(dir);
-			lineRenderer?.SetPosition(1, transform.position + dir * CurrentDistance);
+			lineRenderer?.SetPosition(1, transform.position + (Vector3)direction * CurrentDistance);
 
 			//Debug.Log(dir);
 
 			currentCharge += Time.deltaTime * stats.chargeSpeed;
 			currentCharge = Mathf.Min(currentCharge, MaxCharge);
+			if (chargeParticle != null) chargeParticle.SetActive(true);
 		}
 		else
 		{
 			lineRenderer?.SetPosition(1, transform.position);
+			if (chargeParticle != null) chargeParticle.SetActive(false);
 		}
 	}
 	public bool StartCharge()
@@ -101,7 +103,10 @@ public class ShurikenShooter : MonoBehaviour
     }
 	public void SetDirection(Vector2 _direction)
     {
-		direction = _direction;
+		if (_direction != Vector2.zero)
+        {
+			direction = _direction.normalized;
+        }
     }
 	bool TryShoot()
     {

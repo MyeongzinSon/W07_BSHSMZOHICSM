@@ -112,7 +112,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 461}
-  m_SizeDelta: {x: 400, y: 50}
+  m_SizeDelta: {x: 1000, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6640241272654240986
 CanvasRenderer:
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC5C5\uADF8\uB808\uC774\uB4DC"
+  m_text: "<color=#FF0000>\uD50C\uB808\uC774\uC5B41</color>\uC5C5\uADF8\uB808\uC774\uB4DC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8553214c8c1eaf04da6ca134ac55cd5f, type: 2}
   m_sharedMaterial: {fileID: -7494498155670899968, guid: 8553214c8c1eaf04da6ca134ac55cd5f, type: 2}
@@ -229,7 +229,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6640241272805321600
 RectTransform:
   m_ObjectHideFlags: 0
@@ -466,6 +466,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shurikenDB: {fileID: 11400000, guid: 45ece209a8cf6794a91977af008ff62b, type: 2}
   isSelected: 000000
+  canSelect: 000000
+  remainingSelectCount: 2
   selectedIdxes: 
   player: {fileID: 0}
 --- !u!1 &6640241273431798970

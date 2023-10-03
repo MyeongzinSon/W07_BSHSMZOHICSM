@@ -8,12 +8,17 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 {
 	const float cameraExpandDelay  = 0.5f;
 
+	[SerializeField] bool isMouseInput;
+
 	private NewInputActions inputs;
 	private PlayerMove move;
 	private PlayerRoll roll;
 	private ShurikenShooter attack;
 
+	bool isLooking = false;
 	float cameraExpandTimer = -1f;
+
+	bool IsMouseInput => isMouseInput;
 
 	void Awake()
 	{
@@ -31,7 +36,7 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 	}
 	void Update()
     {
-		SetAttackDirection();
+		SetAttackDirectionWithMouse();
 		if (cameraExpandTimer >= 0)
         {
 			cameraExpandTimer += Time.deltaTime;
@@ -42,10 +47,13 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 		}
 	}
 
-	void SetAttackDirection()
+	void SetAttackDirectionWithMouse()
     {
-		Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
-		attack.SetDirection(dir);
+		if (IsMouseInput)
+		{
+			Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+			attack.SetDirection(dir);
+		}
 	}
 
 	public void OnMove(InputAction.CallbackContext context)
@@ -53,14 +61,35 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 		Debug.Log($"클릭한 디바이스: {context.control.device.name}");
 		
 		if (GameManager.Instance.isBattleStart)
+		{
 			move.OnMove(context);
-	}
+			if (!isLooking)
+            {
+				attack.SetDirection(context.ReadValue<Vector2>());
+            }
+		}
+    }
 
 	public void OnLook(InputAction.CallbackContext context)
 	{
+		var direction = context.ReadValue<Vector2>();
+		if (!IsMouseInput && direction != Vector2.zero)
+		{
+			attack.SetDirection(direction);
+		}
+		if (context.started)
+		{
+			isLooking = true;
+			Debug.Log($"isLooking = true");
+		}
+		else if (context.canceled)
+		{
+			isLooking = false;
+			Debug.Log($"isLooking = false");
+		}
 	}
 
-	public void OnLookOnMouse(InputAction.CallbackContext context)
+    public void OnLookOnMouse(InputAction.CallbackContext context)
 	{
 	}
 
@@ -72,15 +101,23 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 			{
 				if (attack.StartCharge())
 					cameraExpandTimer = 0;
+				if (IsMouseInput)
+                {
+					isLooking = true;
+                }
 			}
 			if (context.canceled)
 			{
-				SetAttackDirection();
+				SetAttackDirectionWithMouse();
 				if (attack.EndCharge())
 				{
 					cameraExpandTimer = -1;
 					VCamManager.Instance.Reduce();
 				}
+				if (IsMouseInput)
+                {
+					isLooking = false;
+                }
 			}
 		}
 	}

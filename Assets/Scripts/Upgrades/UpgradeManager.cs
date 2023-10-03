@@ -10,12 +10,18 @@ public class UpgradeManager : MonoBehaviour
 {
     public ShurikenDB shurikenDB;
     public Boolean[] isSelected = new Boolean[3];
+    public Boolean[] canSelect = new Boolean[3];
+    public int remainingSelectCount = 2;
     public List<int> selectedIdxes; //뜬 3개의 인덱스 리스트
     public GameObject player;
     private Transform[] UpgradeIconContainers = new Transform[3];
 
     void OnEnable()
     {
+        for (int i = 0; i < 3; i++)
+        {
+            canSelect[i] = true;
+        }
         selectedIdxes = GetRandomUpgradeNumbers();
         for (int i = 0; i < 3; i++)
         {
@@ -109,7 +115,7 @@ public class UpgradeManager : MonoBehaviour
     private List<int> GetRandomUpgradeNumbers() //3개의 랜덤한 숫자를 뽑음
     {
         bool isSpecial = false;
-        if (GameManager.Instance.stageCount == 2 || GameManager.Instance.stageCount == 5)
+        if (GameManager.Instance.stageCount == 1 || GameManager.Instance.stageCount == 4) //특일일특일일
         {
             isSpecial = true;
         }
@@ -138,14 +144,28 @@ public class UpgradeManager : MonoBehaviour
         {
             randomInt = Random.Range(0, GameManager.Instance.specialStartIdx);
         }
-        
-        if (GameManager.Instance.canUpgradeIdxList.Contains((GameManager.UpgradeIdx) randomInt))
+
+        if (remainingSelectCount == 2)
         {
-            return randomInt;
+            if (GameManager.Instance.canUpgradeIdxListPlayer1.Contains((GameManager.UpgradeIdx) randomInt))
+            {
+                return randomInt;
+            }
+            else
+            {
+                return -1;
+            }
         }
         else
         {
-            return -1;
+            if (GameManager.Instance.canUpgradeIdxListPlayer2.Contains((GameManager.UpgradeIdx) randomInt))
+            {
+                return randomInt;
+            }
+            else
+            {
+                return -1;
+            }
         }
     }
     
@@ -165,38 +185,80 @@ public class UpgradeManager : MonoBehaviour
             UpgradeIconContainers[i].GetChild(0).gameObject.SetActive(false);
             isSelected[i] = false;
         }
+        transform.GetChild(5).gameObject.SetActive(false);
+    }
+    
+    public void ResetSelectAll()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            canSelect[i] = true;
+            remainingSelectCount = 2;
+            Color originalColor = new Color(0.718f, 0.576f, 0.360f);
+            UpgradeIconContainers[i].GetChild(1).GetComponent<Image>().color = originalColor;
+        }
+
+        transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "<color=#FF0000>플레이어1</color>업그레이드";
     }
 
     public void SelectConfirmHandler()
     {
         int selectedIdx = -1;
+        int curIdx = -1;
         for (int i = 0; i < selectedIdxes.Count; i++)
         {
             if (isSelected[i])
             {
                 selectedIdx = selectedIdxes[i];
-                if (shurikenDB.Shurikens[selectedIdxes[i]].showOnlyOnce > 0) // 한번만 나와야 하는 경우
-                {
-                    GameManager.Instance.canUpgradeIdxList.Remove((GameManager.UpgradeIdx) selectedIdxes[i]);
-                }
+                curIdx = i;
             }
         }
-        ResetSelect();
-        
-        //업그레이드 실제 연동
-        if (selectedIdx != -1)
+
+        if (selectedIdx == -1)
         {
-            CharacterStatsData data = GameManager.Instance.characterStatsDataList[selectedIdx];
-            GameManager.Instance.upgradedList.Add(data);
-            GameManager.Instance.upgradedListInt.Add(selectedIdx);
+            return;
         }
-        
-        GameManager.Instance.ExitState(GameManager.GameState.Upgrade);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-        GameManager.Instance.EnterState(GameManager.GameState.Tournament);
-        TournamentManager.Instance.gameObject.SetActive(true);
-        TournamentManager.Instance.Init();
-        gameObject.SetActive(false);
+        else
+        {
+            if (remainingSelectCount == 2)
+            {
+                CharacterStatsData data = GameManager.Instance.characterStatsDataList[selectedIdx];
+                GameManager.Instance.upgradedListPlayer1.Add(data);
+                GameManager.Instance.upgradedListIntPlayer1.Add(selectedIdx);
+                transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "<color=#0000FF>플레이어2</color>업그레이드";
+            }
+            else
+            {
+                CharacterStatsData data = GameManager.Instance.characterStatsDataList[selectedIdx];
+                GameManager.Instance.upgradedListPlayer2.Add(data);
+                GameManager.Instance.upgradedListIntPlayer2.Add(selectedIdx);
+            }
+
+            if (shurikenDB.Shurikens[selectedIdxes[curIdx]].showOnlyOnce > 0) // 한번만 나와야 하는 경우
+            {
+                GameManager.Instance.canUpgradeIdxListPlayer1.Remove((GameManager.UpgradeIdx)selectedIdxes[curIdx]);
+            }
+
+            canSelect[curIdx] = false;
+            UpgradeIconContainers[curIdx].GetChild(1).GetComponent<Image>().color = new Color(0.341f, 0.278f, 0.169f);
+            
+            
+        }
+
+        remainingSelectCount--;
+        ResetSelect();
+
+        if (remainingSelectCount <= 0)
+        {
+            ResetSelectAll();
+            GameManager.Instance.ExitState(GameManager.GameState.Upgrade);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            GameManager.Instance.EnterState(GameManager.GameState.Tournament);
+            //TournamentManager.Instance.gameObject.SetActive(true);
+            //TournamentManager.Instance.Init();
+            gameObject.SetActive(false);
+
+        }
         
     }
 }
