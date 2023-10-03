@@ -14,14 +14,18 @@ public class CharacterStatsData : ScriptableObject
     [Header("Character")]
     public float maxHp;
     public float moveSpeed;
+    public float rollDistance;
+    public float rollCooldown;
+    public int maxRollNum;
     [Header("Shuriken")]
-    public float attackPower;   //데미지
-    public float chargeSpeed;   //충전 속도
-    public int maxCartridgeNum; //탄창 수
-    public float maxDistance;   //최대 사거리
-    public float shurikenSpeed; //수리검이 날아가는 속도
-    public int shurikenNum;     //한번에 던지는 수리검의 수
-    public float shurikenScale; //수리검의 크기
+    public float attackPower;       //데미지
+    public float chargeSpeed;       //충전 속도
+    public float maxChargeAmount;   //최대 충전 시간
+    public int maxCartridgeNum;     //탄창 수
+    public float maxDistance;       //최대 사거리
+    public float shurikenSpeed;     //수리검이 날아가는 속도
+    public int shurikenNum;         //한번에 던지는 수리검의 수
+    public float shurikenScale;     //수리검의 크기
     public List<ShurikenAttribute> shurikenAttributes;
 }
 
