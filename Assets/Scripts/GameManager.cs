@@ -190,7 +190,7 @@ public class GameManager : MonoBehaviour
         else VersusManager.Instance.victoryCountPlayer2++;
         if (VersusManager.Instance.victoryCountPlayer1 == 4 || VersusManager.Instance.victoryCountPlayer2 == 4)
         {
-            GameObject gameEndPanel = GameObject.Find("GameEndPanel").gameObject;
+            GameObject gameEndPanel = GameObject.Find("IngameCanvas").transform.Find("GameEndPanel").gameObject;
             if (VersusManager.Instance.victoryCountPlayer1 == 4)
             {
                 gameEndPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "<color=#FF0000>플레이어1</color> 최종 승리!";

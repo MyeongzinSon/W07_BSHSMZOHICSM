@@ -54,7 +54,7 @@ public class CatridgeUIManager : MonoBehaviour
             {
                 GameObject kunai = Instantiate(kunaiPrefab, transform);
                 kunai.transform.SetParent(transform);
-                kunai.transform.GetComponent<RectTransform>().position = new Vector3(transform.position.x + (offset * 2) * i, transform.position.y, transform.position.z);
+                kunai.transform.GetComponent<RectTransform>().position = new Vector3(transform.position.x - (offset * 2) * i + 84f, transform.position.y, transform.position.z);
             }
         }
         
