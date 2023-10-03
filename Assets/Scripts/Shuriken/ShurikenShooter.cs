@@ -17,12 +17,16 @@ public class ShurikenShooter : MonoBehaviour
 	[Header("조준 중 n% 느려집니다.")]
 	public float slowOnCharge = 0.3f;
 
+	[Header("차지 데미지")] 
+	public float chargeDamageMultiplier = .25f;
+	public int chargeLevel = 1;
+	
 	#region privateArea
 
 	private Mover mover;
 	private Vector2 direction;
 	private CharacterStats stats;
-	private float maxCharge = 1;
+	private float maxCharge = 3;
 	private int maxCartridge;
 	private int currentCartridge;
 	private int shurikenCount;
@@ -32,7 +36,6 @@ public class ShurikenShooter : MonoBehaviour
 	private LineRenderer lineRenderer;
 	
 	[SerializeField] private GameObject chargeParticle;
-	
 	[SerializeField] private CatridgeUIManager catridgeUIManager;
 
 	#endregion
@@ -66,11 +69,44 @@ public class ShurikenShooter : MonoBehaviour
 		{
 			//Debug.Log(dir);
 			lineRenderer?.SetPosition(1, transform.position + (Vector3)direction * CurrentDistance);
-
+			
 			//Debug.Log(dir);
 
 			currentCharge += Time.deltaTime * stats.chargeSpeed;
 			currentCharge = Mathf.Min(currentCharge, maxCharge);
+			if (lineRenderer != null)
+			{
+				if (currentCharge >= 3)
+				{
+					Color color4 = new Color(0.0f, 0.0f, 0.8f, .3f); // 파란빛
+					chargeDamageMultiplier = 1f;
+					lineRenderer.startColor = color4;
+					lineRenderer.endColor = color4;
+				}
+				else if (currentCharge >= 2)
+				{
+					Color color3 = new Color(0.0f, 0.6314f, 0.6902f, .3f); // 진한 청록빛
+					
+					chargeDamageMultiplier = 0.75f;
+					lineRenderer.startColor = color3;
+					lineRenderer.endColor = color3;
+				}
+				else if (currentCharge >= 1)
+				{
+					Color color2 = new Color(0.0f, 0.7490f, 0.6275f, .3f); // 진한 초록빛
+					chargeDamageMultiplier = 0.5f;
+					lineRenderer.startColor = color2;
+					lineRenderer.endColor = color2;
+				}
+				else
+				{
+					Color color1 = new Color(0.4078f, 0.9922f, 0.8902f, .3f);
+					chargeDamageMultiplier = 0.25f;
+					lineRenderer.startColor = color1;
+					lineRenderer.endColor = color1;
+				}
+			}
+			
 			SwitchChargeParticle();
 		}
 		else
@@ -172,7 +208,7 @@ public class ShurikenShooter : MonoBehaviour
 		Shuriken instSrk = inst.GetComponent<Shuriken>();
 		instSrk.damageLayer = damageLayer;
 		instSrk.owner = gameObject;
-		instSrk.damage = stats.attackPower;
+		instSrk.damage = stats.attackPower * chargeDamageMultiplier;
 		instSrk.moveDistance = CurrentDistance;
 		instSrk.isShadow = isShadow;
 		
