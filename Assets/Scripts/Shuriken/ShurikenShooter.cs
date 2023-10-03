@@ -62,9 +62,8 @@ public class ShurikenShooter : MonoBehaviour
 
 		if (IsCharging)
 		{
-			Vector3 dir = ((Vector2)Camera.main.ScreenToWorldPoint((Vector2)Input.mousePosition) - (Vector2)transform.position).normalized;
 			//Debug.Log(dir);
-			lineRenderer?.SetPosition(1, transform.position + dir * CurrentDistance);
+			lineRenderer?.SetPosition(1, transform.position + (Vector3)direction * CurrentDistance);
 
 			//Debug.Log(dir);
 
@@ -104,7 +103,10 @@ public class ShurikenShooter : MonoBehaviour
     }
 	public void SetDirection(Vector2 _direction)
     {
-		direction = _direction;
+		if (_direction != Vector2.zero)
+        {
+			direction = _direction.normalized;
+        }
     }
 	bool TryShoot()
     {
