@@ -80,6 +80,7 @@ public class CharacterStats : MonoBehaviour
         attackPower +=  info.attackPower;
         chargeSpeed +=  info.chargeSpeed;
         maxCartridgeNum += info.maxCartridgeNum;
+        maxChargeAmount += info.maxChargeAmount;
         maxDistance +=  info.maxDistance;
         shurikenNum += info.shurikenNum;
         shurikenScale += info.shurikenScale;

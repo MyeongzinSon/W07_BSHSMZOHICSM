@@ -53,7 +53,7 @@ public class ShurikenShooter : MonoBehaviour
 			Debug.LogError($"ShurikenShooter : 해당 캐릭터에서 CharacterStats 컴포넌트를 찾을 수 없음! (Instance ID : {this.GetInstanceID()})");
         }
 		mover = GetComponent<Mover>();
-		maxCharge = stats.maxChargeAmount;
+		maxCharge = stats.maxChargeAmount; //maxChargeAmount로 수정이 안됨. 왜지?
 		maxCartridge = stats.maxCartridgeNum;
 		currentCartridge = maxCartridge;
 		shurikenCount = 0;
@@ -94,6 +94,7 @@ public class ShurikenShooter : MonoBehaviour
 				}
 				else if (currentCharge >= 4)
 				{
+					Debug.Log("asd");
 					newColor = new Color(0.3f, 0.2f, 0.8f, .3f); // 파란빛
 					chargeDamageMultiplier = 1.25f;
 				}

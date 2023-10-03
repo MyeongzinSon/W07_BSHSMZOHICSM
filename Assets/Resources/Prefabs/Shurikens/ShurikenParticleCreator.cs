@@ -45,7 +45,7 @@ public class ShurikenParticleCreator : MonoBehaviour
             SpawnShurikenParticle();
             yield return new WaitForSeconds(0.025f);
         }
-        Debug.Log("수리검 파티클 종료");
+        //Debug.Log("수리검 파티클 종료");
         
     }
 
@@ -59,7 +59,7 @@ public class ShurikenParticleCreator : MonoBehaviour
         {
             if (GetComponent<Shuriken>().owner.tag == "Player1")
             {
-                Debug.Log($"내 파티클: {GameManager.Instance.upgradedListIntPlayer1.Count}");
+                //Debug.Log($"내 파티클: {GameManager.Instance.upgradedListIntPlayer1.Count}");
                 for (int i = 0; i < GameManager.Instance.upgradedListIntPlayer1.Count; i++)
                 {
                     var idx = GameManager.Instance.upgradedListIntPlayer1[i];
@@ -72,7 +72,7 @@ public class ShurikenParticleCreator : MonoBehaviour
             }
             else
             {
-                Debug.Log($"내 파티클: {GameManager.Instance.upgradedListIntPlayer2.Count}");
+                //Debug.Log($"내 파티클: {GameManager.Instance.upgradedListIntPlayer2.Count}");
                 for (int i = 0; i < GameManager.Instance.upgradedListIntPlayer2.Count; i++)
                 {
                     var idx = GameManager.Instance.upgradedListIntPlayer2[i];
