@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public List<CharacterStatsData> upgradedListPlayer2 = new List<CharacterStatsData>();
     public List<int> upgradedListIntPlayer2 = new List<int>();
     public GameObject clearPanel;
+    public int currentSelectIdx = -1;
     public enum GameState
     {
         Tournament = 100,
@@ -222,13 +223,16 @@ public class GameManager : MonoBehaviour
         if (winPlayerNum == 1)
         {
             gameClearText.GetComponent<TMPro.TextMeshProUGUI>().text = "<color=#FF0000>플레이어1</color> 승리!";
+            currentSelectIdx = 2;
         }
         else
         {
             gameClearText.GetComponent<TMPro.TextMeshProUGUI>().text = "<color=#0000FF>플레이어2</color> 승리!";
+            currentSelectIdx = 1;
         }
         
         gameClearText.SetActive(true);
+        if (winPlayerNum == 1)
         Invoke("GoToUpgrade", 3.5f);
 
         stageCount += 1;

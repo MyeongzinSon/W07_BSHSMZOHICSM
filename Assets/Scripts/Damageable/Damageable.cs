@@ -31,9 +31,14 @@ public class Damageable : MonoBehaviour
 	private void Update()
 	{
 		#if UNITY_EDITOR
+		if (Input.GetKeyDown(KeyCode.Alpha9))
+		{
+			TestEnemyDamage(1);
+		}
+		
 		if (Input.GetKeyDown(KeyCode.Alpha0))
 		{
-			TestEnemyDamage();
+			TestEnemyDamage(2);
 		}
 		#endif
 	}
@@ -106,17 +111,17 @@ public class Damageable : MonoBehaviour
 	        GameObject gameOverText = GameObject.Find("IngameCanvas").transform.Find("GameOverPanel").gameObject;
 	        gameOverText.SetActive(true);
 	        */
-	        GameManager.Instance.StageClear(1);
+	        GameManager.Instance.StageClear(2);
         }
         else //플레이어2 승리
         {
-	        GameManager.Instance.StageClear(2);
+	        GameManager.Instance.StageClear(1);
         }
 	}
 	
-	public void TestEnemyDamage()
+	public void TestEnemyDamage(int num)
 	{
-		if (gameObject.tag == "Enemy")
+		if (gameObject.tag == "Player" + num.ToString())
 		{
 			Hit(50f);
 		}
