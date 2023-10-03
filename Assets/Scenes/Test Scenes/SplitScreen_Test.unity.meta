@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/Test Scenes/Input/DoubleControllers.unity.meta
+guid: 34e118712a4dbaf4babf917e6e3643e7
+========
 guid: 492614e8b65dcd24894eea5cd5ad64ef
+>>>>>>>> ceba8915e703389858739294f0a309b021763202:Assets/Scenes/Test Scenes/SplitScreen_Test.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

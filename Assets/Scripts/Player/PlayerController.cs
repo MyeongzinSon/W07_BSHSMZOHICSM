@@ -59,6 +59,8 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 
 	public void OnMove(InputAction.CallbackContext context)
 	{
+		Debug.Log($"클릭한 디바이스: {context.control.device.name}");
+		
 		if (GameManager.Instance.isBattleStart)
 		{
 			move.OnMove(context);
