@@ -50,12 +50,22 @@ public class Shuriken : MonoBehaviour
     public float explosionTime = 1f;
     public float explosionDamageRatio = 0.3f; //수리검 데미지의 n%의 데미지
     private bool isExploded = false;
-
+    
+    [Header("거미줄")]
+    private bool isSlowed = false;
+    
+    [Header("저주")]
+    private bool useCurse = false;
+    
     [Header("부메랑")]
     public bool useBoomerang;
     public float boomerangDelay = 5f;
     public float boomerangAccel = 3f;
     private bool isBoomerangReturning = false;
+    
+    [Header("바운스")]
+    public bool isWallBounce = false;
+        
     [Header("수리검 속성")]
     public List<ShurikenAttribute> attributes = new();
 
@@ -116,7 +126,7 @@ public class Shuriken : MonoBehaviour
             case ShurikenAttribute.KnockbackToWall:
                 useKnockBack = true;
                 break;
-            case ShurikenAttribute.Slow:
+            case ShurikenAttribute.Slow: //거미줄
                 useSlow = true;
                 break;
             case ShurikenAttribute.Vulnerable:
@@ -124,6 +134,9 @@ public class Shuriken : MonoBehaviour
                 break;
             case ShurikenAttribute.HealReduction:
                 useInhibitHeal = true;
+                break;
+            case ShurikenAttribute.Curse:
+                useCurse = true;
                 break;
         }
     }
@@ -206,10 +219,12 @@ public class Shuriken : MonoBehaviour
                     {
                         isBoomerangReturning = false;
                     }
+                    
+                    if (useCurse) target.curseStack++;
                     //대상에게 공격 판정
                     target.Hit(damage);
                     OnHitEnemy(target);
-
+                    
                     //PickUp으로 변경 및 Drop
                     float dropDistance = 5f;
                     Vector3 dropPos = transform.position + (Vector3) mover.direction*dropDistance;
@@ -239,7 +254,16 @@ public class Shuriken : MonoBehaviour
                     canDamage = false;
                     StartCoroutine(BounceCoroutine(wallBounceTime));
                 }
-                //부메랑 모드
+                else
+                {
+                    if (isWallBounce == false)
+                    {
+                        damage *= 2;
+                        mover.speed *= 1.5f;
+                        isWallBounce = true;
+                    }
+                    GetComponent<SpriteRenderer>().color = Color.yellow;
+                }
                 //벽과 충돌 시, 공격은 유지하면서, 방향만 플레이어쪽으로 향한다.
                 if (useBoomerang)
                 {
@@ -346,6 +370,17 @@ public class Shuriken : MonoBehaviour
         Instantiate(particle, transform.position, Quaternion.identity);
     }
 
+    void MakeSlowEffect()
+    {
+        if (isSlowed)
+        {
+            return;
+        }
+        isSlowed = true;
+        GameObject spiderWebPrefab = Resources.Load<GameObject>("Prefabs/SpiderWeb");
+        GameObject spiderWeb = Instantiate(spiderWebPrefab, transform.position, Quaternion.identity);
+        spiderWeb.transform.localScale = new Vector3(8f, 8f, 1f);
+    }
 
     Vector2 GetReflectVector(Vector2 _dir, Vector2 _normal)
     {
@@ -402,6 +437,12 @@ public class Shuriken : MonoBehaviour
         {
             Explosion();
         }
+
+        if (useSlow)
+        {
+            MakeSlowEffect();
+        }
+        
         // if (useBoomerang)
         // {
         //     StartCoroutine(BoomerangCoroutine());

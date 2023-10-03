@@ -15,7 +15,7 @@ MonoBehaviour:
   Shurikens:
   - id: 0
     name: "\uCCB4\uB825 \uC99D\uAC00"
-    description: "\uCCB4\uB825\uC774 20 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    description: "\uCCB4\uB825\uC774 30 \uC99D\uAC00\uD569\uB2C8\uB2E4."
     showOnlyOnce: 0
     meritSpecies: Hp
     meritAmount: 20
@@ -23,7 +23,7 @@ MonoBehaviour:
     demeritAmount: 0
   - id: 0
     name: "\uACF5\uACA9\uB825 \uC99D\uAC00"
-    description: "\uACF5\uACA9\uB825\uC774 15 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    description: "\uACF5\uACA9\uB825\uC774 10 \uC99D\uAC00\uD569\uB2C8\uB2E4."
     showOnlyOnce: 0
     meritSpecies: AtkDmg
     meritAmount: 15
@@ -65,7 +65,8 @@ MonoBehaviour:
   - id: 0
     name: "\uBC14\uC6B4\uC2A4!"
     description: "\uC218\uB9AC\uAC80\uC774 \uBCBD\uC5D0 \uBD80\uB52A\uD788\uBA74
-      \uD295\uAE41\uB2C8\uB2E4."
+      \uD295\uAE41\uB2C8\uB2E4. \uD295\uAE34 \uC218\uB9AC\uAC80\uC740 2\uBC30\uC758
+      \uB370\uBBF8\uC9C0\uB97C \uC90D\uB2C8\uB2E4."
     showOnlyOnce: 1
     meritSpecies: none
     meritAmount: 0
@@ -90,7 +91,8 @@ MonoBehaviour:
     demeritAmount: 30
   - id: 0
     name: "\uD22C\uCC99X\uD22C\uCC99!"
-    description: "\uB358\uC9C0\uB294 \uC218\uB9AC\uAC80\uC758 \uC218\uAC00 \uB298\uC5B4\uB0A9\uB2C8\uB2E4."
+    description: "\uB358\uC9C0\uB294 \uC218\uB9AC\uAC80\uC758 \uC218\uAC00 2\uAC1C
+      \uB298\uC5B4\uB0A9\uB2C8\uB2E4."
     showOnlyOnce: 0
     meritSpecies: none
     meritAmount: 0
@@ -106,8 +108,9 @@ MonoBehaviour:
     demeritAmount: 20
   - id: 0
     name: "\uAC70\uBBF8\uC904"
-    description: "\uC218\uB9AC\uAC80\uC5D0 \uC2AC\uB85C\uC6B0 \uAE30\uB2A5\uC774
-      \uC0DD\uAE41\uB2C8\uB2E4."
+    description: "\uC218\uB9AC\uAC80\uC774 \uAC70\uBBF8\uC904\uC744 \uC18C\uD658\uD569\uB2C8\uB2E4.
+      \uAC70\uBBF8\uC904 \uC548\uC5D0 \uC788\uB294 \uC801\uC740 \uB300\uC2DC\uD560
+      \uC218 \uC5C6\uC2B5\uB2C8\uB2E4."
     showOnlyOnce: 1
     meritSpecies: none
     meritAmount: 0
@@ -115,7 +118,7 @@ MonoBehaviour:
     demeritAmount: 10
   - id: 0
     name: "\uC800\uC8FC"
-    description: "\uC790\uC2E0\uC758 \uCCB4\uB825\uC774 40\uC73C\uB85C \uACE0\uC815\uB429\uB2C8\uB2E4.
+    description: "\uC790\uC2E0\uC758 \uCCB4\uB825\uC774 50\uC73C\uB85C \uACE0\uC815\uB429\uB2C8\uB2E4.
       \uC218\uB9AC\uAC80\uC744 \uC0C1\uB300\uC5D0\uAC8C 3\uBC88 \uB9DE\uCD94\uBA74
       \uC0C1\uB300\uAC00 \uC989\uC0AC\uD569\uB2C8\uB2E4."
     showOnlyOnce: 1

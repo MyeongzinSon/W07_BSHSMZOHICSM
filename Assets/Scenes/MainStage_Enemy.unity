@@ -2030,7 +2030,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &566619213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2155,7 +2155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -687, y: -407}
+  m_AnchoredPosition: {x: 7, y: -407}
   m_SizeDelta: {x: 500, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &582872736
@@ -2207,7 +2207,7 @@ MonoBehaviour:
         m_MethodName: AddCharacterStats
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 96bed05f408782740884121dc7fff7fa, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: 49b0f63f22aa884488099ecc71cfa06d, type: 2}
           m_ObjectArgumentAssemblyTypeName: CharacterStatsData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0

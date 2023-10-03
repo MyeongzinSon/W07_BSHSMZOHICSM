@@ -232,6 +232,13 @@ public class GameManager : MonoBehaviour
         stageCount += 1;
         
     }
-    
+
+    public void CreateImageText(string _text, Color _color, Vector3 _pos)
+    {
+        GameObject damageTextPrefab = (GameObject)Resources.Load("Prefabs/UI/DamageText");
+        GameObject damageText = Instantiate(damageTextPrefab, _pos + new Vector3(0f, 1f, 0f), Quaternion.identity);
+        damageText.GetComponent<TextMesh>().color = _color;
+        damageText.GetComponent<MoveAndDestroy>()._text = _text;
+    }
     
 }
