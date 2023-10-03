@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainStage_Enemy.unity
     guid: 7f466cd80cd360545b2ac0a65c6f3bc4
   - enabled: 1
-    path: Assets/Scenes/Test Scenes/Input/InputSelection.unity
+    path: Assets/Scenes/InputSelection.unity
     guid: 4cc0c7293fde89f408c8531c283eb831
   m_configObjects: {}
