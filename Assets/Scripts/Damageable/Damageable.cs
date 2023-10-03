@@ -15,6 +15,9 @@ public class Damageable : MonoBehaviour
 
 	private bool isKilled = false;
 
+	//curse option
+	public int curseStack = 0;
+	private GameObject curseContainer;
 	private void Start()
 	{ 
 		if (TryGetComponent<CharacterStats>(out var stats))
@@ -22,6 +25,7 @@ public class Damageable : MonoBehaviour
 			maxHp = stats.maxHp;
         }
 		hp = maxHp;
+		curseContainer = transform.Find("CurseStackContainer").gameObject;
 	}
 
 	private void Update()
@@ -50,6 +54,24 @@ public class Damageable : MonoBehaviour
 			transform.GetChild(0).GetComponent<FlashingObject>().MakeObjectFlashSprite(transform.GetChild(0).GetComponent<SpriteRenderer>(), .03f, .1f);
 		}
 		if (hp <= 0)
+		{
+			hp = 0f;
+			Kill();
+		}
+
+		if (curseStack > 0)
+		{
+			GameObject curseStackPrefab = (GameObject)Resources.Load("Prefabs/UI/CurseStack");
+
+			for (int i = 0; i < curseStack; i++)
+			{
+				GameObject curseStack = Instantiate(curseStackPrefab, curseContainer.transform.position + new Vector3(i * .8f, 0f, 0f), Quaternion.identity);
+				curseStack.transform.parent = curseContainer.transform;
+			}
+			
+		}
+		
+		if (curseStack >= 3)
 		{
 			hp = 0f;
 			Kill();

@@ -53,7 +53,10 @@ public class Shuriken : MonoBehaviour
     
     [Header("거미줄")]
     private bool isSlowed = false;
-
+    
+    [Header("저주")]
+    private bool useCurse = false;
+    
     [Header("부메랑")]
     public bool useBoomerang;
     public float boomerangDelay = 5f;
@@ -127,6 +130,9 @@ public class Shuriken : MonoBehaviour
                 break;
             case ShurikenAttribute.HealReduction:
                 useInhibitHeal = true;
+                break;
+            case ShurikenAttribute.Curse:
+                useCurse = true;
                 break;
         }
     }
@@ -209,10 +215,12 @@ public class Shuriken : MonoBehaviour
                     {
                         isBoomerangReturning = false;
                     }
+                    
+                    if (useCurse) target.curseStack++;
                     //대상에게 공격 판정
                     target.Hit(damage);
                     OnHitEnemy(target);
-
+                    
                     //PickUp으로 변경 및 Drop
                     float dropDistance = 5f;
                     Vector3 dropPos = transform.position + (Vector3) mover.direction*dropDistance;
