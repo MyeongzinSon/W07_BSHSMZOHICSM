@@ -22,7 +22,7 @@ public class PlayerHpHandler : MonoBehaviour
     void Update()
     {
         smoothHp = Mathf.SmoothDamp(smoothHp, playerStats.hp, ref smoothVelocity, 0.2f);
-        if (playerHpBar != null)
+        if (playerHpBar != null && playerHpText != null)
         {
             playerHpBar.GetComponent<Image>().fillAmount = smoothHp / playerStats.maxHp;
             playerHpText.GetComponent<TextMeshProUGUI>().text = playerStats.hp.ToString("F0") + " / " + playerStats.maxHp.ToString("F0");
@@ -31,5 +31,13 @@ public class PlayerHpHandler : MonoBehaviour
         //{
         //    playerHpBar.GetComponent<Image>().fillAmount = 0;
         //}
+    }
+
+    public void SetPlayerTextToZero()
+    {
+        if (playerHpText != null)
+        {
+            playerHpText.GetComponent<TextMeshProUGUI>().text = "0 / " + playerStats.maxHp.ToString("F0");
+        }
     }
 }

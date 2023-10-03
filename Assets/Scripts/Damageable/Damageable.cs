@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -74,6 +75,7 @@ public class Damageable : MonoBehaviour
 		isKilled = true;
 		Debug.Log("Killed: "+name);
         transform.GetComponent<PlayerHpHandler>().playerHpBar.GetComponent<Image>().fillAmount = 0;
+        transform.GetComponent<PlayerHpHandler>().SetPlayerTextToZero();
 		gameObject.SetActive(false);
         if (gameObject.tag == "Player1") //플레이어1 승리
         {
