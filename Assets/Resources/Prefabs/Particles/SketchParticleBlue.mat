@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Aura Sketch - White
+  m_Name: SketchParticleBlue
   m_Shader: {fileID: -6465566751694194690, guid: 41cb8c0bbe2dfbe42ba137acb60ff77d, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -82,5 +82,5 @@ Material:
     - _QueueControl: 1
     - _QueueOffset: 0
     m_Colors:
-    - _Color1: {r: 11.535917, g: 0.71522665, b: 0.71522665, a: 0}
+    - _Color1: {r: 0.7247697, g: 1.849081, b: 11.535917, a: 0}
   m_BuildTextureStacks: []

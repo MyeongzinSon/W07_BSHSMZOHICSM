@@ -229,3 +229,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a4f438a9ad3bfc4eaf0437988f88f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shurikenShooter: {fileID: 0}
+  colors:
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 0.647, g: 0.165, b: 0.165, a: 1}
+  - {r: 1, g: 0.964, b: 0.415, a: 1}
+  - {r: 1, g: 0.647, b: 0, a: 1}
+  - {r: 0.886, g: 0.447, b: 0.337, a: 1}
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 0.4, g: 1, b: 0, a: 1}
+  - {r: 0.5, g: 0, b: 0.5, a: 1}
+  - {r: 0.933, g: 0.702, b: 0.537, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.647, g: 0, b: 0, a: 1}
+  - {r: 1, g: 0.27, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}

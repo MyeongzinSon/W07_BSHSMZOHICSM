@@ -2,11 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShurikenShooter : MonoBehaviour
 {
-	const float MaxCharge = 1;
-
 	public Mover shurikenPrefab;
 	public LayerMask damageLayer;
 
@@ -18,11 +17,16 @@ public class ShurikenShooter : MonoBehaviour
 	[Header("조준 중 n% 느려집니다.")]
 	public float slowOnCharge = 0.3f;
 
+	[Header("차지 데미지")] 
+	public float chargeDamageMultiplier = .25f;
+	public int chargeLevel = 1;
+	
 	#region privateArea
 
 	private Mover mover;
 	private Vector2 direction;
 	private CharacterStats stats;
+	private float maxCharge = 3;
 	private int maxCartridge;
 	private int currentCartridge;
 	private int shurikenCount;
@@ -39,7 +43,7 @@ public class ShurikenShooter : MonoBehaviour
 	public bool CanShoot => currentCartridge > 0;
 	public bool IsCharging => currentCharge > 0;
 	public bool IsCartridgeFull => currentCartridge == maxCartridge;
-	public float CurrentChargeAmount => currentCharge / MaxCharge;
+	public float CurrentChargeAmount => currentCharge / maxCharge;
 	public float CurrentDistance => stats.maxDistance * CurrentChargeAmount;
 
 	private void Start()
@@ -49,6 +53,7 @@ public class ShurikenShooter : MonoBehaviour
 			Debug.LogError($"ShurikenShooter : 해당 캐릭터에서 CharacterStats 컴포넌트를 찾을 수 없음! (Instance ID : {this.GetInstanceID()})");
         }
 		mover = GetComponent<Mover>();
+		maxCharge = stats.maxChargeAmount;
 		maxCartridge = stats.maxCartridgeNum;
 		currentCartridge = maxCartridge;
 		shurikenCount = 0;
@@ -64,17 +69,53 @@ public class ShurikenShooter : MonoBehaviour
 		{
 			//Debug.Log(dir);
 			lineRenderer?.SetPosition(1, transform.position + (Vector3)direction * CurrentDistance);
-
+			
 			//Debug.Log(dir);
 
 			currentCharge += Time.deltaTime * stats.chargeSpeed;
-			currentCharge = Mathf.Min(currentCharge, MaxCharge);
-			if (chargeParticle != null) chargeParticle.SetActive(true);
+			currentCharge = Mathf.Min(currentCharge, maxCharge);
+			if (lineRenderer != null)
+			{
+				if (currentCharge >= 3)
+				{
+					Color color4 = new Color(0.0f, 0.0f, 0.8f, .3f); // 파란빛
+					chargeDamageMultiplier = 1f;
+					lineRenderer.startColor = color4;
+					lineRenderer.endColor = color4;
+				}
+				else if (currentCharge >= 2)
+				{
+					Color color3 = new Color(0.0f, 0.6314f, 0.6902f, .3f); // 진한 청록빛
+					
+					chargeDamageMultiplier = 0.75f;
+					lineRenderer.startColor = color3;
+					lineRenderer.endColor = color3;
+				}
+				else if (currentCharge >= 1)
+				{
+					Color color2 = new Color(0.0f, 0.7490f, 0.6275f, .3f); // 진한 초록빛
+					chargeDamageMultiplier = 0.5f;
+					lineRenderer.startColor = color2;
+					lineRenderer.endColor = color2;
+				}
+				else
+				{
+					Color color1 = new Color(0.4078f, 0.9922f, 0.8902f, .3f);
+					chargeDamageMultiplier = 0.25f;
+					lineRenderer.startColor = color1;
+					lineRenderer.endColor = color1;
+				}
+			}
+			
+			SwitchChargeParticle();
 		}
 		else
 		{
 			lineRenderer?.SetPosition(1, transform.position);
-			if (chargeParticle != null) chargeParticle.SetActive(false);
+			if (chargeParticle != null)
+			{
+				chargeParticle.SetActive(false);
+			}
 		}
 	}
 	public bool StartCharge()
@@ -150,12 +191,24 @@ public class ShurikenShooter : MonoBehaviour
 		inst.direction = _dir;
 		inst.SetRotationByDirection();
 
-		Debug.Log(inst.speed);
+		//총알 이미지 변경
+		if (transform.CompareTag("Player1"))
+		{
+			Sprite kunaiRed = Resources.Load<Sprite>("Prefabs/Sprites/KunaiRed");
+			shurikenPrefab.GetComponent<SpriteRenderer>().sprite = kunaiRed;
+		}
+		else
+		{
+			Sprite kunaiBlue = Resources.Load<Sprite>("Prefabs/Sprites/KunaiBlue");
+			shurikenPrefab.GetComponent<SpriteRenderer>().sprite = kunaiBlue;
+		}
+		
+		//Debug.Log(inst.speed);
 		//슈리켄 값 받아와서 해당 값에 대한 설정
 		Shuriken instSrk = inst.GetComponent<Shuriken>();
 		instSrk.damageLayer = damageLayer;
 		instSrk.owner = gameObject;
-		instSrk.damage = stats.attackPower;
+		instSrk.damage = stats.attackPower * chargeDamageMultiplier;
 		instSrk.moveDistance = CurrentDistance;
 		instSrk.isShadow = isShadow;
 		
@@ -165,7 +218,8 @@ public class ShurikenShooter : MonoBehaviour
 		//플레이어 수리검 UI 연동
 		if (TryGetComponent<PlayerController>(out var _))
         {
-			catridgeUIManager.ChangeCurrentKunai();
+	        int playerNum = transform.CompareTag("Player1") ? 1 : 2;
+			catridgeUIManager.ChangeCurrentKunai(playerNum);
         }
 
 		inst.speed = stats.shurikenSpeed * CurrentChargeAmount;
@@ -192,12 +246,36 @@ public class ShurikenShooter : MonoBehaviour
 		//수리검 UI 연동
 		if (TryGetComponent<PlayerController>(out var _))
 		{
-			catridgeUIManager.ChangeCurrentKunai();
+			int playerNum = transform.CompareTag("Player1") ? 1 : 2;
+			catridgeUIManager.ChangeCurrentKunai(playerNum);
 		}
 	}
 
 	public int GetcurrentCartridge()
 	{
 		return currentCartridge;
+	}
+
+	public void SwitchChargeParticle()
+	{
+		if (chargeParticle != null)
+		{
+			if (transform.tag == "Player1") //플레이어 1
+			{
+				Material chargeMat = (Material)Resources.Load("Prefabs/Particles/ChargeParticleRed");
+				Material sketchMat = (Material)Resources.Load("Prefabs/Particles/SketchParticleRed");
+				chargeParticle.transform.GetChild(0).GetComponent<ParticleSystem>().GetComponent<Renderer>().material = chargeMat;
+				chargeParticle.transform.GetChild(1).GetComponent<ParticleSystem>().GetComponent<Renderer>().material = sketchMat;
+			}
+			else //플레이어 2
+			{
+				Debug.Log("플레이어2");
+				Material chargeMat = (Material)Resources.Load("Prefabs/Particles/ChargeParticleBlue");
+				Material sketchMat = (Material)Resources.Load("Prefabs/Particles/SketchParticleBlue");
+				chargeParticle.transform.GetChild(0).GetComponent<ParticleSystem>().GetComponent<Renderer>().material = chargeMat;
+				chargeParticle.transform.GetChild(1).GetComponent<ParticleSystem>().GetComponent<Renderer>().material = sketchMat;
+			}
+			chargeParticle.SetActive(true);
+		}
 	}
 }

@@ -841,17 +841,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582872734}
   m_CullTransparentMesh: 1
---- !u!114 &652051584 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1700835936, guid: 65b746dec7f52874ea4dbdbf13893144, type: 3}
-  m_PrefabInstance: {fileID: 1206901230}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbfab39c443850f4b9d1c66a4c668e55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &693373705
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1058,6 +1047,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9486882b2c15c2b44bfaf2cc91ea3921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &930728145 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2436633567722104381, guid: 3d474e24e286ace4782cee9e11a10017, type: 3}
+  m_PrefabInstance: {fileID: 2436633567141053097}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &941832423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1311,6 +1305,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1976141086}
+    - target: {fileID: 1017425455734272219, guid: 65b746dec7f52874ea4dbdbf13893144, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 930728145}
     - target: {fileID: 2415153838630088162, guid: 65b746dec7f52874ea4dbdbf13893144, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1401,11 +1399,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65b746dec7f52874ea4dbdbf13893144, type: 3}
---- !u!1 &1206901231 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2415153838903566522, guid: 65b746dec7f52874ea4dbdbf13893144, type: 3}
-  m_PrefabInstance: {fileID: 1206901230}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1206901232 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2415153838588287189, guid: 65b746dec7f52874ea4dbdbf13893144, type: 3}
@@ -1687,6 +1680,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1778250278
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1778250279}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1778250279
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778250278}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.2077966, y: -0.72790796, z: -0.034056753}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1806338590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1872,6 +1896,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2436633567722104375, guid: 3d474e24e286ace4782cee9e11a10017, type: 3}
+      propertyPath: slowOnCharge
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2436633567722104375, guid: 3d474e24e286ace4782cee9e11a10017, type: 3}
       propertyPath: chargeParticle
       value: 
       objectReference: {fileID: 1853102303}
@@ -1936,17 +1964,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1330590521, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
-      propertyPath: playerHpBar
-      value: 
-      objectReference: {fileID: 1206901231}
-    - target: {fileID: 268700112459832159, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
-      propertyPath: catridgeUIManager
-      value: 
-      objectReference: {fileID: 652051584}
+    - target: {fileID: 226309023, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
+      propertyPath: isMouseInput
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 535176226093055184, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161613079036950405, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161613079788646885, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2161613080536109213, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161613080536109213, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2161613080536109213, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
+      propertyPath: m_TagString
+      value: Player1
       objectReference: {fileID: 0}
     - target: {fileID: 2161613080536109214, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
       propertyPath: m_RootOrder
@@ -1991,6 +2035,14 @@ PrefabInstance:
     - target: {fileID: 2161613080536109214, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277757297554001488, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7782786609720787526, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
