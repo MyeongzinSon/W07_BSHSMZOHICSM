@@ -57,9 +57,22 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 		}
 	}
 
+	bool CheckMyDevice(InputAction.CallbackContext context)
+    {
+		if(ControllerSelector.inputDevices[0] is Keyboard
+			&& context.control.device is Mouse)
+        {
+			return true;
+        }
+
+		return context.control.device == ControllerSelector.inputDevices[0];
+	}
+
 	public void OnMove(InputAction.CallbackContext context)
 	{
-		Debug.Log($"클릭한 디바이스: {context.control.device.name}");
+		if (!CheckMyDevice(context)) return;
+
+		//Debug.Log($"클릭한 디바이스: {context.control.device.name}");
 		
 		if (GameManager.Instance.isBattleStart)
 		{
@@ -73,6 +86,8 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 
 	public void OnLook(InputAction.CallbackContext context)
 	{
+		if (!CheckMyDevice(context)) return;
+
 		var direction = context.ReadValue<Vector2>();
 		if (!IsMouseInput && direction != Vector2.zero)
 		{
@@ -92,10 +107,13 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 
     public void OnLookOnMouse(InputAction.CallbackContext context)
 	{
+		if (!CheckMyDevice(context)) return;
 	}
 
 	public void OnFire(InputAction.CallbackContext context)
 	{
+		if (!CheckMyDevice(context)) return;
+
 		if (GameManager.Instance.isBattleStart)
 		{
 			if (context.started)
@@ -125,6 +143,8 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 
 	public void OnRoll(InputAction.CallbackContext context)
 	{
+		if (!CheckMyDevice(context)) return;
+
 		if (GameManager.Instance.isBattleStart)
 		{
 			roll.OnRoll(context);

@@ -29,7 +29,7 @@ public class ControllerSelectionUI : MonoBehaviour
         //이전에 선택된 디바이스가 내가 선택한 디바이스와 같은지 확인
         for (int i = 0; i < playerId; i++)
         {
-            if (ControllerSelector.inputDeviceId[i] == ControllerSelector.inputDeviceId[playerId])
+            if (ControllerSelector.inputDevices[i] == ControllerSelector.inputDevices[playerId])
             {
                 return false;
             }
@@ -44,9 +44,9 @@ public class ControllerSelectionUI : MonoBehaviour
         else if (_device is Gamepad) selectedDevice = "게임패드";
         else if (_device is Keyboard) selectedDevice = "키보드 & 마우스";
         else if (_device is Joystick) selectedDevice = "조이스틱";
-        
+                
         keyText.text = "선택된 기기: " + selectedDevice;
-        ControllerSelector.inputDeviceId[playerId] = _device.deviceId;
+        ControllerSelector.inputDevices[playerId] = _device;
         
         
         if (CheckValid())
@@ -62,8 +62,7 @@ public class ControllerSelectionUI : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext _context)
     {
-        Debug.Log("아!!!!");
-        if (ControllerSelector.inputDeviceId[playerId] != _context.control.device.deviceId)
+        if (ControllerSelector.inputDevices[playerId] != _context.control.device)
         {
             //만약 입력 장치가 바뀌었다면, 모든 것을 초기화하고 기기를 다시 할당
             SetSelectedDevice(_context.control.device);
@@ -80,7 +79,7 @@ public class ControllerSelectionUI : MonoBehaviour
             //다른 플레이어가 사용하는 장치라면, 그냥 텍스트만 출력하고 아무일도 일어나지 않음.
             SetSelectedDevice(_context.control.device);
         }
-        else if (ControllerSelector.inputDeviceId[playerId] != _context.control.device.deviceId)
+        else if (ControllerSelector.inputDevices[playerId] != _context.control.device)
         {
             //만약 입력 장치가 바뀌었다면, 모든 것을 초기화하고 기기를 다시 할당
             SetSelectedDevice(_context.control.device);

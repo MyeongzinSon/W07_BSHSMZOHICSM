@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class ControllerSelector : MonoBehaviour
 {
 	//Static Variables
 	public const int maxPlayerNum = 2;
-	public static int[] inputDeviceId = new int[maxPlayerNum];
+	//public static int[] inputDeviceId = new int[maxPlayerNum];
+
+	public static InputDevice[] inputDevices = new InputDevice[maxPlayerNum];
 	
 	//현재 선택된 플레이어
 	public int currentPlayer = 0;
@@ -32,10 +35,6 @@ public class ControllerSelector : MonoBehaviour
 	public void ChangeFocus()
 	{
 		currentPlayer += 1;
-		if (currentPlayer >= maxPlayerNum)
-		{
-			Debug.Log("끝!");
-		}
 		for (int i = 0; i < maxPlayerNum; i++)
 		{
 			if (i == currentPlayer)
@@ -50,6 +49,11 @@ public class ControllerSelector : MonoBehaviour
 				selectionScripts[i].gameObject.SetActive(false);
 				blacks[i].gameObject.SetActive(true);
 			}
+		}
+
+		if (currentPlayer >= maxPlayerNum)
+		{
+			UnityEngine.SceneManagement.SceneManager.LoadScene(0);
 		}
 	}
 }
