@@ -9,7 +9,7 @@ public class VCamManager : MonoBehaviour
 
     private TestVCamBlend expandedVirtualCamera;
     private CinemachineVirtualCamera activeVirtualCamera;
-    [SerializeField] private List<CinemachineBrain> brains = new List<CinemachineBrain>();
+    public List<CinemachineBrain> brains = new List<CinemachineBrain>();
 
     // ΩÃ±€≈Ê ¿ŒΩ∫≈œΩ∫
     private static VCamManager instance;

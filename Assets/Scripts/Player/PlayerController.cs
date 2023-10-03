@@ -98,7 +98,8 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+        VCamManager.Instance.brains[playerIndex].TryGetComponent<Camera>(out Camera mainCamera);
+        Vector2 dir = (mainCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
         attack.SetDirection(dir);
     }
 
