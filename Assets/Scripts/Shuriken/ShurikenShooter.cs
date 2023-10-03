@@ -76,35 +76,50 @@ public class ShurikenShooter : MonoBehaviour
 			currentCharge = Mathf.Min(currentCharge, maxCharge);
 			if (lineRenderer != null)
 			{
-				if (currentCharge >= 3)
+				Color newColor;
+				if (currentCharge >= 7)
 				{
-					Color color4 = new Color(0.0f, 0.0f, 0.8f, .3f); // 파란빛
+					newColor = new Color(1.0f, 0.0f, 0.0f, .3f); 
+					chargeDamageMultiplier = 2f;
+				}
+				else if (currentCharge >= 6)
+				{
+					newColor = new Color(0.9f, 0.2f, 0.8f, .3f); // 파란빛
+					chargeDamageMultiplier = 1.75f;
+				}
+				else if (currentCharge >= 5)
+				{
+                    newColor = new Color(0.7f, 0.4f, 0.8f, .3f); // 파란빛
+					chargeDamageMultiplier = 1.5f;
+				}
+				else if (currentCharge >= 4)
+				{
+					newColor = new Color(0.3f, 0.2f, 0.8f, .3f); // 파란빛
+					chargeDamageMultiplier = 1.25f;
+				}
+				else if (currentCharge >= 3)
+				{
+					newColor = new Color(0.0f, 0.0f, 0.8f, .3f); // 파란빛
 					chargeDamageMultiplier = 1f;
-					lineRenderer.startColor = color4;
-					lineRenderer.endColor = color4;
 				}
 				else if (currentCharge >= 2)
 				{
-					Color color3 = new Color(0.0f, 0.6314f, 0.6902f, .3f); // 진한 청록빛
+					newColor = new Color(0.0f, 0.6314f, 0.6902f, .3f); // 진한 청록빛
 					
 					chargeDamageMultiplier = 0.75f;
-					lineRenderer.startColor = color3;
-					lineRenderer.endColor = color3;
 				}
 				else if (currentCharge >= 1)
 				{
-					Color color2 = new Color(0.0f, 0.7490f, 0.6275f, .3f); // 진한 초록빛
+					newColor = new Color(0.0f, 0.7490f, 0.6275f, .3f); // 진한 초록빛
 					chargeDamageMultiplier = 0.5f;
-					lineRenderer.startColor = color2;
-					lineRenderer.endColor = color2;
 				}
 				else
 				{
-					Color color1 = new Color(0.4078f, 0.9922f, 0.8902f, .3f);
+					newColor = new Color(0.4078f, 0.9922f, 0.8902f, .3f);
 					chargeDamageMultiplier = 0.25f;
-					lineRenderer.startColor = color1;
-					lineRenderer.endColor = color1;
 				}
+				lineRenderer.startColor = newColor;
+				lineRenderer.endColor = newColor;
 			}
 			
 			SwitchChargeParticle();
