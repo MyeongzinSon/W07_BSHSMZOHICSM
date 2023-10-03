@@ -25,7 +25,7 @@ public class MapSelecter : MonoBehaviour
 
         //maps = FindObjectsOfType<OnMapActive>().ToList();
 
-        StartRandomMap();
+        StartMap();
     }
 
     private void OnDestroy()
@@ -49,7 +49,7 @@ public class MapSelecter : MonoBehaviour
         }
     }
 
-    public void StartRandomMap()
+    public void StartMap()
     {
         // num = Random.Range(0, maps.Count);
         int num = GameManager.Instance.stageCount-1;
@@ -60,7 +60,7 @@ public class MapSelecter : MonoBehaviour
         }
         else
         {
-            StartRandomMap();
+            StartMap();
         }
     }
 }
