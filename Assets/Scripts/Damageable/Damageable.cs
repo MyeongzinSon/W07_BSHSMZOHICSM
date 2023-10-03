@@ -40,7 +40,7 @@ public class Damageable : MonoBehaviour
 
 	public void Hit(float damage)
 	{
-		Debug.Log("Damaged: "+name + " " + Time.time);
+		//Debug.Log("Damaged: "+name + " " + Time.time);
 		hp -= damage * damageCoef;
 		
 		GameObject damageTextPrefab = (GameObject)Resources.Load("Prefabs/UI/DamageText");
