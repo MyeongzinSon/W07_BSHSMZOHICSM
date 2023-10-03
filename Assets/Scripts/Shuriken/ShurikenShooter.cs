@@ -206,18 +206,19 @@ public class ShurikenShooter : MonoBehaviour
 		inst.direction = _dir;
 		inst.SetRotationByDirection();
 
+		Debug.Log($"Shoot : transform.tag = {transform.tag}");
 		//총알 이미지 변경
 		if (transform.CompareTag("Player1"))
 		{
 			Sprite kunaiRed = Resources.Load<Sprite>("Prefabs/Sprites/KunaiRed");
-			shurikenPrefab.GetComponent<SpriteRenderer>().sprite = kunaiRed;
+			inst.GetComponent<SpriteRenderer>().sprite = kunaiRed;
 		}
 		else
 		{
 			Sprite kunaiBlue = Resources.Load<Sprite>("Prefabs/Sprites/KunaiBlue");
-			shurikenPrefab.GetComponent<SpriteRenderer>().sprite = kunaiBlue;
+			inst.GetComponent<SpriteRenderer>().sprite = kunaiBlue;
 		}
-		
+
 		//Debug.Log(inst.speed);
 		//슈리켄 값 받아와서 해당 값에 대한 설정
 		Shuriken instSrk = inst.GetComponent<Shuriken>();
@@ -284,7 +285,7 @@ public class ShurikenShooter : MonoBehaviour
 			}
 			else //플레이어 2
 			{
-				Debug.Log("플레이어2");
+				//Debug.Log("플레이어2");
 				Material chargeMat = (Material)Resources.Load("Prefabs/Particles/ChargeParticleBlue");
 				Material sketchMat = (Material)Resources.Load("Prefabs/Particles/SketchParticleBlue");
 				chargeParticle.transform.GetChild(0).GetComponent<ParticleSystem>().GetComponent<Renderer>().material = chargeMat;

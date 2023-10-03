@@ -198,12 +198,11 @@ GameObject:
   - component: {fileID: 268700112459832159}
   - component: {fileID: 6115772962267442698}
   - component: {fileID: 2147070924}
-  - component: {fileID: 1330590512}
   - component: {fileID: 1330590521}
   - component: {fileID: 1330590515}
   - component: {fileID: 335330138299867738}
   m_Layer: 12
-  m_Name: Player
+  m_Name: Player 1
   m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,7 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bf267b97ca4b46479547f907cb85c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMouseInput: 1
+  playerIndex: 0
 --- !u!114 &151654153272765878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,7 +359,7 @@ MonoBehaviour:
   shurikenPrefab: {fileID: 3743431136012034996, guid: d6e27b5bc01fc5f43a8a6b0fa5f5c98f, type: 3}
   damageLayer:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 8192
   shootRadius: 0.5
   launchAngle: 20
   slowOnCharge: 0.3
@@ -479,19 +478,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &1330590512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2161613080536109213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73773f1d7173e5a45ad246deae76a73f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 2161613080536109214}
 --- !u!114 &1330590521
 MonoBehaviour:
   m_ObjectHideFlags: 0

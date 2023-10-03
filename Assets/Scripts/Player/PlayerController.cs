@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 {
 	const float cameraExpandDelay  = 0.5f;
 
-	[SerializeField] bool isMouseInput;
+	[SerializeField] int playerIndex;
 
 	private NewInputActions inputs;
 	private PlayerMove move;
@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 	bool isLooking = false;
 	float cameraExpandTimer = -1f;
 
-	bool IsMouseInput => isMouseInput;
+	InputDevice assignedDevice => ControllerSelector.inputDevices[playerIndex];
+	bool IsKeyboardInput => assignedDevice is Keyboard;
 
 	void Awake()
 	{
@@ -50,22 +51,23 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 
 	void SetAttackDirectionWithMouse()
     {
-		if (IsMouseInput)
-		{
-			Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
-			attack.SetDirection(dir);
-		}
-	}
+        if (!IsKeyboardInput)
+        {
+            return;
+        }
+        Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+        attack.SetDirection(dir);
+    }
 
-	bool CheckMyDevice(InputAction.CallbackContext context)
+    bool CheckMyDevice(InputAction.CallbackContext context)
     {
-		if(ControllerSelector.inputDevices[0] is Keyboard
+		if(IsKeyboardInput
 			&& context.control.device is Mouse)
         {
 			return true;
         }
 
-		return context.control.device == ControllerSelector.inputDevices[0];
+		return context.control.device == assignedDevice;
 	}
 
 	public void OnMove(InputAction.CallbackContext context)
@@ -77,10 +79,10 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 		if (GameManager.Instance.isBattleStart)
 		{
 			move.OnMove(context);
-			if (!isLooking)
-            {
-				attack.SetDirection(context.ReadValue<Vector2>());
-            }
+			//if (!isLooking)
+   //         {
+			//	attack.SetDirection(context.ReadValue<Vector2>());
+   //         }
 		}
     }
 
@@ -89,7 +91,7 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 		if (!CheckMyDevice(context)) return;
 
 		var direction = context.ReadValue<Vector2>();
-		if (!IsMouseInput && direction != Vector2.zero)
+		if (!IsKeyboardInput && direction != Vector2.zero)
 		{
 			attack.SetDirection(direction);
 		}
@@ -120,7 +122,7 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 			{
 				if (attack.StartCharge())
 					cameraExpandTimer = 0;
-				if (IsMouseInput)
+				if (IsKeyboardInput)
                 {
 					isLooking = true;
                 }
@@ -133,7 +135,7 @@ public class PlayerController : MonoBehaviour, NewInputActions.IPlayerActions
 					cameraExpandTimer = -1;
 					VCamManager.Instance.Reduce();
 				}
-				if (IsMouseInput)
+				if (IsKeyboardInput)
                 {
 					isLooking = false;
                 }
