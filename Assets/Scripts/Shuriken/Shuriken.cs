@@ -50,6 +50,9 @@ public class Shuriken : MonoBehaviour
     public float explosionTime = 1f;
     public float explosionDamageRatio = 0.3f; //수리검 데미지의 n%의 데미지
     private bool isExploded = false;
+    
+    [Header("거미줄")]
+    private bool isSlowed = false;
 
     [Header("부메랑")]
     public bool useBoomerang;
@@ -116,7 +119,7 @@ public class Shuriken : MonoBehaviour
             case ShurikenAttribute.KnockbackToWall:
                 useKnockBack = true;
                 break;
-            case ShurikenAttribute.Slow:
+            case ShurikenAttribute.Slow: //거미줄
                 useSlow = true;
                 break;
             case ShurikenAttribute.Vulnerable:
@@ -346,6 +349,17 @@ public class Shuriken : MonoBehaviour
         Instantiate(particle, transform.position, Quaternion.identity);
     }
 
+    void MakeSlowEffect()
+    {
+        if (isSlowed)
+        {
+            return;
+        }
+        isSlowed = true;
+        GameObject spiderWebPrefab = Resources.Load<GameObject>("Prefabs/SpiderWeb");
+        GameObject spiderWeb = Instantiate(spiderWebPrefab, transform.position, Quaternion.identity);
+        spiderWeb.transform.localScale = new Vector3(8f, 8f, 1f);
+    }
 
     Vector2 GetReflectVector(Vector2 _dir, Vector2 _normal)
     {
@@ -402,6 +416,12 @@ public class Shuriken : MonoBehaviour
         {
             Explosion();
         }
+
+        if (useSlow)
+        {
+            MakeSlowEffect();
+        }
+        
         // if (useBoomerang)
         // {
         //     StartCoroutine(BoomerangCoroutine());

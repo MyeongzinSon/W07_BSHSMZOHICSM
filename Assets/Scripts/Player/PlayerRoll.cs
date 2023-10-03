@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.AI;
@@ -18,12 +20,14 @@ public class PlayerRoll : MonoBehaviour
     [SerializeField] private int rollMaxFrequency;
     [SerializeField] private bool isRollingCoroutinePlaying = false;
 
+    private bool isOnSpiderWeb = false;
+
     public bool CanRoll { get {
             bool direction = playerMove.direction != Vector2.zero;
             bool rolling = !isRollingCoroutinePlaying;
             bool cooltime = rollCurrentFrequency < rollMaxFrequency;
             //Debug.Log($"CanRoll : direction = {direction}, rolling = {rolling}, cooltime = {cooltime}");
-            return direction && rolling && cooltime;
+            return direction && rolling && cooltime && (isOnSpiderWeb == false);
                 } }
 
     private void Awake()
@@ -49,6 +53,12 @@ public class PlayerRoll : MonoBehaviour
     }
     public bool TryRoll()
     {
+        if (isOnSpiderWeb)
+        {
+            Debug.Log("거미줄 위에 있어서 구르기 불가능");
+            GameManager.Instance.CreateImageText("고정됨!", new Color(.9f, .9f, .9f), transform.position);
+            return false;
+        }
         if (playerMove.direction != Vector2.zero)
         {
             if (!isRollingCoroutinePlaying)
@@ -115,4 +125,20 @@ public class PlayerRoll : MonoBehaviour
         rollCoolTime = _cooltime;
     }
 
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("SpiderWeb"))
+        {
+            isOnSpiderWeb = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("SpiderWeb"))
+        {
+            isOnSpiderWeb = false;
+        }
+    }
 }
