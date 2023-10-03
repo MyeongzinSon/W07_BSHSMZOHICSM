@@ -11,6 +11,7 @@ public class VersusManager : MonoBehaviour
             if (!_instance)
             {
                 _instance = FindObjectOfType(typeof(VersusManager)) as VersusManager;
+                DontDestroyOnLoad(_instance.gameObject);
 
                 if (_instance == null)
                     Debug.Log("no Singleton obj");
