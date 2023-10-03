@@ -149,8 +149,7 @@ public class ShurikenShooter : MonoBehaviour
 		{
 			if (TryShoot())
 			{
-				mover.speed += rawSlowNum;
-				currentCharge = 0;
+				OnFinishCharging();
 				return true;
             }
 		}
@@ -254,7 +253,15 @@ public class ShurikenShooter : MonoBehaviour
 
 	public void Cancel()
 	{
-		currentCharge = 0f;
+		OnFinishCharging();
+	}
+	void OnFinishCharging()
+    {
+		if (IsCharging)
+		{
+			mover.speed += rawSlowNum;
+			currentCharge = 0f;
+		}
 	}
 
 	public void AddCurrentCartridge(int _amount)

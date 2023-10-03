@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.Tournament:
+                VersusManager.Instance.gameObject.SetActive(true);
                 break;
             case GameState.Battle:
                 isBattleStart = true;
@@ -232,7 +233,6 @@ public class GameManager : MonoBehaviour
         }
         
         gameClearText.SetActive(true);
-        if (winPlayerNum == 1)
         Invoke("GoToUpgrade", 3.5f);
 
         stageCount += 1;
