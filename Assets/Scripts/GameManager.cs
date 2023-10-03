@@ -232,7 +232,6 @@ public class GameManager : MonoBehaviour
         }
         
         gameClearText.SetActive(true);
-        if (winPlayerNum == 1)
         Invoke("GoToUpgrade", 3.5f);
 
         stageCount += 1;
