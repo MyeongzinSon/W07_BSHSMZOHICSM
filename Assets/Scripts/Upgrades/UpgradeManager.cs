@@ -18,6 +18,7 @@ public class UpgradeManager : MonoBehaviour
 
     void OnEnable()
     {
+        ChangeUpdrageText(GameManager.Instance.currentSelectIdx);
         for (int i = 0; i < 3; i++)
         {
             canSelect[i] = true;
@@ -197,10 +198,20 @@ public class UpgradeManager : MonoBehaviour
             Color originalColor = new Color(0.718f, 0.576f, 0.360f);
             UpgradeIconContainers[i].GetChild(1).GetComponent<Image>().color = originalColor;
         }
-
-        transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "<color=#FF0000>플레이어1</color>업그레이드";
     }
 
+    public void ChangeUpdrageText(int num)
+    {
+        if (num == 1)
+        {
+            transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "<color=#FF0000>플레이어1</color>업그레이드";
+        }
+        else
+        {
+            transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "<color=#0000FF>플레이어2</color>업그레이드";
+        }
+    }
+    
     public void SelectConfirmHandler()
     {
         int selectedIdx = -1;
@@ -220,29 +231,33 @@ public class UpgradeManager : MonoBehaviour
         }
         else
         {
-            if (remainingSelectCount == 2)
+            if (GameManager.Instance.currentSelectIdx == 1)
             {
                 CharacterStatsData data = GameManager.Instance.characterStatsDataList[selectedIdx];
                 GameManager.Instance.upgradedListPlayer1.Add(data);
                 GameManager.Instance.upgradedListIntPlayer1.Add(selectedIdx);
-                transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "<color=#0000FF>플레이어2</color>업그레이드";
+                if (shurikenDB.Shurikens[selectedIdxes[curIdx]].showOnlyOnce > 0) // 한번만 나와야 하는 경우
+                {
+                    GameManager.Instance.canUpgradeIdxListPlayer1.Remove((GameManager.UpgradeIdx)selectedIdxes[curIdx]);
+                }
+                GameManager.Instance.currentSelectIdx = 2;
+                ChangeUpdrageText(GameManager.Instance.currentSelectIdx);
             }
             else
             {
                 CharacterStatsData data = GameManager.Instance.characterStatsDataList[selectedIdx];
                 GameManager.Instance.upgradedListPlayer2.Add(data);
                 GameManager.Instance.upgradedListIntPlayer2.Add(selectedIdx);
-            }
-
-            if (shurikenDB.Shurikens[selectedIdxes[curIdx]].showOnlyOnce > 0) // 한번만 나와야 하는 경우
-            {
-                GameManager.Instance.canUpgradeIdxListPlayer1.Remove((GameManager.UpgradeIdx)selectedIdxes[curIdx]);
+                if (shurikenDB.Shurikens[selectedIdxes[curIdx]].showOnlyOnce > 0) // 한번만 나와야 하는 경우
+                {
+                    GameManager.Instance.canUpgradeIdxListPlayer2.Remove((GameManager.UpgradeIdx)selectedIdxes[curIdx]);
+                }
+                GameManager.Instance.currentSelectIdx = 1;
+                ChangeUpdrageText(GameManager.Instance.currentSelectIdx);
             }
 
             canSelect[curIdx] = false;
             UpgradeIconContainers[curIdx].GetChild(1).GetComponent<Image>().color = new Color(0.341f, 0.278f, 0.169f);
-            
-            
         }
 
         remainingSelectCount--;
