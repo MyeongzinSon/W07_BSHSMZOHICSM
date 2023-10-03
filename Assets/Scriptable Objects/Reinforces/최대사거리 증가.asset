@@ -20,9 +20,9 @@ MonoBehaviour:
   maxRollNum: 0
   attackPower: 0
   chargeSpeed: 0
-  maxChargeAmount: 0
+  maxChargeAmount: 1
   maxCartridgeNum: 0
-  maxDistance: 3
+  maxDistance: 1
   shurikenSpeed: 0
   shurikenNum: 0
   shurikenScale: 0

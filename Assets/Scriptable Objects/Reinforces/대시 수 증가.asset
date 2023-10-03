@@ -16,8 +16,8 @@ MonoBehaviour:
   maxHp: 0
   moveSpeed: 0
   rollDistance: 0
-  rollCooldown: 0
-  maxRollNum: 0
+  rollCooldown: -0.3
+  maxRollNum: 1
   attackPower: 0
   chargeSpeed: 0
   maxChargeAmount: 0
