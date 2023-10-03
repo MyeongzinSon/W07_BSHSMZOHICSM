@@ -2865,6 +2865,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4863132653218691190, guid: 277b5395cfa148b4d904db860e3ab909, type: 3}
+      propertyPath: brains.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4863132653218691190, guid: 277b5395cfa148b4d904db860e3ab909, type: 3}
+      propertyPath: brains.Array.data[0]
+      value: 
+      objectReference: {fileID: 2049131977}
     - target: {fileID: 4863132653218691192, guid: 277b5395cfa148b4d904db860e3ab909, type: 3}
       propertyPath: m_Name
       value: VCamManager
@@ -4392,6 +4400,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradeCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6640241273192044895, guid: 77c5bf2bd22904e4ba96266b0f6e0678, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77c5bf2bd22904e4ba96266b0f6e0678, type: 3}
 --- !u!1 &1902147053 stripped
@@ -4443,6 +4455,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2161613080536109213, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
   m_PrefabInstance: {fileID: 5200608847638117427}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2049131977 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4432160911253314368, guid: deb943a3982350942b001c0c8f23b9c9, type: 3}
+  m_PrefabInstance: {fileID: 176650946}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9018747501433543
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4861,6 +4884,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 226309023, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
+      propertyPath: isMouseInput
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1330590521, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
       propertyPath: playerHpBar
       value: 
@@ -4927,15 +4954,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2161613080536109214, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2161613080536109214, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2161613080536109214, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2161613080536109214, guid: f3cf2743991063b41b11ef32fc306d5f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
