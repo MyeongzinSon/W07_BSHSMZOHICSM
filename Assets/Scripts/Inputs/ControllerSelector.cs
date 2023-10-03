@@ -53,6 +53,9 @@ public class ControllerSelector : MonoBehaviour
 
 		if (currentPlayer >= maxPlayerNum)
 		{
+			Debug.Log($"Device 0 : {inputDevices[0].name}");
+			Debug.Log($"Device 1 : {inputDevices[1].name}");
+
 			UnityEngine.SceneManagement.SceneManager.LoadScene(0);
 		}
 	}
