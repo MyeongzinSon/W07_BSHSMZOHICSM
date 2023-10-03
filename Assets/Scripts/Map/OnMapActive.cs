@@ -14,8 +14,8 @@ public class OnMapActive : MonoBehaviour
     public void Init(GameObject _enemy = null)
     {
         //enemy =  _enemy != null ? _enemy : transform.GetChild(0).gameObject;
-        map = transform.GetChild(1).gameObject;
-        blueZone = transform.GetChild(2).gameObject;
+        map = transform.GetChild(0).gameObject;
+        blueZone = transform.GetChild(1).gameObject;
 
         //enemy.SetActive(true);
         map.SetActive(true);

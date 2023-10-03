@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
     
     //몇번째 스테이지인가
     public int stageCount = 1;
-    public int maxStage = 6;
+    public int maxStage = 7;
     
     public static GameManager Instance
     {
