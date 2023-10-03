@@ -44,6 +44,8 @@ public class VersusManager : MonoBehaviour
     private RectTransform rightPlayerRectTransform;
     private Vector2 originalLeftPosition;
     private Vector2 originalRightPosition;
+    public GameObject victoryContainerRed;
+    public GameObject victoryContainerBlue;
     
     private void Start()
     {
@@ -85,12 +87,12 @@ public class VersusManager : MonoBehaviour
     {
         for (int i = 1; i <= victoryCountPlayer1; i++)
         {
-            GameObject.Find("VictoryContainerRed").transform.GetChild(i).gameObject.SetActive(true);
+            victoryContainerRed.transform.GetChild(i).gameObject.SetActive(true);
         }
         
         for (int i = 1; i <= victoryCountPlayer2; i++)
         {
-            GameObject.Find("VictoryContainerBlue").transform.GetChild(i).gameObject.SetActive(true);
+            victoryContainerBlue.transform.GetChild(i).gameObject.SetActive(true);
         }
     }
 }

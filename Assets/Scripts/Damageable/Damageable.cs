@@ -45,41 +45,44 @@ public class Damageable : MonoBehaviour
 
 	public void Hit(float damage)
 	{
-		//Debug.Log("Damaged: "+name + " " + Time.time);
-		hp -= damage * damageCoef;
+		if (GameManager.Instance.isBattleStart)
+		{
+			//Debug.Log("Damaged: "+name + " " + Time.time);
+			hp -= damage * damageCoef;
 		
-		GameObject damageTextPrefab = (GameObject)Resources.Load("Prefabs/UI/DamageText");
-		GameObject damageText = Instantiate(damageTextPrefab, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
-		damageText.GetComponent<MoveAndDestroy>()._text = "-" + (damage * damageCoef).ToString("F0");
+			GameObject damageTextPrefab = (GameObject)Resources.Load("Prefabs/UI/DamageText");
+			GameObject damageText = Instantiate(damageTextPrefab, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
+			damageText.GetComponent<MoveAndDestroy>()._text = "-" + (damage * damageCoef).ToString("F0");
 		
-		GameObject hitParticle = (GameObject)Resources.Load("Prefabs/Particles/BloodParticle");
-		Instantiate(hitParticle, transform.position, Quaternion.identity);
-		if (gameObject.activeSelf)
-		{
-			transform.GetChild(0).GetComponent<FlashingObject>().MakeObjectFlashSprite(transform.GetChild(0).GetComponent<SpriteRenderer>(), .03f, .1f);
-		}
-		if (hp <= 0)
-		{
-			hp = 0f;
-			Kill();
-		}
-
-		if (curseStack > 0)
-		{
-			GameObject curseStackPrefab = (GameObject)Resources.Load("Prefabs/UI/CurseStack");
-
-			for (int i = 0; i < curseStack; i++)
+			GameObject hitParticle = (GameObject)Resources.Load("Prefabs/Particles/BloodParticle");
+			Instantiate(hitParticle, transform.position, Quaternion.identity);
+			if (gameObject.activeSelf)
 			{
-				GameObject curseStack = Instantiate(curseStackPrefab, curseContainer.transform.position + new Vector3(i * .8f, 0f, 0f), Quaternion.identity);
-				curseStack.transform.parent = curseContainer.transform;
+				transform.GetChild(0).GetComponent<FlashingObject>().MakeObjectFlashSprite(transform.GetChild(0).GetComponent<SpriteRenderer>(), .03f, .1f);
 			}
+			if (hp <= 0)
+			{
+				hp = 0f;
+				Kill();
+			}
+
+			if (curseStack > 0)
+			{
+				GameObject curseStackPrefab = (GameObject)Resources.Load("Prefabs/UI/CurseStack");
+
+				for (int i = 0; i < curseStack; i++)
+				{
+					GameObject curseStack = Instantiate(curseStackPrefab, curseContainer.transform.position + new Vector3(i * .8f, 0f, 0f), Quaternion.identity);
+					curseStack.transform.parent = curseContainer.transform;
+				}
 			
-		}
+			}
 		
-		if (curseStack >= 3)
-		{
-			hp = 0f;
-			Kill();
+			if (curseStack >= 3)
+			{
+				hp = 0f;
+				Kill();
+			}
 		}
 	}
 
@@ -106,17 +109,13 @@ public class Damageable : MonoBehaviour
 		gameObject.SetActive(false);
         if (gameObject.tag == "Player1") //플레이어1 승리
         {
-	        /*
-	        Debug.Log("Game Over");
-	        GameObject gameOverText = GameObject.Find("IngameCanvas").transform.Find("GameOverPanel").gameObject;
-	        gameOverText.SetActive(true);
-	        */
 	        GameManager.Instance.StageClear(2);
         }
         else //플레이어2 승리
         {
 	        GameManager.Instance.StageClear(1);
         }
+        GameManager.Instance.isBattleStart = false;
 	}
 	
 	public void TestEnemyDamage(int num)
