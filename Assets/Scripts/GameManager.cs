@@ -136,6 +136,7 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.Tournament:
+                VersusManager.Instance.gameObject.SetActive(true);
                 break;
             case GameState.Battle:
                 isBattleStart = true;

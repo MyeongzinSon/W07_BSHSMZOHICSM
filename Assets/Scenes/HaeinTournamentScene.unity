@@ -392,6 +392,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2031379876639148859, guid: 3e0eb0111403178499c42b9792b81182, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ed2dab63cc7f5c746875cf2d096219b8, type: 3}
     - target: {fileID: 2031379876755104181, guid: 3e0eb0111403178499c42b9792b81182, type: 3}
       propertyPath: m_Name
       value: VersusCanvas
@@ -484,6 +488,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2031379876795798757, guid: 3e0eb0111403178499c42b9792b81182, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ed2dab63cc7f5c746875cf2d096219b8, type: 3}
+    - target: {fileID: 2031379876887439087, guid: 3e0eb0111403178499c42b9792b81182, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ed2dab63cc7f5c746875cf2d096219b8, type: 3}
+    - target: {fileID: 2031379877344699889, guid: 3e0eb0111403178499c42b9792b81182, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ed2dab63cc7f5c746875cf2d096219b8, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e0eb0111403178499c42b9792b81182, type: 3}
 --- !u!1001 &2403143410111406520
