@@ -149,7 +149,7 @@ public class Shuriken : MonoBehaviour
                 else
                 {
                     SetPickUpState();
-                    Debug.Log($"{owner.name} 거리 이동완료, ");
+                    //Debug.Log($"{owner.name} 거리 이동완료, ");
                 }
             }
         }
