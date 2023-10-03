@@ -254,6 +254,7 @@ public class UpgradeManager : MonoBehaviour
             GameManager.Instance.ExitState(GameManager.GameState.Upgrade);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
             GameManager.Instance.EnterState(GameManager.GameState.Tournament);
+            VersusManager.Instance.ApplyVictoryCount();
             //TournamentManager.Instance.gameObject.SetActive(true);
             //TournamentManager.Instance.Init();
             gameObject.SetActive(false);

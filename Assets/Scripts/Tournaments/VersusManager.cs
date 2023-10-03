@@ -50,7 +50,13 @@ public class VersusManager : MonoBehaviour
             LeanTween.move(leftPlayerRectTransform, leftTargetPosition, 0.3f).setEase(LeanTweenType.easeOutQuad);
             LeanTween.move(rightPlayerRectTransform, rightTargetPosition, 0.3f).setEase(LeanTweenType.easeOutQuad);
 
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(.2f);
+            //Create Particle
+            GameObject fryingParticle = Resources.Load<GameObject>("Prefabs/Particles/UIFryingParticle");
+            Instantiate(fryingParticle, new Vector3(0f, 0f, 0f), Quaternion.identity);
+            
+            yield return new WaitForSeconds(0.1f);
+            
             
             LeanTween.move(leftPlayerRectTransform, originalLeftPosition, 0.3f).setEase(LeanTweenType.easeOutQuad);
             LeanTween.move(rightPlayerRectTransform, originalRightPosition, 0.3f).setEase(LeanTweenType.easeOutQuad);
