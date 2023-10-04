@@ -228,6 +228,7 @@ public class ShurikenShooter : MonoBehaviour
 		instSrk.damage = stats.attackPower * chargeDamageMultiplier;
 		instSrk.moveDistance = CurrentDistance;
 		instSrk.isShadow = isShadow;
+		instSrk.chargeAmount = CurrentChargeAmount;
 		
 		//특대형 수리검
 		instSrk.transform.localScale *= 1f + stats.shurikenScale;

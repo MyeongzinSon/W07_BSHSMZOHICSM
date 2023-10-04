@@ -81,6 +81,7 @@ public class Shuriken : MonoBehaviour
     public bool useDamageBuff = false;
     public bool useInhibitHeal = false;
     private SpriteOutline spriteOutline;
+    public float chargeAmount;
 
     #region privateValues
 
@@ -393,7 +394,7 @@ public class Shuriken : MonoBehaviour
         }
         isExploded = true;
         ExplosionDamager ex = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        ex.transform.localScale = new Vector3(explosionScale, explosionScale, 1f);
+        ex.transform.localScale = new Vector3(explosionScale * chargeAmount, explosionScale * chargeAmount, 1f);
         ex.destroyTimer = explosionTime;
         ex.damageLayer = damageLayer;
         ex.damage = damage*explosionDamageRatio;
