@@ -470,7 +470,7 @@ MonoBehaviour:
   remainingSelectCount: 2
   selectedIdxes: 
   player: {fileID: 0}
-  additionalHp: 20
+  additionalHp: 10
 --- !u!1 &6640241273431798970
 GameObject:
   m_ObjectHideFlags: 0
