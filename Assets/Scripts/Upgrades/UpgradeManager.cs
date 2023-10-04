@@ -16,6 +16,9 @@ public class UpgradeManager : MonoBehaviour
     public GameObject player;
     private Transform[] UpgradeIconContainers = new Transform[3];
 
+    [Header("Additional Hp Per Round")]
+    [SerializeField] float additionalHp;
+
     void OnEnable()
     {
         ChangeUpdrageText(GameManager.Instance.currentSelectIdx);
@@ -231,7 +234,8 @@ public class UpgradeManager : MonoBehaviour
         {
             if (GameManager.Instance.currentSelectIdx == 1)
             {
-                CharacterStatsData data = GameManager.Instance.characterStatsDataList[selectedIdx];
+                CharacterStatsData data = Instantiate(GameManager.Instance.characterStatsDataList[selectedIdx]);
+                data.maxHp += additionalHp;
                 GameManager.Instance.upgradedListPlayer1.Add(data);
                 GameManager.Instance.upgradedListIntPlayer1.Add(selectedIdx);
                 if (shurikenDB.Shurikens[selectedIdxes[curIdx]].showOnlyOnce > 0) // 한번만 나와야 하는 경우
@@ -243,7 +247,8 @@ public class UpgradeManager : MonoBehaviour
             }
             else
             {
-                CharacterStatsData data = GameManager.Instance.characterStatsDataList[selectedIdx];
+                CharacterStatsData data = Instantiate(GameManager.Instance.characterStatsDataList[selectedIdx]);
+                data.maxHp += additionalHp;
                 GameManager.Instance.upgradedListPlayer2.Add(data);
                 GameManager.Instance.upgradedListIntPlayer2.Add(selectedIdx);
                 if (shurikenDB.Shurikens[selectedIdxes[curIdx]].showOnlyOnce > 0) // 한번만 나와야 하는 경우
