@@ -140,7 +140,7 @@ public class UpgradeManager : MonoBehaviour
         int randomInt;
         if (isSpecial) //특수
         {
-            randomInt = Random.Range(GameManager.Instance.specialStartIdx, GameManager.Instance.upgradeIdxCount + 1);
+            randomInt = Random.Range(GameManager.Instance.specialStartIdx, GameManager.Instance.upgradeIdxCount);
         }
         else //일반
         {
