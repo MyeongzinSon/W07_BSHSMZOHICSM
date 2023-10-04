@@ -36,7 +36,8 @@ public class GameManager : MonoBehaviour
         THROWNUM,
         GUIDANCE,
         SPIDERWEB,
-        CURSE
+        CURSE,
+        COMEBACK,
     }
 
     public int specialStartIdx = 6;
@@ -55,7 +56,8 @@ public class GameManager : MonoBehaviour
         UpgradeIdx.THROWNUM,
         UpgradeIdx.GUIDANCE,
         UpgradeIdx.SPIDERWEB,
-        UpgradeIdx.CURSE
+        UpgradeIdx.CURSE,
+        UpgradeIdx.COMEBACK,
     };
     
     public List<UpgradeIdx> canUpgradeIdxListPlayer2 = new List<UpgradeIdx>
@@ -72,7 +74,8 @@ public class GameManager : MonoBehaviour
         UpgradeIdx.THROWNUM,
         UpgradeIdx.GUIDANCE,
         UpgradeIdx.SPIDERWEB,
-        UpgradeIdx.CURSE
+        UpgradeIdx.CURSE,
+        UpgradeIdx.COMEBACK,
     };
     
     public int upgradeIdxCount = System.Enum.GetValues(typeof(UpgradeIdx)).Length;

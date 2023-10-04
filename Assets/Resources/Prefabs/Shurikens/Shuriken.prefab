@@ -125,9 +125,10 @@ MonoBehaviour:
   explosionScale: 15
   explosionTime: 1
   explosionDamageRatio: 0.3
-  useBoomerang: 0
   boomerangDelay: 5
   boomerangAccel: 3
+  useComeBack: 0
+  isWallBounce: 0
   attributes: 
   useLifeSteal: 0
   lifeStealAmount: 2
@@ -244,3 +245,4 @@ MonoBehaviour:
   - {r: 0.647, g: 0, b: 0, a: 1}
   - {r: 1, g: 0.27, b: 0, a: 1}
   - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0.13725491, g: 0.5137255, b: 0.3764706, a: 1}

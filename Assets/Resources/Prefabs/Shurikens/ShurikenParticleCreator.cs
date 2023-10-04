@@ -24,6 +24,7 @@ public class ShurikenParticleCreator : MonoBehaviour
         new Color(0.4f, 1.0f, 0.0f),      // 초록색
         new Color(0.933f, 0.702f, 0.537f), // 연한 황토색
         new Color(1.0f, 1.0f, 1.0f),      // 흰색
+        new Color(0.1372f,0.51372f,0.3764705f)  //옥색
     };
 
     private Shuriken shuriken;
