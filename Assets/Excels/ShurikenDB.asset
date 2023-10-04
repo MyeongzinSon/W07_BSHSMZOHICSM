@@ -15,7 +15,7 @@ MonoBehaviour:
   Shurikens:
   - id: 0
     name: "\uCCB4\uB825 \uC99D\uAC00"
-    description: "\uCCB4\uB825\uC774 30 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    description: "\uCCB4\uB825\uC774 20 \uC99D\uAC00\uD569\uB2C8\uB2E4."
     showOnlyOnce: 0
     meritSpecies: Hp
     meritAmount: 20
@@ -23,10 +23,10 @@ MonoBehaviour:
     demeritAmount: 0
   - id: 0
     name: "\uACF5\uACA9\uB825 \uC99D\uAC00"
-    description: "\uACF5\uACA9\uB825\uC774 10 \uC99D\uAC00\uD569\uB2C8\uB2E4."
+    description: "\uACF5\uACA9\uB825\uC774 5 \uC99D\uAC00\uD569\uB2C8\uB2E4."
     showOnlyOnce: 0
     meritSpecies: AtkDmg
-    meritAmount: 15
+    meritAmount: 5
     demeritSpecies: none
     demeritAmount: 0
   - id: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
     demeritAmount: 0
   - id: 0
     name: "\uCD5C\uB300\uC0AC\uAC70\uB9AC \uC99D\uAC00"
-    description: "\uCD5C\uB300 \uC0AC\uAC70\uB9AC\uAC00 3 \uB298\uC5B4\uB0A9\uB2C8\uB2E4."
+    description: "\uCC28\uC9D5 \uB2E8\uACC4\uAC00 1 \uB298\uC5B4\uB0A9\uB2C8\uB2E4."
     showOnlyOnce: 0
     meritSpecies: Range
     meritAmount: 3

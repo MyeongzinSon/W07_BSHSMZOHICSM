@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "\uCCB4\uB825 \uC99D\uAC00"
   m_EditorClassIdentifier: 
   forDefaultState: 0
-  maxHp: 30
+  maxHp: 20
   moveSpeed: 0
   rollDistance: 0
   rollCooldown: 0
