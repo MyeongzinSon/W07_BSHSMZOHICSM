@@ -31,13 +31,12 @@ public class GameManager : MonoBehaviour
         RANGEUP,
         RELOAD,
         BOUNCE,
-        BOOMERANG,
+        COMEBACK,
         EXPLOSION,
         THROWNUM,
         GUIDANCE,
         SPIDERWEB,
         CURSE,
-        COMEBACK,
     }
 
     public int specialStartIdx = 6;
@@ -51,13 +50,12 @@ public class GameManager : MonoBehaviour
         UpgradeIdx.RANGEUP,
         UpgradeIdx.RELOAD,
         UpgradeIdx.BOUNCE,
-        UpgradeIdx.BOOMERANG,
+        UpgradeIdx.COMEBACK,
         UpgradeIdx.EXPLOSION,
         UpgradeIdx.THROWNUM,
         UpgradeIdx.GUIDANCE,
         UpgradeIdx.SPIDERWEB,
         UpgradeIdx.CURSE,
-        UpgradeIdx.COMEBACK,
     };
     
     public List<UpgradeIdx> canUpgradeIdxListPlayer2 = new List<UpgradeIdx>
@@ -69,13 +67,12 @@ public class GameManager : MonoBehaviour
         UpgradeIdx.RANGEUP,
         UpgradeIdx.RELOAD,
         UpgradeIdx.BOUNCE,
-        UpgradeIdx.BOOMERANG,
+        UpgradeIdx.COMEBACK,
         UpgradeIdx.EXPLOSION,
         UpgradeIdx.THROWNUM,
         UpgradeIdx.GUIDANCE,
         UpgradeIdx.SPIDERWEB,
         UpgradeIdx.CURSE,
-        UpgradeIdx.COMEBACK,
     };
     
     public int upgradeIdxCount = System.Enum.GetValues(typeof(UpgradeIdx)).Length;
