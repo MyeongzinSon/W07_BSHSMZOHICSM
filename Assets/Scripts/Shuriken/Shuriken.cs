@@ -289,8 +289,8 @@ public class Shuriken : MonoBehaviour
                 {
                     if (isWallBounce == false)
                     {
-                        damage *= 2;
-                        mover.speed *= 1.5f;
+                        damage *= 1.4f;
+                        //mover.speed *= 1.5f;
                         isWallBounce = true;
                     }
                     GetComponent<SpriteRenderer>().color = Color.yellow;
