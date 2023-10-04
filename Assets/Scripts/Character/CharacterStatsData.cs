@@ -21,6 +21,7 @@ public class CharacterStatsData : ScriptableObject
     public float attackPower;       //데미지
     public float chargeSpeed;       //충전 속도
     public float maxChargeAmount;   //최대 충전 시간
+    public int maxChargeLevel;      //최대 충전 단계
     public int maxCartridgeNum;     //탄창 수
     public float maxDistance;       //최대 사거리
     public float shurikenSpeed;     //수리검이 날아가는 속도

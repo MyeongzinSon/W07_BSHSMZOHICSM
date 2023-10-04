@@ -18,18 +18,19 @@ public class ShurikenShooter : MonoBehaviour
 	public float slowOnCharge = 0.3f;
 
 	[Header("차지 데미지")] 
-	public float chargeDamageMultiplier = .25f;
 	public int chargeLevel = 1;
 	[Range(0, 100)] public float ghostShurikenDamageScale = 25;
 	private float shurikenDamageScale = 100f;
+
+	[Header("차지 단계")]
+	public float standardChargeLevel; //not int for divide operation
 
 	#region privateArea
 
 	private Mover mover;
 	private Vector2 direction;
 	private CharacterStats stats;
-	private float maxCharge = 3;
-	private int maxCartridge;
+	private float chargeDamageMultiplier;
 	private int currentCartridge;
 	private int shurikenCount;
 	private float currentCharge = 0;
@@ -46,10 +47,15 @@ public class ShurikenShooter : MonoBehaviour
 
 	#endregion
 
+	float MaxCharge => stats.maxChargeAmount;
+	float LeveledMaxCharge => MaxCharge * MaxChargeLevel / standardChargeLevel;
+	int MaxCartridge => stats.maxCartridgeNum;
+	int MaxChargeLevel => stats.maxChargeLevel;
+
 	public bool CanShoot => currentCartridge > 0;
 	public bool IsCharging => currentCharge > 0;
-	public bool IsCartridgeFull => currentCartridge == maxCartridge;
-	public float CurrentChargeAmount => currentCharge / maxCharge;
+	public bool IsCartridgeFull => currentCartridge == MaxCartridge;
+	public float CurrentChargeAmount => currentCharge / MaxCharge;
 	public float CurrentDistance => stats.maxDistance * CurrentChargeAmount;
 
 	private void Start()
@@ -59,9 +65,7 @@ public class ShurikenShooter : MonoBehaviour
 			Debug.LogError($"ShurikenShooter : 해당 캐릭터에서 CharacterStats 컴포넌트를 찾을 수 없음! (Instance ID : {this.GetInstanceID()})");
         }
 		mover = GetComponent<Mover>();
-		maxCharge = stats.maxChargeAmount; //maxChargeAmount로 수정이 안됨. 왜지?
-		maxCartridge = stats.maxCartridgeNum;
-		currentCartridge = maxCartridge;
+		currentCartridge = MaxCartridge;
 		shurikenCount = 0;
 
 		shurikenIndicator = transform.GetComponentInChildren<ShurikenIndicator>();
@@ -74,32 +78,32 @@ public class ShurikenShooter : MonoBehaviour
 		if (IsCharging)
 		{
 			//Debug.Log(dir);
-			shurikenIndicator?.SetPosition(1, transform.position + (Vector3)direction * CurrentDistance);
 			
 			//Debug.Log(dir);
 
 			currentCharge += Time.deltaTime * stats.chargeSpeed;
-			currentCharge = Mathf.Min(currentCharge, maxCharge);
+			currentCharge = Mathf.Min(currentCharge, LeveledMaxCharge);
 			if (shurikenIndicator != null)
 			{
-				var chargeInt = Mathf.FloorToInt(currentCharge / 1);
-				var i = Mathf.Min(chargeInt, indicatorColors.Length - 1);
-				Debug.Log($"currentCharge = {currentCharge}, length = {indicatorColors.Length}, i = {i}");
+				var chargeLevel = Mathf.FloorToInt(currentCharge * (MaxChargeLevel - 1) / LeveledMaxCharge);
+				var i = Mathf.Min(chargeLevel, indicatorColors.Length - 1);
+				//Debug.Log($"maxLevel={MaxChargeLevel}, currentCharge = {currentCharge}, length = {indicatorColors.Length}, i = {i}");
 				var newColor = indicatorColors[i];
 
-				chargeDamageMultiplier = 0.25f * (i + 1);
+				chargeDamageMultiplier = (i + 1) / standardChargeLevel;
 				shurikenIndicator.SetColor(newColor);
 			}
 			
 			SwitchChargeParticle();
+			shurikenIndicator?.SetPosition(1, transform.position + (Vector3)direction * CurrentDistance);
 		}
 		else
 		{
-			shurikenIndicator?.SetPosition(1, transform.position);
 			if (chargeParticle != null)
 			{
 				chargeParticle.SetActive(false);
 			}
+			shurikenIndicator?.SetPosition(1, transform.position);
 		}
 	}
 	public bool StartCharge()
@@ -229,6 +233,10 @@ public class ShurikenShooter : MonoBehaviour
 		
 		// 파티클 정보 전달
 		instSrk.GetComponent<ShurikenParticleCreator>().shurikenShooter = this;
+
+		//Debug.Log($"Shooter : damageMult={chargeDamageMultiplier}, chargeAmount={CurrentChargeAmount}, maxCharge={MaxCharge}");
+		//Debug.Log($"{CurrentDistance} = {stats.maxDistance} * {CurrentChargeAmount} * {MaxChargeLevel} / {standardChargeLevel}");
+		//Debug.Log($"Shuriken : damage={instSrk.damage}, distance={instSrk.moveDistance}, speed={inst.speed}");
 	}
 
 	public void Cancel()

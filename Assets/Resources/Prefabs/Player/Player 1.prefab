@@ -398,8 +398,9 @@ MonoBehaviour:
   shootRadius: 0.5
   launchAngle: 20
   slowOnCharge: 0.3
-  chargeDamageMultiplier: 0.25
   chargeLevel: 1
+  ghostShurikenDamageScale: 25
+  standardChargeLevel: 4
   chargeParticle: {fileID: 4277757297554001488}
   indicatorColors:
   - {r: 0.4078, g: 0.9922, b: 0.8902, a: 0.29803923}
