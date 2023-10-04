@@ -330,7 +330,8 @@ public class Shuriken : MonoBehaviour
     {
         if (guidedTarget == null)
         {
-            GameObject g = GameObject.FindWithTag("Enemy");
+            var targetTag = owner.gameObject.CompareTag("Player1") ? "Player2" : "Player1";
+            GameObject g = GameObject.FindWithTag(targetTag);
             if (g != null)
             {
                 guidedTarget = g.transform;
