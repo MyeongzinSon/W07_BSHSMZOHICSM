@@ -125,6 +125,9 @@ MonoBehaviour:
   explosionScale: 15
   explosionTime: 1
   explosionDamageRatio: 0.3
+  useSlow: 0
+  slowWebScale: 10
+  slowWebDuration: 2.5
   boomerangDelay: 5
   boomerangAccel: 3
   useComeBack: 0
@@ -134,9 +137,9 @@ MonoBehaviour:
   lifeStealAmount: 2
   useKnockBack: 0
   knockbackPower: 5
-  useSlow: 0
   useDamageBuff: 0
   useInhibitHeal: 0
+  chargeAmount: 0
 --- !u!114 &3743431136012034996
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -52,7 +52,11 @@ public class Shuriken : MonoBehaviour
     private bool isExploded = false;
     
     [Header("거미줄")]
+    public bool useSlow = false;
+    public float slowWebScale = 6f;
+    public float slowWebDuration = 1f;
     private bool isSlowed = false;
+    
     
     [Header("저주")]
     private bool useCurse = false;
@@ -77,7 +81,6 @@ public class Shuriken : MonoBehaviour
     [FormerlySerializedAs("healAmount")] public float lifeStealAmount = 2f;
     public bool useKnockBack = false;
     public float knockbackPower = 5f;
-    public bool useSlow = false;
     public bool useDamageBuff = false;
     public bool useInhibitHeal = false;
     private SpriteOutline spriteOutline;
@@ -170,7 +173,6 @@ public class Shuriken : MonoBehaviour
                 //else
                 {
                     SetPickUpState();
-                    //Debug.Log($"{owner.name} 거리 이동완료, ");
                 }
             }
         }
@@ -412,7 +414,11 @@ public class Shuriken : MonoBehaviour
         isSlowed = true;
         GameObject spiderWebPrefab = Resources.Load<GameObject>("Prefabs/SpiderWeb");
         GameObject spiderWeb = Instantiate(spiderWebPrefab, transform.position, Quaternion.identity);
-        spiderWeb.transform.localScale = new Vector3(8f, 8f, 1f);
+        spiderWeb.transform.localScale = new Vector3(slowWebScale*chargeAmount,slowWebScale*chargeAmount, 1f);
+        //spiderWeb.transform.localScale = new Vector3(8f, 8f, 1f);
+
+        DestroySeconds webTimer = spiderWeb.GetComponent<DestroySeconds>();
+        webTimer.destroyTime = slowWebDuration;
     }
 
     Vector2 GetReflectVector(Vector2 _dir, Vector2 _normal)
@@ -532,14 +538,14 @@ public class Shuriken : MonoBehaviour
                 sep.value = 5f;
                 sec.AddStatusEffect(sep);
             }
-            if (useSlow)
-            {
-                StatusEffectParameter sep = new StatusEffectParameter(StatusEffectController.StatusEffect.SLOW);
-                
-                sep.duration = 3.0f;
-                sep.value = 0.3f;
-                sec.AddStatusEffect(sep);
-            }
+            // if (useSlow)
+            // {
+            //     StatusEffectParameter sep = new StatusEffectParameter(StatusEffectController.StatusEffect.SLOW);
+            //     
+            //     sep.duration = 3.0f;
+            //     sep.value = 0.3f;
+            //     sec.AddStatusEffect(sep);
+            // }
             if (useDamageBuff)
             {
                 StatusEffectParameter sep = new StatusEffectParameter(StatusEffectController.StatusEffect.MORE_DAMAGE_TAKEN);

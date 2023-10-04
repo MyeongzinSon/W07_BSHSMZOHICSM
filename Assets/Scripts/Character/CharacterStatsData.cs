@@ -43,9 +43,10 @@ public static class ShurikenAttributeExtensions
             case ShurikenAttribute.KnockbackToWall:
             case ShurikenAttribute.Curse:
             case ShurikenAttribute.ComeBack:
+            case ShurikenAttribute.Slow:
                 return 1;
             case ShurikenAttribute.DoT:
-            case ShurikenAttribute.Slow:
+            //case ShurikenAttribute.Slow:
             case ShurikenAttribute.Vulnerable:
             case ShurikenAttribute.Vampire:
             case ShurikenAttribute.HealReduction:
