@@ -16,7 +16,7 @@ MonoBehaviour:
   maxHp: 100
   moveSpeed: 10
   rollDistance: 15
-  rollCooldown: 0.5
+  rollCooldown: 1
   maxRollNum: 1
   attackPower: 20
   chargeSpeed: 1

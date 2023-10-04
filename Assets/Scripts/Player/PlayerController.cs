@@ -158,12 +158,12 @@ public class PlayerController : MonoBehaviour
         if (context.started)
         {
             isLooking = true;
-            Debug.Log($"isLooking = true");
+            //Debug.Log($"isLooking = true");
         }
         else if (context.canceled)
         {
             isLooking = false;
-            Debug.Log($"isLooking = false");
+            //Debug.Log($"isLooking = false");
         }
     }
 
@@ -215,7 +215,7 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance.isBattleStart)
         {
             roll.OnRoll(context);
-            attack.Cancel();
+            //attack.Cancel();
             cameraExpandTimer = -1;
             VCamManager.Instance.Reduce();
         }
