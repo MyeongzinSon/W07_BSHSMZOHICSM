@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CharacterDefault 1
   m_EditorClassIdentifier: 
   forDefaultState: 1
-  maxHp: 100
-  moveSpeed: 10
+  maxHp: 50
+  moveSpeed: 7.5
   rollDistance: 15
   rollCooldown: 1
   maxRollNum: 1
