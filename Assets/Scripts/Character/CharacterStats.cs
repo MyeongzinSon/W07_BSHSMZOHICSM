@@ -21,7 +21,7 @@ public class CharacterStats : MonoBehaviour
     public int maxCartridgeNum { get; private set; }
     public float maxDistance { get; private set; }
     public float shurikenSpeed { get; private set; }
-    public float shurikenNum { get; private set; }
+    public int shurikenNum { get; private set; }
     public float shurikenScale { get; private set; }
     public List<ShurikenAttribute> shurikenAttributes { get; private set; }
 

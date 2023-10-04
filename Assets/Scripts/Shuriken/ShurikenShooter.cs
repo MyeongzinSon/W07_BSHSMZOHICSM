@@ -12,7 +12,7 @@ public class ShurikenShooter : MonoBehaviour
 	[Header("플레이어에게서 약간 떨어진 거리에서 발사됩니다.")]
 	public float shootRadius = 0.5f;
 	[Header("여러발 발사할 때의 최대 발사각")]
-	public float launchAngle = 30f;
+	public float launchAngle = 15f;
 
 	[Header("조준 중 n% 느려집니다.")]
 	public float slowOnCharge = 0.3f;
@@ -20,7 +20,9 @@ public class ShurikenShooter : MonoBehaviour
 	[Header("차지 데미지")] 
 	public float chargeDamageMultiplier = .25f;
 	public int chargeLevel = 1;
-	
+	[Range(0, 100)] public float ghostShurikenDamageScale = 25;
+	private float shurikenDamageScale = 100f;
+
 	#region privateArea
 
 	private Mover mover;
@@ -188,6 +190,15 @@ public class ShurikenShooter : MonoBehaviour
 						Shoot(td,true);
 					Debug.Log($"i: {i}, dir: {direction}, cur: {td}, angle: {angle}");
 					angle += launchAngle*2f/(stats.shurikenNum-1);
+
+					if (i != stats.shurikenNum / 2)
+					{
+						shurikenDamageScale = ghostShurikenDamageScale;
+					}
+					else
+					{
+						shurikenDamageScale = 100f;
+					}
 				}
 			}
 			return true;
@@ -225,7 +236,7 @@ public class ShurikenShooter : MonoBehaviour
 		Shuriken instSrk = inst.GetComponent<Shuriken>();
 		instSrk.damageLayer = damageLayer;
 		instSrk.owner = gameObject;
-		instSrk.damage = stats.attackPower * chargeDamageMultiplier;
+		instSrk.damage = stats.attackPower * chargeDamageMultiplier * (shurikenDamageScale / 100);
 		instSrk.moveDistance = CurrentDistance;
 		instSrk.isShadow = isShadow;
 		instSrk.chargeAmount = CurrentChargeAmount;
