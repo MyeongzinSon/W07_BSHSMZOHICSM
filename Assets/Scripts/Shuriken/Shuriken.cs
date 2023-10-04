@@ -58,10 +58,13 @@ public class Shuriken : MonoBehaviour
     private bool useCurse = false;
     
     [Header("부메랑")]
-    public bool useBoomerang;
+    //public bool useBoomerang;
     public float boomerangDelay = 5f;
     public float boomerangAccel = 3f;
-    private bool isBoomerangReturning = false;
+    //private bool isBoomerangReturning = false;
+
+    [Header("돌아와!")]
+    public bool useComeBack = false;
     
     [Header("바운스")]
     public bool isWallBounce = false;
@@ -109,8 +112,11 @@ public class Shuriken : MonoBehaviour
         //bool 변수로 컨트롤 되는 경우 수정
         switch (attr)
         {
-            case ShurikenAttribute.Boomerang:
-                useBoomerang = true;
+            //case ShurikenAttribute.Boomerang:
+            //    useBoomerang = true;
+            //    break;
+            case ShurikenAttribute.ComeBack:
+                useComeBack = true;
                 break;
             case ShurikenAttribute.Guidance:
                 useGuidedMove = true;
@@ -151,16 +157,17 @@ public class Shuriken : MonoBehaviour
 
             if (movedDistance >= moveDistance)
             {
-                if (useBoomerang)
+                //if (useBoomerang)
                 {
-                    if (!isBoomerangReturning)
-                    {
-                        //부메랑 모드일 경우, 공격을 유지하고 돌아오는 중으로 체크
-                        mover.speed = 0f;
-                        isBoomerangReturning = true;
-                    }
+                    //부메랑 로직 변경으로 인해 주석처리
+                    // if (!isBoomerangReturning)
+                    // {
+                    //     //부메랑 모드일 경우, 공격을 유지하고 돌아오는 중으로 체크
+                    //     mover.speed = 0f;
+                    //     isBoomerangReturning = true;
+                    // }
                 }
-                else
+                //else
                 {
                     SetPickUpState();
                     //Debug.Log($"{owner.name} 거리 이동완료, ");
@@ -171,11 +178,12 @@ public class Shuriken : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isBoomerangReturning)
-        {
-            //부메랑 리턴은 PICKUP이어도 작동한다.
-            AdaptBoomerangReturnMove();
-        }
+        //부메랑 삭제로 인해 삭제됨
+        // if (isBoomerangReturning)
+        // {
+        //     //부메랑 리턴은 PICKUP이어도 작동한다.
+        //     AdaptBoomerangReturnMove();
+        // }
 
         if (state == ShurikenState.PICKUP)
         {
@@ -188,6 +196,19 @@ public class Shuriken : MonoBehaviour
             {
                 spriteOutline.color = Color.blue;
             }
+
+            if (useComeBack)
+            {
+                //'돌아와!' 사용 중일 경우 벽을 무시하고, 플레이어쪽으로 돌아옴
+                // - 벽 무시: PICKUP이므로 충돌처리가 일어나지 않음
+                // - 플레이어쪽으로 방향을 설정하고, canMove를 true로 변경함.
+                Vector2 dist = owner.transform.position - transform.position;
+                mover.CanMove = true;
+                mover.direction = dist.normalized;
+                mover.accel = boomerangAccel;
+            }
+            
+            //PICKUP State일 경우, 이 이하의 처리들은 할 필요 없음
             return;
         }
         else
@@ -224,10 +245,10 @@ public class Shuriken : MonoBehaviour
                 if (hit.collider.gameObject.TryGetComponent<Damageable>(out var target))
                 {
                     canDamage = false;
-                    if (isBoomerangReturning)
-                    {
-                        isBoomerangReturning = false;
-                    }
+                    //if (isBoomerangReturning)
+                    //{
+                    //    isBoomerangReturning = false;
+                    //}
                     
                     if (useCurse) target.curseStack++;
                     //대상에게 공격 판정
@@ -255,8 +276,10 @@ public class Shuriken : MonoBehaviour
             //벽에 부딪힘
             if ((targetLayer & bounceLayer) > 0)
             {
-                if(!isBoomerangReturning)
-                    mover.direction = GetReflectVector(mover.direction, hit.normal);
+                //부메랑 로직 삭제로 주석처리.
+                //if(!isBoomerangReturning)
+                //    mover.direction = GetReflectVector(mover.direction, hit.normal);
+                
                 //리플렉트가 불가능하다면, 벽 반사 움직임 코루틴 시작, 가능하다면 그냥 방향만 바뀌고 쭊 날아감
                 if (!useBounce)
                 {
@@ -274,11 +297,11 @@ public class Shuriken : MonoBehaviour
                     GetComponent<SpriteRenderer>().color = Color.yellow;
                 }
                 //벽과 충돌 시, 공격은 유지하면서, 방향만 플레이어쪽으로 향한다.
-                if (useBoomerang)
-                {
-                    mover.speed = 0f;
-                    isBoomerangReturning = true;
-                }
+                //if (useBoomerang)
+                //{
+                //    mover.speed = 0f;
+                //    isBoomerangReturning = true;
+               // }
             }
 
         }
@@ -416,8 +439,8 @@ public class Shuriken : MonoBehaviour
         while (timer > 0f)
         {
             //부메랑 이동이 발견되면, BounceCoroutine을 끊는다. 정말 먼 나중에 착오가 생길 수 있는 하드코딩이므로 시간이 난다면 수정 필요.
-            if (isBoomerangReturning)
-                yield break;
+            //if (isBoomerangReturning)
+            //    yield break;
 
             timer -= Time.deltaTime;
             mover.speed = orgSpeed*timer/_moveTime;
@@ -471,6 +494,12 @@ public class Shuriken : MonoBehaviour
         if (isShadow)
         {
             Destroy(gameObject);
+        }
+        
+        //돌아와라면, 속도가 0에서부터 다시 시작해야한다.
+        if (useComeBack)
+        {
+            mover.speed = 0f;
         }
     }
 

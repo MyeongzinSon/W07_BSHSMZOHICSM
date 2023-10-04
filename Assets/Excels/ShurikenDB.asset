@@ -74,8 +74,8 @@ MonoBehaviour:
     demeritAmount: 0
   - id: 0
     name: "\uBD80\uBA54\uB791!"
-    description: "\uC218\uB9AC\uAC80\uC774 \uD50C\uB808\uC774\uC5B4\uC5D0\uAC8C \uB2E4\uC2DC
-      \uB3CC\uC544\uC635\uB2C8\uB2E4."
+    description: "\uD604\uC7AC \uC791\uB3D9\uD558\uC9C0 \uC54A\uC2B5\uB2C8\uB2E4.
+      (\uD0C8\uB860W\uCC98\uB7FC \uBCC0\uACBD\uC911)"
     showOnlyOnce: 1
     meritSpecies: none
     meritAmount: 0
@@ -126,3 +126,12 @@ MonoBehaviour:
     meritAmount: 0
     demeritSpecies: none
     demeritAmount: 0
+  - id: 0
+    name: "\uB3CC\uC544\uC640!"
+    description: "\uC218\uB9AC\uAC80\uC774 \uBC14\uB2E5\uC5D0 \uB5A8\uC5B4\uC9C0\uBA74
+      \uC790\uB3D9\uC73C\uB85C \uC8FC\uC778\uC5D0\uAC8C \uB3CC\uC544\uC635\uB2C8\uB2E4."
+    showOnlyOnce: 1
+    meritSpecies: none
+    meritAmount: 0
+    demeritSpecies: Cartridge
+    demeritAmount: 1

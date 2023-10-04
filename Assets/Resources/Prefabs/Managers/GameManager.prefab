@@ -59,11 +59,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d1381af371395b1408220ed833c919b2, type: 2}
   - {fileID: 11400000, guid: 49b0f63f22aa884488099ecc71cfa06d, type: 2}
   - {fileID: 11400000, guid: ee59970d95d285548a81dbfb9e77ae05, type: 2}
-  upgradedList: []
-  upgradedListInt: 
+  - {fileID: 11400000, guid: 5f4a36ca23c78f545b677f6ddfef433b, type: 2}
+  upgradedListPlayer1: []
+  upgradedListIntPlayer1: 
+  upgradedListPlayer2: []
+  upgradedListIntPlayer2: 
   clearPanel: {fileID: 0}
+  currentSelectIdx: -1
   specialStartIdx: 6
-  canUpgradeIdxList: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c000000
+  canUpgradeIdxListPlayer1: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d000000
+  canUpgradeIdxListPlayer2: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d000000
   upgradeIdxCount: 13
   isBattleStart: 0
   magneticFieldAppearCount: 30
