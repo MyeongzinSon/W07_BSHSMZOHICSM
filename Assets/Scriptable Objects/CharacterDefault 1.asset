@@ -20,7 +20,8 @@ MonoBehaviour:
   maxRollNum: 1
   attackPower: 20
   chargeSpeed: 1
-  maxChargeAmount: 3
+  maxChargeAmount: 2
+  maxChargeLevel: 4
   maxCartridgeNum: 3
   maxDistance: 20
   shurikenSpeed: 60

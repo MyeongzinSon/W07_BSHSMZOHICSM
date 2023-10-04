@@ -17,6 +17,7 @@ public class CharacterStats : MonoBehaviour
     //shuriken
     public float attackPower { get; private set; }
     public float chargeSpeed { get; private set; }
+    public int maxChargeLevel { get; private set; }
     public float maxChargeAmount { get; private set; }
     public int maxCartridgeNum { get; private set; }
     public float maxDistance { get; private set; }
@@ -52,6 +53,7 @@ public class CharacterStats : MonoBehaviour
         maxRollNum = info.maxRollNum;
         attackPower = info.attackPower;
         chargeSpeed = info.chargeSpeed;
+        maxChargeLevel = info.maxChargeLevel;
         maxChargeAmount = info.maxChargeAmount;
         maxCartridgeNum = info.maxCartridgeNum;
         maxDistance = info.maxDistance;
@@ -79,6 +81,7 @@ public class CharacterStats : MonoBehaviour
         maxRollNum += info.maxRollNum;
         attackPower +=  info.attackPower;
         chargeSpeed +=  info.chargeSpeed;
+        maxChargeLevel += info.maxChargeLevel;
         maxCartridgeNum += info.maxCartridgeNum;
         maxChargeAmount += info.maxChargeAmount;
         maxDistance +=  info.maxDistance;
