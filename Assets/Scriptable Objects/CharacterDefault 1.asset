@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forDefaultState: 1
   maxHp: 100
-  moveSpeed: 5
+  moveSpeed: 10
   rollDistance: 15
   rollCooldown: 0.5
   maxRollNum: 1
@@ -23,7 +23,7 @@ MonoBehaviour:
   maxChargeAmount: 3
   maxCartridgeNum: 3
   maxDistance: 20
-  shurikenSpeed: 30
+  shurikenSpeed: 60
   shurikenNum: 1
   shurikenScale: 0
   shurikenAttributes: 
