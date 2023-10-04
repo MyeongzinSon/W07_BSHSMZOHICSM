@@ -277,7 +277,7 @@ public class Shuriken : MonoBehaviour
             {
                 //부메랑 로직 삭제로 주석처리.
                 //if(!isBoomerangReturning)
-                //    mover.direction = GetReflectVector(mover.direction, hit.normal);
+                mover.direction = GetReflectVector(mover.direction, hit.normal);
                 
                 //리플렉트가 불가능하다면, 벽 반사 움직임 코루틴 시작, 가능하다면 그냥 방향만 바뀌고 쭊 날아감
                 if (!useBounce)
