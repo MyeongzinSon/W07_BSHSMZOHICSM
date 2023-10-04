@@ -35,7 +35,11 @@ public class ShurikenShooter : MonoBehaviour
 
 	private ShurikenIndicator shurikenIndicator;
 	
+	[Header("차지 파티클 & UI")]
 	[SerializeField] private GameObject chargeParticle;
+	[SerializeField] Color[] indicatorColors;
+
+	[Header("수리검 탄창 UI")]
 	[SerializeField] private CatridgeUIManager catridgeUIManager;
 
 	#endregion
@@ -76,49 +80,12 @@ public class ShurikenShooter : MonoBehaviour
 			currentCharge = Mathf.Min(currentCharge, maxCharge);
 			if (shurikenIndicator != null)
 			{
-				Color newColor;
-				if (currentCharge >= 7)
-				{
-					newColor = new Color(1.0f, 0.0f, 0.0f, .3f); 
-					chargeDamageMultiplier = 2f;
-				}
-				else if (currentCharge >= 6)
-				{
-					newColor = new Color(0.9f, 0.2f, 0.8f, .3f); // 파란빛
-					chargeDamageMultiplier = 1.75f;
-				}
-				else if (currentCharge >= 5)
-				{
-                    newColor = new Color(0.7f, 0.4f, 0.8f, .3f); // 파란빛
-					chargeDamageMultiplier = 1.5f;
-				}
-				else if (currentCharge >= 4)
-				{
-					Debug.Log("asd");
-					newColor = new Color(0.3f, 0.2f, 0.8f, .3f); // 파란빛
-					chargeDamageMultiplier = 1.25f;
-				}
-				else if (currentCharge >= 3)
-				{
-					newColor = new Color(0.0f, 0.0f, 0.8f, .3f); // 파란빛
-					chargeDamageMultiplier = 1f;
-				}
-				else if (currentCharge >= 2)
-				{
-					newColor = new Color(0.0f, 0.6314f, 0.6902f, .3f); // 진한 청록빛
-					
-					chargeDamageMultiplier = 0.75f;
-				}
-				else if (currentCharge >= 1)
-				{
-					newColor = new Color(0.0f, 0.7490f, 0.6275f, .3f); // 진한 초록빛
-					chargeDamageMultiplier = 0.5f;
-				}
-				else
-				{
-					newColor = new Color(0.4078f, 0.9922f, 0.8902f, .3f);
-					chargeDamageMultiplier = 0.25f;
-				}
+				var chargeInt = Mathf.FloorToInt(currentCharge / 1);
+				var i = Mathf.Min(chargeInt, indicatorColors.Length - 1);
+				Debug.Log($"currentCharge = {currentCharge}, length = {indicatorColors.Length}, i = {i}");
+				var newColor = indicatorColors[i];
+
+				chargeDamageMultiplier = 0.25f * (i + 1);
 				shurikenIndicator.SetColor(newColor);
 			}
 			

@@ -401,6 +401,15 @@ MonoBehaviour:
   chargeDamageMultiplier: 0.25
   chargeLevel: 1
   chargeParticle: {fileID: 4277757297554001488}
+  indicatorColors:
+  - {r: 0.4078, g: 0.9922, b: 0.8902, a: 0.29803923}
+  - {r: 0, g: 0.749, b: 0.6275, a: 0.29803923}
+  - {r: 0, g: 0.6314, b: 0.6902, a: 0.29803923}
+  - {r: 0, g: 0, b: 0.8, a: 0.29803923}
+  - {r: 0.3, g: 0.2, b: 0.8, a: 0.29803923}
+  - {r: 0.7, g: 0.4, b: 0.8, a: 0.29803923}
+  - {r: 0.9, g: 0.2, b: 0.8, a: 0.29803923}
+  - {r: 1, g: 0, b: 0, a: 0.29803923}
   catridgeUIManager: {fileID: 0}
 --- !u!114 &6115772962267442698
 MonoBehaviour:
