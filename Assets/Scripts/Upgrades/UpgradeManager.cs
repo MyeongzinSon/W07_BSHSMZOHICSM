@@ -117,7 +117,7 @@ public class UpgradeManager : MonoBehaviour
     private List<int> GetRandomUpgradeNumbers() //3개의 랜덤한 숫자를 뽑음
     {
         bool isSpecial = false;
-        if (GameManager.Instance.stageCount == 2 || GameManager.Instance.stageCount == 5 || GameManager.Instance.stageCount == 7) //특일일특일특
+        if (GameManager.Instance.stageCount == 2 || GameManager.Instance.stageCount == 4 || GameManager.Instance.stageCount == 6) //특일특일특일
         {
             isSpecial = true;
         }
@@ -140,7 +140,7 @@ public class UpgradeManager : MonoBehaviour
         int randomInt;
         if (isSpecial) //특수
         {
-            randomInt = Random.Range(GameManager.Instance.specialStartIdx, GameManager.Instance.upgradeIdxCount + 1);
+            randomInt = Random.Range(GameManager.Instance.specialStartIdx, GameManager.Instance.upgradeIdxCount);
         }
         else //일반
         {
