@@ -105,7 +105,7 @@ MonoBehaviour:
     meritSpecies: none
     meritAmount: 0
     demeritSpecies: Hp
-    demeritAmount: 20
+    demeritAmount: 10
   - id: 0
     name: "\uAC70\uBBF8\uC904"
     description: "\uC218\uB9AC\uAC80\uC774 \uAC70\uBBF8\uC904\uC744 \uC18C\uD658\uD569\uB2C8\uB2E4.
