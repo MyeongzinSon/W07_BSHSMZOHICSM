@@ -180,14 +180,6 @@ public class GameManager : MonoBehaviour
 
     public void GoToUpgrade()
     {
-        ExitState(GameState.Battle);
-        EnterState(GameState.Upgrade);
-    }
-    
-    public void StageClear(int winPlayerNum)
-    {
-        if (winPlayerNum == 1) VersusManager.Instance.victoryCountPlayer1++;
-        else VersusManager.Instance.victoryCountPlayer2++;
         if (VersusManager.Instance.victoryCountPlayer1 == 4 || VersusManager.Instance.victoryCountPlayer2 == 4)
         {
             GameObject gameEndPanel = GameObject.Find("IngameCanvas").transform.Find("GameEndPanel").gameObject;
@@ -203,10 +195,10 @@ public class GameManager : MonoBehaviour
             string descriptionText = "";
             switch (stageCount)
             {
-                case 4:
+                case 5:
                     descriptionText = "압도적인 경기력이었습니다! \n실력 차이가 어마어마하네요.";
                     break;
-                case 7:
+                case 8:
                     descriptionText = "정말 치열한 접전이었습니다! \n두 플레이어의 희비가 교차하는 순간입니다.";
                     break;
                 default:
@@ -219,6 +211,16 @@ public class GameManager : MonoBehaviour
             
             return;
         }
+        
+        ExitState(GameState.Battle);
+        EnterState(GameState.Upgrade);
+    }
+    
+    public void StageClear(int winPlayerNum)
+    {
+        if (winPlayerNum == 1) VersusManager.Instance.victoryCountPlayer1++;
+        else VersusManager.Instance.victoryCountPlayer2++;
+        
         GameObject gameClearText = GameObject.Find("IngameCanvas").transform.Find("ClearText").gameObject;
 
         if (winPlayerNum == 1)
