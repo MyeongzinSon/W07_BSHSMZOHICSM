@@ -414,7 +414,7 @@ public class Shuriken : MonoBehaviour
         isSlowed = true;
         GameObject spiderWebPrefab = Resources.Load<GameObject>("Prefabs/SpiderWeb");
         GameObject spiderWeb = Instantiate(spiderWebPrefab, transform.position, Quaternion.identity);
-        spiderWeb.transform.localScale = new Vector3(slowWebScale*chargeAmount,slowWebScale*chargeAmount, 1f);
+        spiderWeb.transform.localScale = new Vector3(slowWebScale,slowWebScale, 1f);
         //spiderWeb.transform.localScale = new Vector3(8f, 8f, 1f);
 
         DestroySeconds webTimer = spiderWeb.GetComponent<DestroySeconds>();
@@ -477,7 +477,7 @@ public class Shuriken : MonoBehaviour
             Explosion();
         }
 
-        if (useSlow)
+        if (!isSlowed&&useSlow)
         {
             MakeSlowEffect();
         }
@@ -525,6 +525,11 @@ public class Shuriken : MonoBehaviour
                 ownerHp.Heal(lifeStealAmount);
             }
             
+        }
+        
+        if (!isSlowed&&useSlow)
+        {
+            MakeSlowEffect();
         }
         
         //맞았을때 적에게 디버프 효과

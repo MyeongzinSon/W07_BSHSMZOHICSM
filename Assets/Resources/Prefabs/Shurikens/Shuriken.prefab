@@ -126,8 +126,8 @@ MonoBehaviour:
   explosionTime: 1
   explosionDamageRatio: 0.3
   useSlow: 0
-  slowWebScale: 10
-  slowWebDuration: 2.5
+  slowWebScale: 12.5
+  slowWebDuration: 4
   boomerangDelay: 5
   boomerangAccel: 3
   useComeBack: 0
