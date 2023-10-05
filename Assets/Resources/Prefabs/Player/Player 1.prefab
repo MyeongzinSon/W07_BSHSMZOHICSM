@@ -343,6 +343,7 @@ MonoBehaviour:
   lastInput: {x: 0, y: -1}
   isRotate: 0
   knockbackTime: 0.25
+  slowRatio: 0.5
 --- !u!114 &2161613080536109209
 MonoBehaviour:
   m_ObjectHideFlags: 0

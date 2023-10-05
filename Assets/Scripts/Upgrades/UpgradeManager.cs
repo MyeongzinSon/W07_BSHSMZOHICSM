@@ -51,7 +51,7 @@ public class UpgradeManager : MonoBehaviour
                         meritText = "공격력";
                         break;
                     case "AtkSpeed":
-                        meritText = "공격속도";
+                        meritText = "수리검속도";
                         meritAmount += "%";
                         break;
                     case "Cartridge":
@@ -87,7 +87,7 @@ public class UpgradeManager : MonoBehaviour
                         meritText = "공격력";
                         break;
                     case "AtkSpeed":
-                        meritText = "공격속도";
+                        meritText = "수리검속도";
                         meritAmount += "%";
                         break;
                     case "Cartridge":

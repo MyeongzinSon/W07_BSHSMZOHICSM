@@ -50,8 +50,8 @@ MonoBehaviour:
     name: "\uCD5C\uB300\uC0AC\uAC70\uB9AC \uC99D\uAC00"
     description: "\uCC28\uC9D5 \uB2E8\uACC4\uAC00 1 \uB298\uC5B4\uB0A9\uB2C8\uB2E4."
     showOnlyOnce: 0
-    meritSpecies: Range
-    meritAmount: 3
+    meritSpecies: none
+    meritAmount: 0
     demeritSpecies: none
     demeritAmount: 0
   - id: 0
@@ -68,8 +68,8 @@ MonoBehaviour:
       \uD295\uAE41\uB2C8\uB2E4. \uD295\uAE34 \uC218\uB9AC\uAC80\uC740 2\uBC30\uC758
       \uB370\uBBF8\uC9C0\uB97C \uC90D\uB2C8\uB2E4.(\uC911\uCCA9\uBD88\uAC00)"
     showOnlyOnce: 1
-    meritSpecies: none
-    meritAmount: 0
+    meritSpecies: AtkSpeed
+    meritAmount: 25
     demeritSpecies: none
     demeritAmount: 0
   - id: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
     meritSpecies: none
     meritAmount: 0
     demeritSpecies: AtkSpeed
-    demeritAmount: 10
+    demeritAmount: 20
   - id: 0
     name: "\uC800\uC8FC"
     description: "\uC790\uC2E0\uC758 \uCCB4\uB825\uC774 50\uC73C\uB85C \uACE0\uC815\uB429\uB2C8\uB2E4.
