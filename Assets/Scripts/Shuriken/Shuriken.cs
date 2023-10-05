@@ -292,7 +292,7 @@ public class Shuriken : MonoBehaviour
                 {
                     if (isWallBounce == false)
                     {
-                        damage *= 1.4f;
+                        damage *= 1.5f;
                         //mover.speed *= 1.5f;
                         isWallBounce = true;
                     }

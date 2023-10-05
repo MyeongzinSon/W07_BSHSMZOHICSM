@@ -14,10 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forDefaultState: 0
   maxHp: 0
-  moveSpeed: -1
+  moveSpeed: 0
+  rollDistance: 0
+  rollCooldown: 0
+  maxRollNum: 0
   attackPower: 0
   chargeSpeed: 0
-  maxCartridgeNum: 1
+  maxChargeAmount: 0
+  maxChargeLevel: 0
+  maxCartridgeNum: 2
   maxDistance: 0
   shurikenSpeed: 0
   shurikenNum: 0
